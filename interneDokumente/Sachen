@@ -1,16 +1,10 @@
 
 ---------- Aufgabenverteilung -----------
 
-LogIn - Susi
+LogIn, Datenbank (JS, html, json, css) - Susi
 
-WebService Integration (JS) - Lena
+WebService Integration (JS, json) - Lena
 
 Main Page (HTML & CSS) - Magdalena
 
 Blog (HTML & CSS) - Niko
-
-
-
----------- Offene Fragen -----------
-
-Wird die Homepage dann auf einem öffentlichen Server gehostet? Oder auf einem FH Server?
