@@ -7,9 +7,10 @@ header {
 }
 
 #logo {
-    height: 10vw;
-    width: 10vw;
+    height: 8vw;
+    width: 8vw;
     align-self: center;
+    margin-left: 1vw;
 }
 
 h1 {
@@ -18,18 +19,21 @@ h1 {
     font-weight: lighter;
     flex-grow: 1;
     color: grey;
+    margin-left: 1vw;
 }
 
 #user {
-    height: 6vw;
+    height: 7vw;
     width: 6vw;
     align-self: center;
+    margin-right: 1vw;
 }
 
 #option {
     align-self: center;
     height: 6vw;
     width: 6vw;
+    margin-right: 1vw;
 }
 
 nav{
@@ -58,7 +62,7 @@ nav{
     position: absolute;
     background-color: lightgray;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
     font-size: 1.5vw;
 }
@@ -78,12 +82,34 @@ nav{
 
 main {
 
-    display: flex;
+
     justify-content: center;
+    text-align: center;
 
 }
 
-textarea {
+#textOptions button, #textOptions2 button, #countryDropdown, label, #submitButton {
+    height: 2vw;
+    width: 7vw;
+    color: grey;
+    font-size: 1vw;
+
+}
+#titel {
+    font-size: 1vw;
+
+    height: 3vw;
+    width: 55vw;
+    order: 2;
+    margin: 2vw 1vw 1vw 1vw;
+
+}
+
+#secondRow {
+    display: flex;
+}
+
+#blog {
     font-size: 1vw;
     color: grey;
     height: 30vw;
@@ -100,8 +126,6 @@ textarea {
     margin: 1vw 1vw 1vw 1vw;
     font-size: 5vw;
 
-
-
 }
 #ad2 {
     order: 3;
@@ -110,6 +134,9 @@ textarea {
     width: 20vw;
     margin: 1vw 1vw 1vw 1vw;
     font-size: 5vw;
+
+
+
 
 
 
