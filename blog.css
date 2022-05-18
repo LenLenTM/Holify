@@ -75,3 +75,43 @@ nav{
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: lightgray;}
+
+main {
+
+    display: flex;
+    justify-content: center;
+
+}
+
+textarea {
+    font-size: 1vw;
+    color: grey;
+    height: 30vw;
+    width: 60vw;
+    order: 2;
+    margin: 1vw 1vw 1vw 1vw;
+}
+
+#ad1 {
+    border-style: solid;
+    border-color: black;
+    order: 1;
+    width: 20vw;
+    margin: 1vw 1vw 1vw 1vw;
+    font-size: 5vw;
+
+
+
+}
+#ad2 {
+    order: 3;
+    border-style: solid;
+    border-color: black;
+    width: 20vw;
+    margin: 1vw 1vw 1vw 1vw;
+    font-size: 5vw;
+
+
+
+
+}
