@@ -95,7 +95,7 @@ main {
     font-size: 1vw;
 
 }
-#titel {
+#title {
     font-size: 1vw;
 
     height: 3vw;
@@ -109,7 +109,8 @@ main {
     display: flex;
 }
 
-#blog {
+
+#blog{
     font-size: 1vw;
     color: grey;
     height: 30vw;
