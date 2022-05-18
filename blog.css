@@ -15,8 +15,10 @@ a {display: flex;
     width: 8vw;
     align-self: center;
     margin-left: 1vw;
-    border: 0;
+    min-width: 100px;
+    min-height: 100px;
 }
+
 
 h1 {
     align-self: center;
@@ -24,9 +26,11 @@ h1 {
     font-weight: lighter;
     color: grey;
     margin-left: 1vw;
+
 }
 #order2 {
     flex-grow: 1;
+    align-self: center;
 
 }
 #space {
@@ -58,13 +62,14 @@ nav{
     padding: 1vw;
     font-size: 1.5vw;
     border: none;
-
+    cursor: pointer;
 }
 
 .dropdown {
     position: relative;
     display: inline-block;
     align-items: center;
+    cursor: pointer;
 }
 
 .dropdown-content {
@@ -103,6 +108,7 @@ main {
     width: 7vw;
     color: grey;
     font-size: 1vw;
+    cursor: pointer;
 
 }
 #title {
@@ -145,11 +151,9 @@ main {
     width: 20vw;
     margin: 1vw 1vw 1vw 1vw;
     font-size: 5vw;
+}
 
-
-
-
-
-
-
+address {
+    bottom: 0;
+    font-size: 0.75vw;
 }
