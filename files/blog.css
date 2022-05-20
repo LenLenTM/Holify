@@ -116,16 +116,33 @@ address {
     bottom: 0;
     font-size: 0.75vw;
 }
-#submitButton {
-    margin-top: 2vw;
+#submitButton, #add-button {
+    margin-top: 1vw;
     background-color: #9ae7cd;
     color: white;
-    height: 3vw ;
-    width: 10vw;
     border-style: hidden;
     font-size: medium;
     cursor: pointer;
+    }
 
+#submitButton {
+    height: 3vw ;
+    width: 10vw;
+}
+
+.tag {
+    color: white;
+    background-color: #9ae7cd;
+    border-width: 0.1vw;
+    border-style: groove;
+    border-color: #9ae7cd;
+    border-radius: 0.5vw;
+    margin-right: 1vw;
+}
+.remove-tag {
+    color: white;
+    margin-left: 1vw;
+    cursor: pointer;
 }
 
 @media (max-width: 800px) {
@@ -233,7 +250,7 @@ address {
         cursor: pointer;
     }
 
-    a {
-        z-index: 1000
-    }
+
+
+
 }
