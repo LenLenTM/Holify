@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MapTest</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="startController.js"></script>
+    <link rel="stylesheet" href="startStyle.css">
+</head>
+
+<body class="grid" id="body">
+
+<nav id="nav">
+    <img src="../resources/Holify.png" id="logo">
+    <p id="navText">HOLIFY</p>
+    <img src="../resources/UserIcon.png" id="user">
+    <img src="../resources/Options.png" id="options">
+</nav>
+
+<div id="worldMap"></div>
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTWxNRa3H52kSbaahZtYq-EtnaaYbujGM&callback=initMap"></script>
+
+<img id="intro" src="../resources/IntroLogo.png" onclick="startScreen()">
+<div id="buttons"></div>
+
+<footer id="footer">
+</footer>
+
+</body>
+</html>
