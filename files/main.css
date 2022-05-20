@@ -4,11 +4,12 @@
 body {
     margin: 0;
     background-color: #9ae7cd;
+    color: gray;
     display: grid;
     grid-template-areas:
     "h h"
-    "n n"
     "m m"
+    "a a"
     "f f";
 }
 
@@ -33,6 +34,8 @@ div {
     display: inline-grid;
     justify-content: space-between;
     align-items: stretch;
+
+
 }
 
 nav {
@@ -57,13 +60,10 @@ select {
 
 }
 
-a {display: flex;
-    justify-content: space-between;
-    align-items: stretch;}
 
 #logo {
-    height: 8vw;
-    width: 8vw;
+    height: 4vw;
+    width: 4vw;
     align-self: center;
     margin-left: 1vw;
     min-width: 100px;
@@ -72,27 +72,49 @@ a {display: flex;
 
 main {
     grid-area: m;
-    background-color: gray;
-    margin: 5px;
+    background-color: #9ae7cd;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+
+#WorldMap{
+    width: 100%;
 }
 
 aside {
+    width: 55%;
     grid-area: a;
     background-color: white;
     margin: 50px;
-    border-radius: 50px;
-    text-align: center;
+    border-radius: 20px;
+    border-color: gray;
+    padding: 1em 3em;
     color: gray;
 
 }
 
-#WorldMap{
-    height: 95%;
-    width: 95%;
+#PlanTrip{
+    align-content: center;
+    border-color: lightgray;
+    color: gray;
+    border-radius: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: lighter;
 }
+
+h2 {
+    text-align: center;
+    padding-bottom: 1rem;
+    font-weight: lighter;
+
+}
+
+
 
 footer {
     grid-area: f;
     font-size: small;
+    margin: 15px;
 }
 
