@@ -1,0 +1,98 @@
+* {font-family: "Avenir", sans-serif}
+
+
+body {
+    margin: 0;
+    background-color: #9ae7cd;
+    display: grid;
+    grid-template-areas:
+    "h h"
+    "n n"
+    "m m"
+    "f f";
+}
+
+@media (min-width: 642px) {
+    body {
+        grid-template-areas:
+        "h n n"
+        "a m m"
+        "f f f";
+    }
+}
+
+header {
+    grid-area: h;
+    background-color: white;
+    font-size: 4vw;
+    font-weight: lighter;
+    color: lightgray;
+}
+
+div {
+    display: inline-grid;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+nav {
+    grid-area: n;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: white;
+}
+
+li {
+    display: inline-block;
+}
+
+select {
+    align-content: center;
+    border-color: lightgray;
+    color: gray;
+    border-radius: 40px;
+    padding: 10px;
+    font-size: large;
+    font-weight: lighter;
+
+}
+
+a {display: flex;
+    justify-content: space-between;
+    align-items: stretch;}
+
+#logo {
+    height: 8vw;
+    width: 8vw;
+    align-self: center;
+    margin-left: 1vw;
+    min-width: 100px;
+    min-height: 100px;
+}
+
+main {
+    grid-area: m;
+    background-color: gray;
+    margin: 5px;
+}
+
+aside {
+    grid-area: a;
+    background-color: white;
+    margin: 50px;
+    border-radius: 50px;
+    text-align: center;
+    color: gray;
+
+}
+
+#WorldMap{
+    height: 95%;
+    width: 95%;
+}
+
+footer {
+    grid-area: f;
+    font-size: small;
+}
+
