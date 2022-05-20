@@ -7,25 +7,24 @@
     <title>Holify - BLOG</title>
     <link rel="stylesheet" href="blog.css">
     <link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet">
-
 </head>
 
 <body>
 <header>
     <a id = "order1" href = "https://www.google.com">
-    <img src="resources/Holify.png" alt="Holify Logo" id="logo">
+        <img src="../resources/Holify.png" alt="Holify Logo" id="logo">
     </a>
 
     <a id = "order2">
-    <h1> HOLIFY </h1>
+        <h1> HOLIFY </h1>
     </a>
 
     <a id = "order3" href = "https://www.google.com">
-    <img src="resources/UserIcon.png" alt="User Icon" id="user">
+        <img src="../resources/UserIcon.png" alt="User Icon" id="user">
     </a>
 
     <a id = "order4" href = "https://www.google.com">
-    <img src="resources/Options.png" alt="Option Button" id="option">
+        <img src="../resources/Options.png" alt="Option Button" id="option">
     </a>
 
 
@@ -84,32 +83,27 @@
 
 <main>
     <form>
+        <script src='../resources/tinymce/tinymce.min.js'></script>
 
-        <div id ="firstRow">
-
-            <label for="title"></label>
-
-            <textarea name="title" id="title" cols="30" rows="2" placeholder= "Write your title"></textarea>
-
-    </div>
-
-    <div id = "secondRow">
+        <script>tinymce.init({
+            selector: "#blog"
+        });
+        </script>
 
 
-        <label hidden for="blog"></label><textarea name="blog" id="blog" cols="30" rows="10" placeholder= "Write your personal traveling experience and share it with others."></textarea>
 
-        <div id = "ad1" >
-        AD SPACE
-        </div>
+        <label for="title"></label>
 
-        <div id = "ad2" >
-        AD SPACE
-        </div>
-    </div>
+        <textarea name="title" id="title" cols="30" rows="2" placeholder= "Write your title"></textarea>
 
-    <div>
-        <label for = "countryDropdown"> Choose your Country:</label>
-        <select name="Country" id = "countryDropdown">
+
+        <label hidden for="blog"></label><textarea name="blog" id="blog" ></textarea>
+
+
+
+        <div>
+            <label for = "countryDropdown"> Choose your Country:</label>
+            <select name="Country" id = "countryDropdown">
                 <option value="" selected>---</option>
 
                 <option value="Afganistan">Afghanistan</option>
@@ -358,12 +352,12 @@
                 <option value="Zaire">Zaire</option>
                 <option value="Zambia">Zambia</option>
                 <option value="Zimbabwe">Zimbabwe</option>
-        </select>
+            </select>
 
-        <button type="submit" id ="submitButton" value="Submit">SUBMIT
+            <button type="submit" id ="submitButton" value="Submit">SUBMIT
 
-        </button>
-    </div>
+            </button>
+        </div>
     </form>
 </main>
 <address>
