@@ -26,9 +26,10 @@ function initMap() {
         gestureHandling: 'none'
     });
 
-    map.data.loadGeoJson('../resources/custom.geo.json');  /* Add Geo data to map */
+    /* Add Geo data to map. this data contains all the land, making land and ocean distinguishable */
+    map.data.loadGeoJson('../resources/custom.geo.json');
 
-    /* Style map after Geo data */
+    /* Style map after Geo data. */
     map.data.setStyle(function(feature) {
         return ({
             fillColor: '#ffffff',
@@ -258,7 +259,8 @@ function startScreen(event) {
     fadeOutTip();
 }
 
-/* Google Map Styling */
+/* Google Map Styling - setting the land color to the background color. later
+coloring it with the GeoJson data overlay back to white to get rid of antarctica */
 let mapStyle = [
     {
         "elementType": "geometry",
