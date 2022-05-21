@@ -82,15 +82,20 @@ function zoomMap(event) {
     removeSearchBar();
 }
 
+/* Get up to 5 cities where the user clicked */
 function clickNearestCities() {
 
+    /* define the square around the click in which to search for cities */
     let latMin = (latitude - 1);
     let latMax = (latitude + 1);
     let lonMin = (longitude - 1);
     let lonMax = (longitude + 1);
+
+    /* generating the url */
     let url = 'https://api.api-ninjas.com/v1/city?min_lat=' + latMin + '&max_lat=' + latMax + '&min_lon=' + lonMin + '&max_lon=' + lonMax + '&limit=5&min_population=25000';
     let responseArray = [];
 
+    /* get the city data */
     fetch(url, {
         method: 'GET',
         headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
@@ -101,6 +106,7 @@ function clickNearestCities() {
             for (let i = 0; i < data.length; i++) {
                 responseArray.push(new city(data[i].name, data[i].latitude, data[i].longitude, data[i].country, data[i].population));
             }
+            /* if no cities where found set page back to start */
             if (responseArray.length === 0) {
                 map.setZoom(0.6);
                 map.panTo({lat: 0, lng: 0});
@@ -108,13 +114,13 @@ function clickNearestCities() {
                 removeBackUp();
                 appendSearchBar();
             }
+            /* if cities -> create the popup with up to 5 entries */
             else {createPopUp(responseArray);}
         }));
     interactionMode = 'popup';
 }
 
 function createPopUp(responseArray) {
-
     let nameArray = [];
     for (let i = 0; i < responseArray.length; i++) {
         nameArray.push(responseArray[i].name);
@@ -136,6 +142,8 @@ function createPopUp(responseArray) {
     let citiesContainer = [];
     let divContainer = [];
 
+    /* generating an array with lenght = amount of cities in response, containing variables for
+    * creating the popup elements */
     for (digit = 1; digit < (responseArray.length + 1); digit++) {
         citiesContainer.push(eval('let ' + name + digit + ' = document.createElement(\'a\');'));
         divContainer.push(eval('let' + div + digit + ' = document.createElement(\'div\');'));
@@ -149,10 +157,10 @@ function createPopUp(responseArray) {
         citiesContainer[i].appendChild(divContainer[i]);
         citiesDiv.append(citiesContainer[i]);
     }
-
     document.getElementById('worldMap').append(divPop);
 }
 
+/* if popup exists delete its childs and itself and set page back to start */
 function closePopUp() {
     if (document.getElementById('popup')) {
         let popup = document.getElementById('divPop');
@@ -168,6 +176,7 @@ function closePopUp() {
     appendSearchBar();
 }
 
+/* set page back to start using the back button */
 function backUp(event) {
     if (interactionMode === 'popup') {closePopUp()}
     else {
@@ -179,10 +188,11 @@ function backUp(event) {
     }
 }
 
+/* generating the back button and set its style properties */
 function appendBackUp() {
     let back = document.createElement('img');
     back.src = '../resources/backUp.png';
-    back.style.opacity = '70%';
+    back.style.opacity = '70%'; /* generate a relative style which works for all mobiles */
     back.style.top = `${(window.innerHeight - 60)}` + 'px';
     back.style.left = `${(screen.width / 2) - (7.5 * screen.width / 100)}` + 'px';
     back.style.width = `${(15 * 100 /screen.width)}`
@@ -195,11 +205,12 @@ function removeBackUp() {
     document.getElementById('backUp').remove();
 }
 
+/* generating the search bar and set its style properties */
 function appendSearchBar() {
     let search = document.createElement('textarea');
     search.setAttribute('id', 'searchText');
     search.setAttribute('placeholder', 'Search for a city ...');
-    search.style.width = '52%';
+    search.style.width = '52%';     /* generate a relative style which works for all mobiles */
     search.style.top = `${(window.innerHeight - 60)}` + 'px';
     search.style.left = `${(screen.width / 2) - (26 * screen.width / 100)}` + 'px';
     search.style.width = `${(52 * 100 /screen.width)}`
@@ -214,14 +225,16 @@ function appendTip() {
     let tip = document.createElement('textarea');
     tip.setAttribute('id', 'tip')
     tip.innerText = 'Tab map to zoom in'
-    tip.style.width = '40%';
+    tip.style.width = '40%'; /* generate a relative style which works for all mobiles */
     tip.style.top = `${(window.innerHeight - 160)}` + 'px';
     tip.style.left = `${(screen.width / 2) - (20 * screen.width / 100)}` + 'px';
     tip.setAttribute('readonly', '');
     document.getElementById('buttons').append(tip);
 }
 
-/* https://stackoverflow.com/questions/29017379/how-to-make-fadeout-effect-with-pure-javascript */
+/* fade out the tip
+* following methode is from:
+*  https://stackoverflow.com/questions/29017379/how-to-make-fadeout-effect-with-pure-javascript */
 function fadeOutTip() {
     let tip = document.getElementById("tip");
     let fadeEffect = setInterval(function () {
@@ -234,7 +247,7 @@ function fadeOutTip() {
             clearInterval(fadeEffect);
         }
     }, 500);
-}
+} /* until here */
 
 function startScreen(event) {
     document.getElementById('nav').style.opacity = '1';
@@ -245,6 +258,7 @@ function startScreen(event) {
     fadeOutTip();
 }
 
+/* Google Map Styling */
 let mapStyle = [
     {
         "elementType": "geometry",
