@@ -109,8 +109,7 @@ function clickNearestCities() {
             }
             /* if no cities where found set page back to start */
             if (responseArray.length === 0) {
-                map.setZoom(0.6);
-                map.panTo({lat: 0, lng: 0});
+                initMap();
                 interactionMode = 'start';
                 removeBackUp();
                 appendSearchBar();
@@ -170,8 +169,7 @@ function closePopUp() {
         }
         popup.remove();
     }
-    map.setZoom(zoom);
-    map.panTo({lat: 0, lng: 0});
+    initMap();
     interactionMode = 'start';
     removeBackUp();
     appendSearchBar();
@@ -181,8 +179,7 @@ function closePopUp() {
 function backUp(event) {
     if (interactionMode === 'popup') {closePopUp()}
     else {
-        map.setZoom(zoom);
-        map.panTo({lat: 0, lng: 0});
+        initMap();
         interactionMode = 'start';
         appendSearchBar();
         removeBackUp();
