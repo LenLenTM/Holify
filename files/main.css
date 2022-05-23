@@ -7,7 +7,8 @@ body {
     color: gray;
     display: grid;
     grid-template-areas:
-    "h h"
+    "n n"
+    "n n"
     "m m"
     "a a"
     "f f";
@@ -16,14 +17,106 @@ body {
 @media (min-width: 642px) {
     body {
         grid-template-areas:
-        "h n n"
+        "n n n"
         "a m m"
         "f f f";
     }
 }
 
+/* -----------------------------------   Nav   --------------------------------- */
 
-header {
+nav {
+    grid-area: n;
+    width: 100%;
+    background-color: white;
+    font-family: Avenir;
+    font-size: 1.5em;
+    color: grey;
+    /*opacity: 0;*/
+}
+#navText {
+    position: absolute;
+    top: 1.1%;
+    left: 10%;
+}
+#logo {
+    width: 18%;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+#user {
+    width: 50px;
+    position: absolute;
+    top: 2vw;
+    left: 85vw;
+}
+#options {
+    width: 50px;
+    alignment: right;
+    position: absolute;
+    left: 92vw;
+    top: 2.5vw;
+}
+#logo {
+    height: 4vw;
+    width: 4vw;
+    align-self: center;
+    margin-left: 1vw;
+    min-width: 100px;
+    min-height: 100px;
+}
+
+--------------------------------------------------------------
+
+main {
+    grid-area: m;
+    background-color: #9ae7cd;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+
+#WorldMap{
+    width: 100%;
+    padding-top: 30px;
+}
+
+aside {
+    width: 55%;
+    grid-area: a;
+    background-color: white;
+    margin: 50px;
+    border-radius: 20px;
+    border-color: gray;
+    padding: 1em 3em;
+    color: gray;
+
+}
+
+#PlanTrip{
+    align-content: center;
+    border-color: lightgray;
+    color: gray;
+    border-radius: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: lighter;
+}
+
+h2 {
+    text-align: center;
+    padding-bottom: 1rem;
+    font-weight: lighter;
+
+}
+
+
+
+footer {
+    grid-area: f;
+    font-size: small;
+    margin: 15px;
+}
+/*header {
     grid-area: h;
     background-color: white;
     font-size: 4vw;
@@ -119,3 +212,4 @@ footer {
     margin: 15px;
 }
 
+*/
