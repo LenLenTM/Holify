@@ -46,31 +46,16 @@ nav {
 
 /* -----------------------------------   World Map  --------------------------------- */
 
-main {
-    background-color: #9ae7cd;
-    border: none;
-    width: 100%;
-    position: absolute;
-    top: 700px;
-}
 #worldMap {
     margin-top: 2px;
     width: 100%;
     height: 600px;
     overflow: hidden;
 }
-.img-wrapper {
-    margin-top: 1px;
-    overflow: hidden;
-    height: 600px;
-    width: 100%;
-}
 
 /* -----------------------------------   PopUp  --------------------------------- */
-#tipIMG {
-    position: absolute;
-    opacity: 70%;
-}
+
+
 #tip {
     position: absolute;
     text-align: center;
@@ -142,8 +127,4 @@ a[href^="https://www.google.com/maps"] {
     height: 12px;
     opacity: 80%;
     background-color: lightslategrey;
-}
-
-#marker {
-    opacity: 50%;
 }

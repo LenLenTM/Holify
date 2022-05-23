@@ -185,8 +185,9 @@ function createPopUp(responseArray) {
             divContainer.push(eval('let' + div + digit + ' = document.createElement(\'div\');'));
         }
         for (let i = 0; i < responseArray.length; i++) {
+            let url = 'cityInformation.html?city=' + responseArray[i].name;
             citiesContainer[i] = document.createElement('a');
-            citiesContainer[i].setAttribute('href', "");
+            citiesContainer[i].setAttribute('href', url);
             divContainer[i] = document.createElement('div');
             divContainer[i].setAttribute('id', 'city' + (i + 1));
             divContainer[i].innerText = nameArray[i].toUpperCase();
@@ -217,7 +218,9 @@ function createMarker() {
     let markerName = 'marker';
 
     for (markerCount = 1; markerCount < (responseArray.length + 1); markerCount++) {
-        markerList.push(eval('let ' + markerName + markerCount + ' = new google.maps.Marker({position: {lat: responseArray[markerCount - 1].latitude, lng: responseArray[markerCount - 1].longitude}, icon: \'../resources/Marker.png\', map: map})'));
+        let position = {lat: responseArray[markerCount - 1].latitude, lng: responseArray[markerCount - 1].longitude};
+        let icon = {url: '../resources/Marker.png'}
+        markerList.push(eval('let ' + markerName + markerCount + ' = new google.maps.Marker({position: position, icon: icon, map: map})'));
     }
 }
 
