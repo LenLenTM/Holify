@@ -4,6 +4,7 @@ let latitude;
 let longitude;
 let map;
 let responseArray = [];
+let markerList = [];
 
 /* Cities received from Cities API */
 class city {
@@ -49,9 +50,13 @@ function initMap() {
         console.log('L1 ' + latitude + " - " + longitude);
 
         if (interactionMode === 'start') {
+            removeTip();
             zoomMap(event);
+            appendTip();
+            fadeOutTip();
         }
         else if (interactionMode === 'zoom') {
+            removeTip();
             clickNearestCities();
             progressBar();
         }
@@ -68,6 +73,7 @@ function initMap() {
         console.log('L2 ' + latitude + " - " + longitude);
 
         if (interactionMode === 'zoom') {
+            removeTip();
             clickNearestCities();
             progressBar();
         }
@@ -121,6 +127,7 @@ function clickNearestCities() {
             else {
                 createPopUp(responseArray);
                 document.getElementById('progBar').remove();
+                createMarker();
             }
         }));
     interactionMode = 'popup';
@@ -205,6 +212,15 @@ function closePopUp() {
     appendSearchBar();
 }
 
+function createMarker() {
+    let markerCount = 0;
+    let markerName = 'marker';
+
+    for (markerCount = 1; markerCount < (responseArray.length + 1); markerCount++) {
+        markerList.push(eval('let ' + markerName + markerCount + ' = new google.maps.Marker({position: {lat: responseArray[markerCount - 1].latitude, lng: responseArray[markerCount - 1].longitude}, icon: \'../resources/Marker.png\', map: map})'));
+    }
+}
+
 /* set page back to start using the back button */
 function backUp(event) {
     if (interactionMode === 'popup') {closePopUp()}
@@ -252,7 +268,13 @@ function removeSearchBar() {
 function appendTip() {
     let tip = document.createElement('textarea');
     tip.setAttribute('id', 'tip')
-    tip.innerText = 'Tab map to zoom in'
+    if (interactionMode === 'start') {
+        tip.innerText = 'Tab map to zoom in';
+    }
+    else if (interactionMode === 'zoom') {
+        tip.innerText = 'Tab to get cities';
+    }
+
     tip.style.width = '40%'; /* generate a relative style which works for all mobiles */
     tip.style.top = `${(window.innerHeight - 160)}` + 'px';
     tip.style.left = `${(screen.width / 2) - (20 * screen.width / 100)}` + 'px';
@@ -276,6 +298,12 @@ function fadeOutTip() {
         }
     }, 500);
 } /* until here */
+
+function removeTip() {
+    if (document.getElementById('tip')) {
+        document.getElementById('tip').remove();
+    }
+}
 
 function startScreen(event) {
     document.getElementById('nav').style.opacity = '1';

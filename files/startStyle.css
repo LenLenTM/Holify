@@ -143,3 +143,7 @@ a[href^="https://www.google.com/maps"] {
     opacity: 80%;
     background-color: lightslategrey;
 }
+
+#marker {
+    opacity: 50%;
+}
