@@ -81,6 +81,9 @@ function initMap() {
             closePopUp();
         }
     });
+    appendSearchBar();
+    appendTip();
+    fadeOutTip();
 }
 window.initMap = initMap;
 
@@ -307,15 +310,6 @@ function removeTip() {
     if (document.getElementById('tip')) {
         document.getElementById('tip').remove();
     }
-}
-
-function startScreen(event) {
-    document.getElementById('nav').style.opacity = '1';
-    document.getElementById('body').style.backgroundColor = '#9ae7cd';
-    document.getElementById('intro').remove();
-    appendSearchBar();
-    appendTip();
-    fadeOutTip();
 }
 
 /* Google Map Styling - setting the land color to the background color. later

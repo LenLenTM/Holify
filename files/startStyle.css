@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    background-color: #ffffff;
+    background-color: #9ae7cd;
 }
 #intro {
     position: absolute;
@@ -18,7 +18,6 @@ nav {
     font-family: Avenir;
     font-size: 1.5em;
     color: grey;
-    opacity: 0;
 }
 #navText {
     position: absolute;

@@ -1,0 +1,27 @@
+body {
+    background-color: #ffffff;
+}
+
+#logo {
+    position: absolute;
+    width: 30%;
+    left: 35%;
+    top: 30%;
+}
+
+#font {
+    position: absolute;
+    width: 30%;
+    left: 36.5%;
+    top: 42%;
+    font-family: Avenir;
+    color: grey;
+    font-size: 30px;
+}
+
+.font {
+    display: flex;
+    alignment: center;
+    text-align: center;
+    width: 100%;
+}
