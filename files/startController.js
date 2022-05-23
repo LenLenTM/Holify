@@ -185,7 +185,7 @@ function createPopUp(responseArray) {
             divContainer.push(eval('let' + div + digit + ' = document.createElement(\'div\');'));
         }
         for (let i = 0; i < responseArray.length; i++) {
-            let url = 'cityInformation.html?city=' + responseArray[i].name;
+            let url = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country;
             citiesContainer[i] = document.createElement('a');
             citiesContainer[i].setAttribute('href', url);
             divContainer[i] = document.createElement('div');
