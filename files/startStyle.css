@@ -135,3 +135,11 @@ a[href^="https://www.google.com/maps"] {
 .gmnoprint:not(.gm-bundled-control) {
     display: none;
 }
+
+#progBar {
+    position: absolute;
+    width: 1%;
+    height: 12px;
+    opacity: 80%;
+    background-color: lightslategrey;
+}

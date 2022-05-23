@@ -3,6 +3,7 @@ let zoom = 0.6;
 let latitude;
 let longitude;
 let map;
+let responseArray = [];
 
 /* Cities received from Cities API */
 class city {
@@ -52,6 +53,7 @@ function initMap() {
         }
         else if (interactionMode === 'zoom') {
             clickNearestCities();
+            progressBar();
         }
         else if (interactionMode === 'popup') {
             closePopUp();
@@ -67,6 +69,7 @@ function initMap() {
 
         if (interactionMode === 'zoom') {
             clickNearestCities();
+            progressBar();
         }
         else if (interactionMode === 'popup') {
             closePopUp();
@@ -94,7 +97,7 @@ function clickNearestCities() {
 
     /* generating the url */
     let url = 'https://api.api-ninjas.com/v1/city?min_lat=' + latMin + '&max_lat=' + latMax + '&min_lon=' + lonMin + '&max_lon=' + lonMax + '&limit=5&min_population=25000';
-    let responseArray = [];
+    responseArray = [];
 
     /* get the city data */
     fetch(url, {
@@ -115,49 +118,76 @@ function clickNearestCities() {
                 appendSearchBar();
             }
             /* if cities -> create the popup with up to 5 entries */
-            else {createPopUp(responseArray);}
+            else {
+                createPopUp(responseArray);
+                document.getElementById('progBar').remove();
+            }
         }));
     interactionMode = 'popup';
 }
 
+function progressBar() {
+    let bar = 0;
+    let elem = document.createElement('div');
+    elem.setAttribute('id', 'progBar');
+    document.getElementById('buttons').append(elem);
+
+    if (bar === 0) {
+        bar = 1;
+        let width = 1;
+        let id = setInterval(frame, 10);
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+                bar = 0;
+            } else {
+                width++;
+                elem.style.width = width + "%";
+            }
+        }
+    }
+}
+
 function createPopUp(responseArray) {
-    let nameArray = [];
-    for (let i = 0; i < responseArray.length; i++) {
-        nameArray.push(responseArray[i].name);
-    }
+    if (responseArray !== 0) {
+        let nameArray = [];
+        for (let i = 0; i < responseArray.length; i++) {
+            nameArray.push(responseArray[i].name);
+        }
 
-    let divPop = document.createElement('div');
-    divPop.setAttribute('id', 'divPop')
-    let popup = document.createElement('img');
-    popup.src = "../resources/SelectCityPopUp.png";
-    popup.setAttribute('id', 'popup');
-    let citiesDiv = document.createElement('div');
-    citiesDiv.setAttribute('id', 'citiesDiv');
-    citiesDiv.setAttribute('class', 'citiesBox')
-    divPop.append(popup, citiesDiv);
+        let divPop = document.createElement('div');
+        divPop.setAttribute('id', 'divPop')
+        let popup = document.createElement('img');
+        popup.src = "../resources/SelectCityPopUp.png";
+        popup.setAttribute('id', 'popup');
+        let citiesDiv = document.createElement('div');
+        citiesDiv.setAttribute('id', 'citiesDiv');
+        citiesDiv.setAttribute('class', 'citiesBox')
+        divPop.append(popup, citiesDiv);
 
-    let name = 'a';
-    let div = 'div';
-    let digit = 0;
-    let citiesContainer = [];
-    let divContainer = [];
+        let name = 'a';
+        let div = 'div';
+        let digit = 0;
+        let citiesContainer = [];
+        let divContainer = [];
 
-    /* generating an array with lenght = amount of cities in response, containing variables for
-    * creating the popup elements */
-    for (digit = 1; digit < (responseArray.length + 1); digit++) {
-        citiesContainer.push(eval('let ' + name + digit + ' = document.createElement(\'a\');'));
-        divContainer.push(eval('let' + div + digit + ' = document.createElement(\'div\');'));
+        /* generating an array with lenght = amount of cities in response, containing variables for
+        * creating the popup elements */
+        for (digit = 1; digit < (responseArray.length + 1); digit++) {
+            citiesContainer.push(eval('let ' + name + digit + ' = document.createElement(\'a\');'));
+            divContainer.push(eval('let' + div + digit + ' = document.createElement(\'div\');'));
+        }
+        for (let i = 0; i < responseArray.length; i++) {
+            citiesContainer[i] = document.createElement('a');
+            citiesContainer[i].setAttribute('href', "");
+            divContainer[i] = document.createElement('div');
+            divContainer[i].setAttribute('id', 'city' + (i + 1));
+            divContainer[i].innerText = nameArray[i].toUpperCase();
+            citiesContainer[i].appendChild(divContainer[i]);
+            citiesDiv.append(citiesContainer[i]);
+        }
+        document.getElementById('worldMap').append(divPop);
     }
-    for (let i = 0; i < responseArray.length; i++) {
-        citiesContainer[i] = document.createElement('a');
-        citiesContainer[i].setAttribute('href', "");
-        divContainer[i] = document.createElement('div');
-        divContainer[i].setAttribute('id', 'city' + (i + 1));
-        divContainer[i].innerText = nameArray[i].toUpperCase();
-        citiesContainer[i].appendChild(divContainer[i]);
-        citiesDiv.append(citiesContainer[i]);
-    }
-    document.getElementById('worldMap').append(divPop);
 }
 
 /* if popup exists delete its childs and itself and set page back to start */
