@@ -122,6 +122,7 @@ function clickNearestCities() {
                 interactionMode = 'start';
                 removeBackUp();
                 appendSearchBar();
+                document.getElementById('progBar').remove();
             }
             /* if cities -> create the popup with up to 5 entries */
             else {
