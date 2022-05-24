@@ -1,4 +1,3 @@
-const button = document.querySelector('#add-button');
 const tagInput = document.querySelector('#input');
 
 const form = document.forms[0];
