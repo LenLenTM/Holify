@@ -107,7 +107,6 @@ nav {
 }
 #errorMessage {
     font-family: "Avenir";
-    font-weight: bold;
     font-size: 1.5em;
     line-height: 1.7;
     color: grey;
@@ -129,8 +128,8 @@ a[href^="https://www.google.com/maps"] {
 
 #progBar {
     position: absolute;
-    width: 1%;
-    height: 12px;
+    width: 30%;
     opacity: 80%;
-    background-color: lightslategrey;
+    left: 35%;
+    top: 35%;
 }
