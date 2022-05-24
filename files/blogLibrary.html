@@ -8,7 +8,7 @@
     <link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet">
 </head>
 
-<body>
+<body id="body">
 <header>
     <a id = "order1" href = "start.html">
         <img src="../resources/Holify.png" alt="Holify Logo" id="logo">
@@ -31,55 +31,61 @@
     <nav>
         <div class="dropdown">
             <button class="dropbtn" id="afrika">Afrika</button>
-            <div class="dropdown-content">
-                <a href="#">Kongo</a>
-                <a href="#">Namibia</a>
-                <a href="#">Rhodesien</a>
-            </div>
+
         </div>
         <div class="dropdown">
             <button class="dropbtn" id="asien">Asien</button>
-            <div class="dropdown-content">
-                <a href="#">USA</a>
-                <a href="#">Kanada</a>
-                <a href="#">Mexiko</a>
-            </div>
+
         </div>
         <div class="dropdown">
             <button class="dropbtn" id="europa">Europa </button>
-            <div class="dropdown-content">
-                <a href="#">Serbien</a>
-                <a href="#">Albanien</a>
-                <a href="#">San Marino</a>
-            </div>
+
         </div>
         <div class="dropdown">
             <button class="dropbtn" id="ozeanien">Ozeanien</button>
-            <div class="dropdown-content">
-                <a href="#">Australien</a>
-                <a href="#">Neuseeland</a>
-                <a href="#">Mordor</a>
-            </div>
+
         </div>
         <div class="dropdown">
             <button class="dropbtn" id="nordamerika">Nordamerika</button>
-            <div class="dropdown-content">
-                <a href="#">USA</a>
-                <a href="#">Kanada</a>
-                <a href="#">Mexiko</a>
-            </div>
+
         </div>
         <div class="dropdown">
             <button class="dropbtn" id="südamerika">Südamerika</button>
-            <div class="dropdown-content">
-                <a href="#">Uruguay</a>
-                <a href="#">URUGUAY</a>
-                <a href="#">URUGUAY!!!</a>
+
             </div>
-        </div>
     </nav>
+<main>
+    <h2 id="libraryTitle">
+
+    </h2>
+
+    <p id="libraryTime"></p>
+
+    <div id="libraryContent">
+
+    </div>
 
 
+
+
+</main>
+<script src="blogInit.js"></script>
+<script>
+    let json = localStorage.getItem('blogPost');
+    let blogPost = jsonToBlog(json);
+    blogPost.content.replaceAll('""','');
+
+    let date = blogPost.time;
+
+
+
+
+
+    document.getElementById("libraryTitle").innerText = blogPost.title;
+    document.getElementById("libraryTime").innerText = blogPost.time;
+    document.getElementById("libraryTime").innerText = date;
+    document.getElementById("libraryContent").innerHTML = blogPost.content;
+</script>
 
 </body>
 </html>
