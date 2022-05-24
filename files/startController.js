@@ -6,6 +6,7 @@ let map;
 let responseArray = [];
 let responseArrayBackup = [];
 let markerList = [];
+let landscape = false;
 
 /* Cities received from Cities API */
 function City(name, latitude, longitude, country, population) {
@@ -86,7 +87,16 @@ function initMap() {
     fadeOutTip();
 }
 window.initMap = initMap;
+window.loadFont();
 
+function loadFont(){
+    let junction_font = new FontFace('Junction Regular', '../resources/fonts/Avenir.ttc');
+    junction_font.load().then(function(loaded_face) {
+        document.fonts.add(loaded_face);
+        document.body.style.fontFamily = '"Junction Regular", Avenir';
+    }).catch(function(error) {
+    });
+}
 function zoomMap(event) {
     map.panTo(event.latLng);
     map.setZoom(4.5);
@@ -314,6 +324,7 @@ function appendSearchBar() {
     search.style.top = `${(window.innerHeight - 60)}` + 'px';
     search.style.left = `${(screen.width / 2) - (26 * screen.width / 100)}` + 'px';
     search.style.width = `${(52 * 100 /screen.width)}`
+    search.style.resize = 'none';
     let addCSS = document.createElement('style');
     addCSS.innerHTML = "::placeholder {color: lightgray;}";
     document.body.append(addCSS);
@@ -372,6 +383,7 @@ function appendTip() {
         tip.style.width = '40%'; /* generate a relative style which works for all mobiles */
         tip.style.top = `${(window.innerHeight - 160)}` + 'px';
         tip.style.left = `${(screen.width / 2) - (20 * screen.width / 100)}` + 'px';
+        tip.style.resize = 'none';
         tip.setAttribute('readonly', '');
         document.getElementById('buttons').append(tip);
     }
