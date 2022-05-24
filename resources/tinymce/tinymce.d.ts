@@ -2803,6 +2803,7 @@ interface TinyMCE extends EditorManager {
         Rect: Rect;
     };
     util: {
+        JSON: any;
         Delay: Delay;
         Tools: Tools;
         VK: VK;

@@ -20,64 +20,39 @@
     </a>
 
     <a id = "order3" href = "login.html">
-        <img src="../resources/UserIcon.png" alt="User Icon" id="user">
+        <img src="../resources/UserIcon.png" alt="User Icon" id="userIcon">
     </a>
 
-    <a id = "order4" href = "blogLibrary.html">
+    <a id = "order4" href = "blog.html">
         <img src="../resources/Options.png" alt="Option Button" id="option">
     </a>
-
 
 </header>
 
 <nav>
     <div class="dropdown">
-        <button class="dropbtn" id="afrika">Afrika</button>
-        <div class="dropdown-content">
-            <a href="#">Kongo</a>
-            <a href="#">Namibia</a>
-            <a href="#">Rhodesien</a>
-        </div>
+        <button class="dropbtn" id="africa">Africa</button>
+
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="asien">Asien</button>
-        <div class="dropdown-content">
-            <a href="#">USA</a>
-            <a href="#">Kanada</a>
-            <a href="#">Mexiko</a>
-        </div>
+        <button class="dropbtn" id="asia">Asia</button>
+
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="europa">Europa </button>
-        <div class="dropdown-content">
-            <a href="#">Serbien</a>
-            <a href="#">Albanien</a>
-            <a href="#">San Marino</a>
-        </div>
+        <button class="dropbtn" id="europe">Europe </button>
+
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="ozeanien">Ozeanien</button>
-        <div class="dropdown-content">
-            <a href="#">Australien</a>
-            <a href="#">Neuseeland</a>
-            <a href="#">Mordor</a>
-        </div>
+        <button class="dropbtn" id="oceania">Oceania</button>
+
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="nordamerika">Nordamerika</button>
-        <div class="dropdown-content">
-            <a href="#">USA</a>
-            <a href="#">Kanada</a>
-            <a href="#">Mexiko</a>
-        </div>
+        <button class="dropbtn" id="northamerica">North America</button>
+
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="südamerika">Südamerika</button>
-        <div class="dropdown-content">
-            <a href="#">Uruguay</a>
-            <a href="#">URUGUAY</a>
-            <a href="#">URUGUAY!!!</a>
-        </div>
+        <button class="dropbtn" id="southamerica">South America</button>
+
     </div>
 </nav>
 
@@ -86,13 +61,17 @@
         <script src='../resources/tinymce/tinymce.min.js'></script>
 
         <script>tinymce.init({
-            selector: "#blog"
+            selector: "#blogContent"
         });
         </script>
 
+        <label for="user"></label>
+        <textarea name="user" id="user" cols="3" rows="2" placeholder= "Write your Name"></textarea>
+        <br>
         <label for="title"></label>
         <textarea name="title" id="title" cols="30" rows="2" placeholder= "Write your title"></textarea>
-        <label hidden for="blog"></label><textarea name="blog" id="blog" ></textarea>
+
+        <label hidden for="blogContent"></label><textarea name="blog" id="blogContent" ></textarea>
 
         <h2>Tags</h2>
         <p>Press comma or click the add button to create a tag.</p>
@@ -101,13 +80,17 @@
             <button id="add-button">Add</button>
 
         </div>
-        <div class="tag-container">
+        <div class="tag-container" id = "tag-container">
             <br>
         </div>
-        <input type="submit" value="Submit" id="submitButton">
+
+        <input type="submit" value="Submit" id="submitButton" onclick="tester = new Blog(document.getElementById('title').value,tinyMCE.activeEditor.getContent(),document.querySelectorAll('[id=tagID]'), document.getElementById('user').value);  testJSON = blogToJSON(tester); saveJSON(testJSON);console.log(document.querySelectorAll('[id=tagID]'));location.href='blogLibrary.html'">
     </form>
 </main>
-<script src="app.js"></script>
+
+<script src="tag.js"></script>
+<script src="blogInit.js"></script>
+
 
 <address>
     Written by <a href="mailto:nikolaus.kapfer-rupp@stud.fh-campuswien.ac.at">Nikolaus Kapfer-Rupp</a><br>

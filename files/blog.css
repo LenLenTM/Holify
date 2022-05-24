@@ -32,7 +32,7 @@ h1 {
     flex-grow: 1;
     align-self: center;
 }
-#user {
+#userIcon {
     height: 7vw;
     width: 6vw;
     align-self: center;
@@ -105,7 +105,7 @@ main {
 }
 
 
-#title {
+#title, #user {
     width: 50vw
 
 }
@@ -154,7 +154,7 @@ address {
         align-items: center;
     }
 
-    #title {
+    #title,#user {
         max-width: 50vw
     }
 
@@ -193,7 +193,7 @@ address {
         align-self: center;
     }
 
-    #user {
+    #userIcon {
         height: 10vw;
         width: 8vw;
         align-self: center;
@@ -236,7 +236,7 @@ address {
 
     address {
         bottom: 0;
-        font-size: 3vw;
+        font-size: 2vw;
     }
 
     #submitButton {

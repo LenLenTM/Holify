@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale= 1.0">
     <title>Holify - BLOG</title>
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="blogLibrary.css">
     <link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet">
 </head>
 
-<body>
+<body id="body">
 <header>
     <a id = "order1" href = "start.html">
         <img src="../resources/Holify.png" alt="Holify Logo" id="logo">
     </a>
 
     <a id = "order2">
-        <h1> HOLIFY </h1>
+        <h1 id="holifyTitle"> HOLIFY </h1>
     </a>
 
     <a id = "order3" href = "login.html">
@@ -28,58 +28,66 @@
 
 </header>
 
-    <nav>
-        <div class="dropdown">
-            <button class="dropbtn" id="afrika">Afrika</button>
-            <div class="dropdown-content">
-                <a href="#">Kongo</a>
-                <a href="#">Namibia</a>
-                <a href="#">Rhodesien</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn" id="asien">Asien</button>
-            <div class="dropdown-content">
-                <a href="#">USA</a>
-                <a href="#">Kanada</a>
-                <a href="#">Mexiko</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn" id="europa">Europa </button>
-            <div class="dropdown-content">
-                <a href="#">Serbien</a>
-                <a href="#">Albanien</a>
-                <a href="#">San Marino</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn" id="ozeanien">Ozeanien</button>
-            <div class="dropdown-content">
-                <a href="#">Australien</a>
-                <a href="#">Neuseeland</a>
-                <a href="#">Mordor</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn" id="nordamerika">Nordamerika</button>
-            <div class="dropdown-content">
-                <a href="#">USA</a>
-                <a href="#">Kanada</a>
-                <a href="#">Mexiko</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn" id="südamerika">Südamerika</button>
-            <div class="dropdown-content">
-                <a href="#">Uruguay</a>
-                <a href="#">URUGUAY</a>
-                <a href="#">URUGUAY!!!</a>
-            </div>
-        </div>
-    </nav>
+<nav>
+    <div class="dropdown">
+        <button class="dropbtn" id="africa">Africa</button>
+
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="asia">Asia</button>
+
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="europe">Europe </button>
+
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="oceania">Oceania</button>
+
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="northamerica">North America</button>
+
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="southamerica">South America</button>
+
+    </div>
+</nav>
+<main>
+    <br>
+    <div id="searchbarDIV">
+    <input type="text" id=searchbar placeholder="Search..">
+    </div>
+
+    <div id="blogBody">
+
+    <h1 id="libraryTitle"></h1>
+
+    <p id="libraryTime"></p>
+    <p id="libraryUser"></p>
+    <br>
+    <div id="libraryContent"></div>
+
+    </div>
 
 
+
+
+</main>
+<script src="blogInit.js"></script>
+<script>
+    let json = localStorage.getItem('blogPost');
+    let blogPost = jsonToBlog(json);
+    blogPost.content.replaceAll('""','');
+
+    let date = blogPost.time;
+    document.getElementById("libraryTitle").innerText = blogPost.title;
+    document.getElementById("libraryTime").innerText = date;
+    document.getElementById("libraryUser").innerText = blogPost.user;
+    document.getElementById("libraryContent").innerHTML = blogPost.content;
+    console.log(blogPost)
+</script>
 
 </body>
 </html>

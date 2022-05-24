@@ -6,17 +6,17 @@ let map;
 let responseArray = [];
 let responseArrayBackup = [];
 let markerList = [];
+let landscape = false;
 
 /* Cities received from Cities API */
-class city {
-    constructor(name, latitude, longitude, country, population) {
+function City(name, latitude, longitude, country, population) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.country = country;
         this.population = population;
-    }
 }
+
 
 /* Initialize GoogleMap */
 function initMap() {
@@ -87,7 +87,16 @@ function initMap() {
     fadeOutTip();
 }
 window.initMap = initMap;
+window.loadFont();
 
+function loadFont(){
+    let junction_font = new FontFace('Junction Regular', '../resources/fonts/Avenir.ttc');
+    junction_font.load().then(function(loaded_face) {
+        document.fonts.add(loaded_face);
+        document.body.style.fontFamily = '"Junction Regular", Avenir';
+    }).catch(function(error) {
+    });
+}
 function zoomMap(event) {
     map.panTo(event.latLng);
     map.setZoom(4.5);
@@ -120,10 +129,10 @@ function clickNearestCities() {
         .then(data2 => {
         console.log('Success(wide): ', data2);
         for (let i = 0; i < data2.length; i++) {
-            responseArrayBackup.push(new city(data2[i].name, data2[i].latitude, data2[i].longitude, data2[i].country, data2[i].population));
+            responseArrayBackup.push(new City(data2[i].name, data2[i].latitude, data2[i].longitude, data2[i].country, data2[i].population));
         }
     }));
-    setTimeout(mainFetch(responseArray, url), 220);
+    window.setTimeout(mainFetch(responseArray, url), 250);
     /* get the city data */
 }
 
@@ -136,13 +145,16 @@ function mainFetch(responseArray, url){
         .then(data => {
             console.log('Success(normal): ', data);
             for (let i = 0; i < data.length; i++) {
-                responseArray.push(new city(data[i].name, data[i].latitude, data[i].longitude, data[i].country, data[i].population));
+                responseArray.push(new City(data[i].name, data[i].latitude, data[i].longitude, data[i].country, data[i].population));
+            }
+            for (let i = 0; i < responseArray.length; i++){
+                console.log(responseArray[i]);
             }
             /* if no cities where found set page back to start */
             if ((responseArray.length === 0) && (responseArrayBackup.length === 0)) {
                 document.getElementById('progBar').remove();
                 createErrorMessage();
-                window.setTimeout(resetOnEmptyFetch, 1800);
+                window.setTimeout(resetOnEmptyFetch, 1000);
             }
             else if (responseArray.length !== 0) {
                 createPopUp(responseArray);
@@ -161,15 +173,13 @@ function mainFetch(responseArray, url){
 }
 
 function resetOnEmptyFetch(){
-    closePopUp();
+    removeSearchBar();
     initMap();
     interactionMode = 'start';
     removeBackUp();
-    appendSearchBar();
 }
 
 function createErrorMessage(){
-    console.log('what???')
     let divPop = document.createElement('div');
     divPop.setAttribute('id', 'divPop')
     let popup = document.createElement('img');
@@ -182,30 +192,19 @@ function createErrorMessage(){
     let p = document.createElement('p');
     p.setAttribute('id', 'errorMessage');
     p.innerText = "No cities\nin\nthis area.\n\nTry again!";
+
     citiesDiv.append(p);
     document.getElementById('worldMap').append(divPop, citiesDiv);
+    removeTip();
+
+    window.setTimeout(closePopUp, 1000);
 }
 
-function progressBar() {
-    let bar = 0;
-    let elem = document.createElement('div');
-    elem.setAttribute('id', 'progBar');
-    document.getElementById('buttons').append(elem);
-
-    if (bar === 0) {
-        bar = 1;
-        let width = 1;
-        let id = setInterval(frame, 12);
-        function frame() {
-            if (width >= 100) {
-                clearInterval(id);
-                bar = 0;
-            } else {
-                width++;
-                elem.style.width = width + "%";
-            }
-        }
-    }
+function progressBar(){
+    let load = document.createElement('img');
+    load.src = '../resources/loading.gif';
+    load.setAttribute('id', 'progBar');
+    document.getElementById('buttons').append(load);
 }
 
 function createPopUp(responseArray) {
@@ -260,10 +259,18 @@ function closePopUp() {
         }
         popup.remove();
     }
+    removeSearchBar();
     initMap();
     interactionMode = 'start';
     removeBackUp();
-    appendSearchBar();
+}
+
+function closeErrorMessage() {
+    if (document.getElementById('popup')) {
+        document.getElementById('errorMessage').remove();
+        document.getElementById('citiesDiv').remove();
+        document.getElementById('divPop').remove();
+    }
 }
 
 function createMarker(responseArray) {
@@ -281,9 +288,9 @@ function createMarker(responseArray) {
 function backUp(event) {
     if (interactionMode === 'popup') {closePopUp()}
     else {
+        removeSearchBar();
         initMap();
         interactionMode = 'start';
-        appendSearchBar();
         removeBackUp();
     }
 }
@@ -312,32 +319,74 @@ function appendSearchBar() {
     let search = document.createElement('textarea');
     search.setAttribute('id', 'searchText');
     search.setAttribute('placeholder', 'Search for a city ...');
+    search.addEventListener("keydown", searchFiledActivated);
     search.style.width = '52%';     /* generate a relative style which works for all mobiles */
     search.style.top = `${(window.innerHeight - 60)}` + 'px';
     search.style.left = `${(screen.width / 2) - (26 * screen.width / 100)}` + 'px';
     search.style.width = `${(52 * 100 /screen.width)}`
+    search.style.resize = 'none';
+    let addCSS = document.createElement('style');
+    addCSS.innerHTML = "::placeholder {color: lightgray;}";
+    document.body.append(addCSS);
     document.getElementById('buttons').append(search);
 }
 
+function searchFiledActivated(event){
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        let entry = document.getElementById('searchText').value;
+
+        let city;
+        progressBar();
+        document.getElementById('progBar').style.top = '70%';
+
+        let url = 'https://api.api-ninjas.com/v1/city?name=' + entry;
+        console.log(url);
+        fetch(url, {
+            method: 'GET',
+            headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
+            contentType: 'application/json',
+        }).then(response => response.json()
+            .then(data => {
+                console.log('Success(city): ', data);
+                document.getElementById('progBar').remove();
+                if (data.length === 0 || entry === "") {
+                    document.getElementById('searchText').setAttribute('placeholder', 'not a valid city!');
+                    let addCSS = document.createElement('style');
+                    addCSS.innerHTML = "::placeholder {color: red; opacity: 40%;}";
+                    document.body.append(addCSS);
+                    document.getElementById('searchText').value = "";
+                } else {
+                    city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
+                    window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;
+                }
+            }));
+    }
+}
+
 function removeSearchBar() {
-    document.getElementById('searchText').remove();
+    if (document.getElementById('searchText')) {
+        document.getElementById('searchText').remove();
+    }
 }
 
 function appendTip() {
-    let tip = document.createElement('textarea');
-    tip.setAttribute('id', 'tip')
-    if (interactionMode === 'start') {
-        tip.innerText = 'Tab map to zoom in';
-    }
-    else if (interactionMode === 'zoom') {
-        tip.innerText = 'Tab to get cities';
-    }
+    if (!document.getElementById('tip')) {
+        let tip = document.createElement('textarea');
+        tip.setAttribute('id', 'tip')
+        if (interactionMode === 'start' || interactionMode === 'popup') {
+            tip.innerText = 'Tab map to zoom in';
+        } else if (interactionMode === 'zoom') {
+            tip.innerText = 'Tab to get cities';
+        }
 
-    tip.style.width = '40%'; /* generate a relative style which works for all mobiles */
-    tip.style.top = `${(window.innerHeight - 160)}` + 'px';
-    tip.style.left = `${(screen.width / 2) - (20 * screen.width / 100)}` + 'px';
-    tip.setAttribute('readonly', '');
-    document.getElementById('buttons').append(tip);
+        tip.style.width = '40%'; /* generate a relative style which works for all mobiles */
+        tip.style.top = `${(window.innerHeight - 160)}` + 'px';
+        tip.style.left = `${(screen.width / 2) - (20 * screen.width / 100)}` + 'px';
+        tip.style.resize = 'none';
+        tip.setAttribute('readonly', '');
+        document.getElementById('buttons').append(tip);
+    }
 }
 
 /* fade out the tip

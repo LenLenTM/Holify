@@ -1,4 +1,3 @@
-const button = document.querySelector('#add-button');
 const tagInput = document.querySelector('#input');
 
 const form = document.forms[0];
@@ -13,6 +12,8 @@ const createTag = (tagValue) => {
     const tag = document.createElement('span');
     const tagContent = document.createTextNode(value);
     tag.setAttribute('class', 'tag');
+
+    tag.setAttribute("id", "tagID")
     tag.appendChild(tagContent);
 
     const close = document.createElement('span');
