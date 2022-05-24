@@ -4,6 +4,7 @@ let latitude;
 let longitude;
 let map;
 let responseArray = [];
+let responseArrayBackup = [];
 let markerList = [];
 
 /* Cities received from Cities API */
@@ -106,35 +107,83 @@ function clickNearestCities() {
 
     /* generating the url */
     let url = 'https://api.api-ninjas.com/v1/city?min_lat=' + latMin + '&max_lat=' + latMax + '&min_lon=' + lonMin + '&max_lon=' + lonMax + '&limit=5&min_population=25000';
+    let url2 = 'https://api.api-ninjas.com/v1/city?min_lat=' + (latMin - 1) + '&max_lat=' + (latMax +1 ) + '&min_lon=' + (lonMin - 1) + '&max_lon=' + (lonMax + 1) + '&limit=5&min_population=25000';
     responseArray = [];
+    responseArrayBackup = [];
 
+    /* backup search with bigger radius */
+    fetch(url2, {
+        method: 'GET',
+        headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
+        contentType: 'application/json',
+    }).then(response => response.json()
+        .then(data2 => {
+        console.log('Success(wide): ', data2);
+        for (let i = 0; i < data2.length; i++) {
+            responseArrayBackup.push(new city(data2[i].name, data2[i].latitude, data2[i].longitude, data2[i].country, data2[i].population));
+        }
+    }));
+    setTimeout(mainFetch(responseArray, url), 220);
     /* get the city data */
+}
+
+function mainFetch(responseArray, url){
     fetch(url, {
         method: 'GET',
         headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
         contentType: 'application/json',
     }).then(response => response.json()
         .then(data => {
-            console.log('Success: ', data);
+            console.log('Success(normal): ', data);
             for (let i = 0; i < data.length; i++) {
                 responseArray.push(new city(data[i].name, data[i].latitude, data[i].longitude, data[i].country, data[i].population));
             }
             /* if no cities where found set page back to start */
-            if (responseArray.length === 0) {
-                initMap();
-                interactionMode = 'start';
-                removeBackUp();
-                appendSearchBar();
+            if ((responseArray.length === 0) && (responseArrayBackup.length === 0)) {
                 document.getElementById('progBar').remove();
+                createErrorMessage();
+                window.setTimeout(resetOnEmptyFetch, 1800);
+            }
+            else if (responseArray.length !== 0) {
+                createPopUp(responseArray);
+                document.getElementById('progBar').remove();
+                createMarker(responseArray);
+                interactionMode = 'popup';
             }
             /* if cities -> create the popup with up to 5 entries */
             else {
-                createPopUp(responseArray);
+                createPopUp(responseArrayBackup);
                 document.getElementById('progBar').remove();
-                createMarker();
+                createMarker(responseArrayBackup);
+                interactionMode = 'popup';
             }
         }));
-    interactionMode = 'popup';
+}
+
+function resetOnEmptyFetch(){
+    closePopUp();
+    initMap();
+    interactionMode = 'start';
+    removeBackUp();
+    appendSearchBar();
+}
+
+function createErrorMessage(){
+    console.log('what???')
+    let divPop = document.createElement('div');
+    divPop.setAttribute('id', 'divPop')
+    let popup = document.createElement('img');
+    popup.src = "../resources/SelectCityPopUp.png";
+    popup.setAttribute('id', 'popup');
+    divPop.append(popup);
+    let citiesDiv = document.createElement('div');
+    citiesDiv.setAttribute('id', 'citiesDiv');
+    citiesDiv.setAttribute('class', 'citiesBox');
+    let p = document.createElement('p');
+    p.setAttribute('id', 'errorMessage');
+    p.innerText = "No cities\nin\nthis area.\n\nTry again!";
+    citiesDiv.append(p);
+    document.getElementById('worldMap').append(divPop, citiesDiv);
 }
 
 function progressBar() {
@@ -146,7 +195,7 @@ function progressBar() {
     if (bar === 0) {
         bar = 1;
         let width = 1;
-        let id = setInterval(frame, 10);
+        let id = setInterval(frame, 12);
         function frame() {
             if (width >= 100) {
                 clearInterval(id);
@@ -173,7 +222,7 @@ function createPopUp(responseArray) {
         popup.setAttribute('id', 'popup');
         let citiesDiv = document.createElement('div');
         citiesDiv.setAttribute('id', 'citiesDiv');
-        citiesDiv.setAttribute('class', 'citiesBox')
+        citiesDiv.setAttribute('class', 'citiesBox');
         divPop.append(popup, citiesDiv);
 
         let name = 'a';
@@ -217,7 +266,7 @@ function closePopUp() {
     appendSearchBar();
 }
 
-function createMarker() {
+function createMarker(responseArray) {
     let markerCount = 0;
     let markerName = 'marker';
 
@@ -253,7 +302,9 @@ function appendBackUp() {
 }
 
 function removeBackUp() {
-    document.getElementById('backUp').remove();
+    if (document.getElementById('backUp')) {
+        document.getElementById('backUp').remove();
+    }
 }
 
 /* generating the search bar and set its style properties */

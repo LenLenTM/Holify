@@ -105,6 +105,13 @@ nav {
     line-height: 3;
     color: grey;
 }
+#errorMessage {
+    font-family: "Avenir";
+    font-weight: bold;
+    font-size: 1.5em;
+    line-height: 1.7;
+    color: grey;
+}
 
 /* https://stackoverflow.com/questions/12499886/how-to-hide-or-disable-the-google-logo-footer-copyright-on-google-maps-javascr */
 
