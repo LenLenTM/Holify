@@ -11,7 +11,7 @@
 
 <body>
 <header>
-    <a id = "order1" href = "https://www.barbie.com">
+    <a id = "order1" href = "start.html">
         <img src="../resources/Holify.png" alt="Holify Logo" id="logo">
     </a>
 
@@ -19,40 +19,39 @@
         <h1> HOLIFY </h1>
     </a>
 
-    <a id = "order3" href = "https://www.cia.gov">
-        <img src="../resources/UserIcon.png" alt="User Icon" id="user">
+    <a id = "order3" href = "login.html">
+        <img src="../resources/UserIcon.png" alt="User Icon" id="userIcon">
     </a>
 
-    <a id = "order4" href = "https://www.scientology.org/">
+    <a id = "order4" href = "blog.html">
         <img src="../resources/Options.png" alt="Option Button" id="option">
     </a>
-
 
 </header>
 
 <nav>
     <div class="dropdown">
-        <button class="dropbtn" id="afrika">Afrika</button>
+        <button class="dropbtn" id="africa">Africa</button>
 
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="asien">Asien</button>
+        <button class="dropbtn" id="asia">Asia</button>
 
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="europa">Europa </button>
+        <button class="dropbtn" id="europe">Europe </button>
 
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="ozeanien">Ozeanien</button>
+        <button class="dropbtn" id="oceania">Oceania</button>
 
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="nordamerika">Nordamerika</button>
+        <button class="dropbtn" id="northamerica">North America</button>
 
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="südamerika">Südamerika</button>
+        <button class="dropbtn" id="southamerica">South America</button>
 
     </div>
 </nav>
@@ -66,6 +65,9 @@
         });
         </script>
 
+        <label for="user"></label>
+        <textarea name="user" id="user" cols="3" rows="2" placeholder= "Write your Name"></textarea>
+        <br>
         <label for="title"></label>
         <textarea name="title" id="title" cols="30" rows="2" placeholder= "Write your title"></textarea>
 
@@ -78,19 +80,16 @@
             <button id="add-button">Add</button>
 
         </div>
-        <div class="tag-container">
+        <div class="tag-container" id = "tag-container">
             <br>
         </div>
 
-        <input type="submit" value="Submit" id="submitButton" onclick="tester = new Blog(document.getElementById('title').value,tinyMCE.activeEditor.getContent(),document.getElementsByClassName('tag'), 'Test'); console.log(tester);  testJSON = blogToJSON(tester); saveJSON(testJSON); location.href='blogLibrary.html'">
+        <input type="submit" value="Submit" id="submitButton" onclick="tester = new Blog(document.getElementById('title').value,tinyMCE.activeEditor.getContent(),document.querySelectorAll('[id=tagID]'), document.getElementById('user').value);  testJSON = blogToJSON(tester); saveJSON(testJSON);console.log(document.querySelectorAll('[id=tagID]'));location.href='blogLibrary.html'">
     </form>
 </main>
 
 <script src="tag.js"></script>
 <script src="blogInit.js"></script>
-<script>
-    let test = new Blog(document.getElementById("title").value,document.getElementById('blogContent').value,"Test", "Test");
-    </script>
 
 
 <address>

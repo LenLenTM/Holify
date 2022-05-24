@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale= 1.0">
     <title>Holify - BLOG</title>
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="blogLibrary.css">
     <link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet">
 </head>
 
@@ -15,7 +15,7 @@
     </a>
 
     <a id = "order2">
-        <h1> HOLIFY </h1>
+        <h1 id="holifyTitle"> HOLIFY </h1>
     </a>
 
     <a id = "order3" href = "login.html">
@@ -28,40 +28,46 @@
 
 </header>
 
-    <nav>
-        <div class="dropdown">
-            <button class="dropbtn" id="afrika">Afrika</button>
+<nav>
+    <div class="dropdown">
+        <button class="dropbtn" id="africa">Africa</button>
 
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn" id="asien">Asien</button>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="asia">Asia</button>
 
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn" id="europa">Europa </button>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="europe">Europe </button>
 
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn" id="ozeanien">Ozeanien</button>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="oceania">Oceania</button>
 
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn" id="nordamerika">Nordamerika</button>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="northamerica">North America</button>
 
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn" id="südamerika">Südamerika</button>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="southamerica">South America</button>
 
-            </div>
-    </nav>
+    </div>
+</nav>
 <main>
-    <h2 id="libraryTitle">
+    <br>
+    <div id="searchbarDIV">
+    <input type="text" id=searchbar placeholder="Search..">
+    </div>
 
-    </h2>
+    <div id="blogBody">
+
+    <h1 id="libraryTitle"></h1>
 
     <p id="libraryTime"></p>
-
-    <div id="libraryContent">
+    <p id="libraryUser"></p>
+    <br>
+    <div id="libraryContent"></div>
 
     </div>
 
@@ -76,15 +82,11 @@
     blogPost.content.replaceAll('""','');
 
     let date = blogPost.time;
-
-
-
-
-
     document.getElementById("libraryTitle").innerText = blogPost.title;
-    document.getElementById("libraryTime").innerText = blogPost.time;
     document.getElementById("libraryTime").innerText = date;
+    document.getElementById("libraryUser").innerText = blogPost.user;
     document.getElementById("libraryContent").innerHTML = blogPost.content;
+    console.log(blogPost)
 </script>
 
 </body>
