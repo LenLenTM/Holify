@@ -16,16 +16,15 @@ a {display: flex;
     height: 8vw;
     width: 8vw;
     align-self: center;
-    margin-left: 1vw;
+    margin-left: 2vw;
     min-width: 100px;
     min-height: 100px;
 }
 #holifyTitle {
     align-self: center;
     font-size: 4vw;
-    font-weight: lighter;
     color: grey;
-    margin-left: 1vw;
+    margin-left: 2vw;
 }
 #order2 {
     flex-grow: 1;
@@ -40,9 +39,9 @@ a {display: flex;
 
 #option {
     align-self: center;
-    height: 4vw;
-    width: 4vw;
-    margin-right: 1vw;
+    height: 5vw;
+    width: 5vw;
+    margin-right: 2vw;
 }
 nav{
     text-align: center;
