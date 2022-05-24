@@ -21,7 +21,7 @@ nav {
     color: grey;
 }
 #navText {
-    position: fixed;
+    position: absolute;
     top: 9px;
     left: 90px;
 }
@@ -133,4 +133,13 @@ a[href^="https://www.google.com/maps"] {
     opacity: 80%;
     left: 35%;
     top: 35%;
+}
+
+#warning {
+    position: absolute;
+    font-family: 'Avenir';
+    font-size: 30px;
+    color: grey;
+    top: 50px;
+    left: 50px;
 }
