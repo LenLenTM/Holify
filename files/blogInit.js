@@ -23,5 +23,3 @@ function saveJSON (JSON) {
 function jsonToBlog (json) {
     return JSON.parse(json);
 }
-
-

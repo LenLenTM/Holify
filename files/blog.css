@@ -89,10 +89,15 @@ nav{
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: lightgray;}
-
 main {
     justify-content: center;
     text-align: center;
+}
+
+label {
+    margin-top: 1vw;
+    display: flex;
+    justify-content: center;
 }
 
 #titleLabel {align-self: center}
@@ -233,6 +238,8 @@ address {
         text-decoration: none;
         display: block;
     }
+
+
 
     address {
         bottom: 0;

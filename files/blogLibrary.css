@@ -80,10 +80,21 @@ nav{
 
 #blogBody {
     margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+#authorBlock, #timeBlock  {
+    display: flex;
+    font-style: italic ;
+    font-size: 1vw;
 }
 
 #libraryTitle {
     font-size: 5vw;
+}
+
+#libraryContent {
+    padding-top: 1vw;
 }
 
 address {
@@ -160,6 +171,17 @@ address {
         font-size: 5vw;
         border: none;
         cursor: pointer;
+    }
+
+    #authorBlock, #timeBlock  {
+        font-size: 3vw;
+    }
+
+    #libraryTitle {
+        font-size: 8vw;
+    }
+    #libraryTime, #libraryUser {
+        font-size: 3vw;
     }
 
     address {

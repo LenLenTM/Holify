@@ -31,27 +31,27 @@
 
 <nav>
     <div class="dropdown">
-        <button class="dropbtn" id="africa">Africa</button>
+        <button class="dropbtn" id="africa" onclick="setSearchbar(id)">Africa</button>
 
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="asia">Asia</button>
+        <button class="dropbtn" id="asia" onclick="setSearchbar(id)">Asia</button>
 
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="europe">Europe </button>
+        <button class="dropbtn" id="europe" onclick="setSearchbar(id)">Europe </button>
 
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="oceania">Oceania</button>
+        <button class="dropbtn" id="oceania" onclick="setSearchbar(id)">Oceania</button>
 
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="northamerica">North America</button>
+        <button class="dropbtn" id="northamerica" onclick="setSearchbar(id)">North America</button>
 
     </div>
     <div class="dropdown">
-        <button class="dropbtn" id="southamerica">South America</button>
+        <button class="dropbtn" id="southamerica" onclick="setSearchbar(id)">South America</button>
 
     </div>
 </nav>
@@ -65,13 +65,13 @@
         });
         </script>
 
-        <label for="user"></label>
-        <textarea name="user" id="user" cols="3" rows="2" placeholder= "Write your Name"></textarea>
-        <br>
-        <label for="title"></label>
+        <label for="user"> Here's space to write your name!</label>
+        <textarea name="user" id="user" cols="30" rows="2" placeholder= "Write your name"></textarea>
+
+        <label for="title"> What is the title of your adventure? </label>
         <textarea name="title" id="title" cols="30" rows="2" placeholder= "Write your title"></textarea>
 
-        <label hidden for="blogContent"></label><textarea name="blog" id="blogContent" ></textarea>
+        <label for="blogContent">Tell us your travel experiences!</label><textarea name="blog" id="blogContent" ></textarea>
 
         <h2>Tags</h2>
         <p>Press comma or click the add button to create a tag.</p>
@@ -90,6 +90,8 @@
 
 <script src="tag.js"></script>
 <script src="blogInit.js"></script>
+<script src="blogLibrary.js"></script>
+
 
 
 <address>
