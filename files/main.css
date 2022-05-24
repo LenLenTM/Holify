@@ -71,17 +71,20 @@ main {
 #WorldMap{
     width: 100%;
     padding-top: 30px;
-    padding-left: 10px;
+    padding-left: 15px;
 }
 
 aside {
     width: 200px;
+    height: 450px;
     grid-area: a;
     background-color: white;
-    margin: 50px;
+    margin-top: 110px;
+    margin-left: 50px;
+    margin-right: 10px;
     border-radius: 20px;
     border-color: gray;
-    padding: 1em 3em;
+    padding: 5px 5em;
     color: gray;
 
 }
@@ -96,9 +99,9 @@ aside {
     font-weight: lighter;
 }
 
-h2 {
+h2, p {
     text-align: center;
-    padding-bottom: 20%;
+    padding-bottom: 10%;
     font-weight: lighter;
 
 }
