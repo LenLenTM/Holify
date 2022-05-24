@@ -320,8 +320,6 @@ function closeErrorMessage() {
 }
 
 function createMarker(responseArray, boolean) {
-    let markerCount = 0;
-    let markerName = 'marker';
 
     markerList = [];
 
