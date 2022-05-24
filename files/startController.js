@@ -7,6 +7,10 @@ let responseArray = [];
 let responseArrayBackup = [];
 let markerList = [];
 let landscape = false;
+let latMin;
+let latMax;
+let lonMin;
+let lonMax;
 
 /* Cities received from Cities API */
 function City(name, latitude, longitude, country, population) {
@@ -55,6 +59,7 @@ function initMap() {
             zoomMap(event);
             appendTip();
             fadeOutTip();
+            getFiveBiggestCities();
         }
         else if (interactionMode === 'zoom') {
             removeTip();
@@ -89,6 +94,10 @@ function initMap() {
 window.initMap = initMap;
 window.loadFont();
 
+function calculateZoom(){
+
+}
+
 function loadFont(){
     let junction_font = new FontFace('Junction Regular', '../resources/fonts/Avenir.ttc');
     junction_font.load().then(function(loaded_face) {
@@ -105,20 +114,53 @@ function zoomMap(event) {
     removeSearchBar();
 }
 
+function getFiveBiggestCities(){
+    let bounds = map.getBounds();
+    let southWest = bounds.getSouthWest();
+    let northEast = bounds.getNorthEast();
+
+    latMin = southWest.lat();
+    latMax = northEast.lat();
+    lonMin = southWest.lng();
+    lonMax = northEast.lng();
+
+    markerList = [];
+    responseArray = [];
+    progressBar();
+    let url = 'https://api.api-ninjas.com/v1/city?min_lat=' + latMin + '&max_lat=' + latMax + '&min_lon=' + lonMin + '&max_lon=' + lonMax + '&limit=50&min_population=200000';
+
+    fetch(url, {
+        method: 'GET',
+        headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
+        contentType: 'application/json',
+    }).then(response => response.json()
+        .then(data2 => {
+            console.log('Success(wide): ', data2);
+            for (let i = 0; i < data2.length; i++) {
+                responseArray.push(new City(data2[i].name, data2[i].latitude, data2[i].longitude, data2[i].country, data2[i].population));
+            }
+            responseArray.sort((a, b) => b.population - a.population);
+            responseArray = responseArray.slice(0, 5);
+            console.log(responseArray);
+            createMarker(responseArray, true);
+            document.getElementById('progBar').remove();
+        }));
+}
+
 /* Get up to 5 cities where the user clicked */
 function clickNearestCities() {
 
     /* define the square around the click in which to search for cities */
-    let latMin = (latitude - 1);
-    let latMax = (latitude + 1);
-    let lonMin = (longitude - 1);
-    let lonMax = (longitude + 1);
+    latMin = (latitude - 1);
+    latMax = (latitude + 1);
+    lonMin = (longitude - 1);
+    lonMax = (longitude + 1);
 
     /* generating the url */
-    let url = 'https://api.api-ninjas.com/v1/city?min_lat=' + latMin + '&max_lat=' + latMax + '&min_lon=' + lonMin + '&max_lon=' + lonMax + '&limit=5&min_population=25000';
     let url2 = 'https://api.api-ninjas.com/v1/city?min_lat=' + (latMin - 1) + '&max_lat=' + (latMax +1 ) + '&min_lon=' + (lonMin - 1) + '&max_lon=' + (lonMax + 1) + '&limit=5&min_population=25000';
     responseArray = [];
     responseArrayBackup = [];
+    removeMarker();
 
     /* backup search with bigger radius */
     fetch(url2, {
@@ -132,11 +174,13 @@ function clickNearestCities() {
             responseArrayBackup.push(new City(data2[i].name, data2[i].latitude, data2[i].longitude, data2[i].country, data2[i].population));
         }
     }));
-    window.setTimeout(mainFetch(responseArray, url), 250);
+    window.setTimeout(mainFetch, 250);
     /* get the city data */
 }
 
-function mainFetch(responseArray, url){
+function mainFetch(){
+    let url = 'https://api.api-ninjas.com/v1/city?min_lat=' + latMin + '&max_lat=' + latMax + '&min_lon=' + lonMin + '&max_lon=' + lonMax + '&limit=5&min_population=25000';
+
     fetch(url, {
         method: 'GET',
         headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
@@ -159,14 +203,16 @@ function mainFetch(responseArray, url){
             else if (responseArray.length !== 0) {
                 createPopUp(responseArray);
                 document.getElementById('progBar').remove();
-                createMarker(responseArray);
+                markerList = [];
+                createMarker(responseArray, false);
                 interactionMode = 'popup';
             }
             /* if cities -> create the popup with up to 5 entries */
             else {
                 createPopUp(responseArrayBackup);
                 document.getElementById('progBar').remove();
-                createMarker(responseArrayBackup);
+                markerList = [];
+                createMarker(responseArrayBackup, false);
                 interactionMode = 'popup';
             }
         }));
@@ -273,14 +319,29 @@ function closeErrorMessage() {
     }
 }
 
-function createMarker(responseArray) {
-    let markerCount = 0;
-    let markerName = 'marker';
+function createMarker(responseArray, boolean) {
 
-    for (markerCount = 1; markerCount < (responseArray.length + 1); markerCount++) {
-        let position = {lat: responseArray[markerCount - 1].latitude, lng: responseArray[markerCount - 1].longitude};
-        let icon = {url: '../resources/Marker.png'}
-        markerList.push(eval('let ' + markerName + markerCount + ' = new google.maps.Marker({position: position, icon: icon, map: map})'));
+    markerList = [];
+
+    for (let i = 0; i < responseArray.length; i++) {
+        let position = {lat: responseArray[i].latitude, lng: responseArray[i].longitude};
+        let icon = {url: '../resources/Marker.png', labelOrigin: new google.maps.Point(8, -6)};
+
+        if (boolean) {
+            let label = {text: responseArray[i].name, fontFamily: 'Avenir', color: 'grey'};
+            let marker = new google.maps.Marker({position: position, icon: icon, label: label, map: map});
+            markerList.push(marker);
+        }
+        else {
+            let marker = new google.maps.Marker({position: position, icon: icon, map: map});
+            markerList.push(marker);
+        }
+    }
+}
+
+function removeMarker(){
+    for (let i = 0; i < 5; i++){
+        markerList[i].setMap(null);
     }
 }
 
