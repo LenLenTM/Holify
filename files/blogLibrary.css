@@ -13,12 +13,11 @@ a {display: flex;
     align-items: stretch;
 }
 #logo {
-    height: 8vw;
-    width: 8vw;
+    height: 10vw;
+    width: 10vw;
     align-self: center;
-    margin-left: 2vw;
-    min-width: 100px;
-    min-height: 100px;
+    margin-left: 1vw;
+
 }
 #holifyTitle {
     align-self: center;
@@ -127,19 +126,17 @@ address {
     }
 
     #logo {
-        height: 8vw;
-        width: 8vw;
+        height: 20vw;
+        width: 20vw;
         align-self: center;
         margin-left: 1vw;
-        min-width: 100px;
-        min-height: 100px;
+
     }
 
     #holifyTitle {
 
         align-self: center;
-        font-size: 10vw;
-        font-weight: lighter;
+        font-size: 8vw;
         color: grey;
         margin-left: 1vw;
     }
@@ -150,16 +147,16 @@ address {
     }
 
     #user {
-        height: 10vw;
-        width: 8vw;
+        height: 20vw;
+        width: 18vw;
         align-self: center;
-        margin-right: 5vw;
+        margin-right: 3vw;
     }
 
     #option {
         align-self: center;
-        height: 8vw;
-        width: 8vw;
+        height: 18vw;
+        width: 18vw;
         margin-right: 1vw;
     }
 

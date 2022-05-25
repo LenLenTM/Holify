@@ -16,8 +16,7 @@ a {display: flex;
     width: 8vw;
     align-self: center;
     margin-left: 2vw;
-    min-width: 100px;
-    min-height: 100px;
+
 }
 h1 {
     align-self: center;
@@ -173,19 +172,17 @@ address {
     }
 
     #logo {
-        height: 8vw;
-        width: 8vw;
+        height: 20vw;
+        width: 20vw;
         align-self: center;
         margin-left: 1vw;
-        min-width: 100px;
-        min-height: 100px;
+
     }
 
     h1 {
 
         align-self: center;
-        font-size: 10vw;
-        font-weight: lighter;
+        font-size: 8vw;
         color: grey;
         margin-left: 1vw;
     }
@@ -196,16 +193,16 @@ address {
     }
 
     #userIcon {
-        height: 10vw;
-        width: 8vw;
+        height: 20vw;
+        width: 18vw;
         align-self: center;
-        margin-right: 5vw;
+        margin-right: 3vw;
     }
 
     #option {
         align-self: center;
-        height: 8vw;
-        width: 8vw;
+        height: 18vw;
+        width: 18vw;
         margin-right: 1vw;
     }
 
