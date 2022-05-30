@@ -1,11 +1,12 @@
 let responseArray = [];
 let paraString;
 let parameter;
-let weatherResponse = [];
+let weatherResponse;
 let weather = [];
 let allWeather = [];
 let mainInfo = [];
 let weatherOutput = [];
+let cityData;
 
 function WeatherResponse(city, cnt, cod, list, message){
     this.city = city;
@@ -34,9 +35,16 @@ function WeatherOutput(date, temp, weather){
     this.weather = weather;
 }
 
+function City(country, currency, population){
+    this.country = country;
+    this.currency = currency;
+    this.population = population;
+}
+
 function initPage() {
     navText();
     getWeather();
+    window.setTimeout(cityInformation, 600);
 }
 
 function navText(){
@@ -89,4 +97,24 @@ function filterInformation(allWeather){
         }
     }
     console.log(weatherOutput);
+}
+
+function cityInformation(){
+    let geoID = weatherResponse.city.id;
+    let url = 'https://world-geo-data.p.rapidapi.com/cities/' + geoID;
+    let options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Host': 'world-geo-data.p.rapidapi.com',
+            'X-RapidAPI-Key': '0f52931f6cmsh872610cb50d77e2p105401jsn7a4fb537d6e9'
+        }
+    };
+
+    fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            cityData = new City(data.country, data.currency, data.population);
+            console.log(cityData);
+        })
+        .catch(err => console.error(err));
 }
