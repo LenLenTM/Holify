@@ -12,3 +12,21 @@ Blog (HTML & CSS) - Niko
 Türkiser Farbton:
 RGB: 154, 231, 205
 #9ae7cd
+
+
+------------- LINKS ----------
+
+Express/Node:
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction
+
+WebStorage:
+https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
+
+Session Storage:
+https://www.mediaevent.de/javascript/session-storage.html
+
+Fetch:
+https://openjavascript.info/2022/01/03/using-fetch-to-make-get-post-put-and-delete-requests/#2
+
+Write JSON to local file:
+https://www.tutorialkart.com/nodejs/node-js-write-json-object-to-file/
