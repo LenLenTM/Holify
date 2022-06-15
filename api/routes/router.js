@@ -1,8 +1,9 @@
 const { Router } = require('express');
-const controller = require('../controllers/controller');
+const mobileMainController = require('../controllers/mobileMain-controller.js');
 
 const routes = Router();
 
-routes.get('/categories', controller.getCategories);
+routes.get('/categories', mobileMainController.getCategories);
+routes.get('/getcity/:city', mobileMainController.getCity);
 
 module.exports = routes;

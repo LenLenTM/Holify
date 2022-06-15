@@ -397,16 +397,40 @@ function searchFiledActivated(event){
         event.preventDefault();
         let entry = document.getElementById('searchText').value;
 
+        let url = 'http://localhost:3456/api/getcity/' + entry;
+
+        console.log(url);
         let city;
         progressBar();
         document.getElementById('progBar').style.top = '70%';
 
-        let url = 'https://api.api-ninjas.com/v1/city?name=' + entry;
-        console.log(url);
+        fetch(url, {
+            method: 'GET',
+            contentType: 'application/json'
+        })
+            .then(response => response.json())
+            .then(City => {
+
+                console.log(City);
+                /**if (data.length === 0 || entry === "") {
+                    document.getElementById('searchText').setAttribute('placeholder', 'not a valid city!');
+                    let addCSS = document.createElement('style');
+                    addCSS.innerHTML = "::placeholder {color: red; opacity: 40%;}";
+                    document.body.append(addCSS);
+                    document.getElementById('searchText').value = "";
+                } else {
+                    city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
+                    window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;
+                } **/
+            })
+
+        //let url = 'https://api.api-ninjas.com/v1/city?name=' + entry;
+
+        /**
         fetch(url, {
             method: 'GET',
             headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
-            contentType: 'application/json',
+            v,
         }).then(response => response.json()
             .then(data => {
                 console.log('Success(city): ', data);
@@ -421,7 +445,7 @@ function searchFiledActivated(event){
                     city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
                     window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;
                 }
-            }));
+            })); **/
     }
 }
 
