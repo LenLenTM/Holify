@@ -2,26 +2,21 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
 
-const bookRouter = require('./api/routes/book-router');
-const feedbackRouter = require('./api/routes/feedback-router');
+const router = require('./api/routes/router.js');
 
 const app = express();
-const port = process.env.PORT ?? 3000;
+const port = 3456;
 
-// Serving static files from folder 'files'
 app.use(express.static(path.join(__dirname, 'files')));
 
 // Parse urlencoded bodies (for form data)
 app.use(bodyParser.urlencoded({ extended: true }));
-
 // Parse JSON bodies (from requests)
 app.use(bodyParser.json());
 
 // Include the book routes
-app.use('/api', bookRouter);
+app.use('/api', router);
 
-// Include the feedback routes
-app.use('/api', feedbackRouter);
 
 app.listen(port, (error) => {
     if (error) {
