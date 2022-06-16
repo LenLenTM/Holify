@@ -2,26 +2,73 @@
 
 
 body {
+    justify-content: center;
     margin: 0;
     background-color: #9ae7cd;
     color: gray;
+
+}
+.imgcontainer {
     display: grid;
-    grid-template-areas:
-    "n n"
-    "n n"
-    "m m"
-    "a a"
-    "f f";
+    justify-content: center;
+    margin-top: 10px;
+
+
+}
+#image2 {
+    width: 80px;
+}
+.formContainer {
+    display: grid;
+    justify-content: center;
+}
+form {
+    display: grid;
+    justify-content: center;
+    grid-row-gap: 10px;
+    border-radius: 20px;
+    width: 250px;
+    background-color: white;
+    margin-top: 20px;
 }
 
-@media (min-width: 750px) {
-    body {
-        grid-template-areas:
-        "n n n"
-        "a m m"
-        "f f f";
-    }
+input {
+    max-width: 200px;
 }
+
+.container {
+    display: grid;
+    max-width: 20vw;
+    margin-bottom: 5px;
+    grid-row-gap: 10px;
+    justify-content: center;
+}
+.formTitle,.username, .password, .checkbox, .signUpBotton, .forgotPassButton, .email, .clearfix{
+    display: grid;
+    max-width: 20vw;
+    justify-content: center;
+    grid-row-gap: 2px;
+}
+
+.cancelbtn {
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+button {
+    background-color: #9ae7cd;
+    color: white;
+    border-style: hidden;
+    font-size: medium;
+    cursor: pointer;
+}
+
+#termsParagraph {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
 
 /* -----------------------------------   Nav   --------------------------------- */
 
