@@ -2,9 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Holify - Login</title>
+    <link rel="stylesheet" href="login.css">
+
 </head>
 <body>
+<nav id="nav">
+    <a href="mobileMain.html">
+        <div> <img src="resources/Holify.png" alt="Holify Logo" id="logo"> </div>
+    </a>
+    <h1 id="navText">HOLIFY</h1>
+    <a href="login.html">
+        <img src="resources/UserIcon.png" id="user" alt="user icon">
+    </a>
+    <a href="blogLibrary.html">
+        <img src="resources/Options.png" id="options" alt="options">
+    </a>
+</nav>
+<form action="" method="post">
+    <div class="imgcontainer" id = "imagecontainer">
+        <img src="resources/Holify.png" alt="Holify logo" id = "image">
+    </div>
 
+    <div class="container">
+        <label >Username</label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+
+        <label >Password</label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <button type="submit">Login</button>
+        <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+        <div class = "signUP">
+            <label>No Account?</label>
+            <button type="button" onclick="location.href='signUp.html'">Register</button>
+        </div>
+        <div class = "resetPassword">
+            <label>Forgot Password?</label>
+            <button type="button" onclick="location.href='resetPassword.html'">Reset Password</button>
+        </div>
+    </div>
+
+</form>
 </body>
 </html>
