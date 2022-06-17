@@ -84,7 +84,7 @@
             <br>
         </div>
 
-        <input type="submit" value="Submit" id="submitButton" onclick="tester = new Blog(document.getElementById('title').value,tinyMCE.activeEditor.getContent(),document.querySelectorAll('[id=tagID]'), document.getElementById('user').value);  testJSON = blogToJSON(tester); saveJSON(testJSON);console.log(document.querySelectorAll('[id=tagID]'));location.href='blogLibrary.html'">
+        <input type="submit" value="Submit" id="submitButton" onclick="saveJSON(blogToJSON(collectData()));location.href='blogLibrary.html'">
     </form>
 </main>
 

@@ -73,13 +73,13 @@ button {
 /* -----------------------------------   Nav   --------------------------------- */
 
 nav {
-    grid-area: n;
-    width: 100%;
-    height: 110px;
-    background-color: white;
-    font-size: 1.8em;
-    color: grey;
-}
+     grid-area: n;
+     width: 100%;
+     height: 110px;
+     background-color: white;
+     font-size: 1.8em;
+     color: grey;
+ }
 #navText {
     position: absolute;
     top: -10px;

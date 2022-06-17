@@ -75,7 +75,44 @@ nav{
     justify-content: center;
     text-align: center;
 }
+#searchButton {
+    margin-top: 1vw;
+    background-color: #9ae7cd;
+    color: white;
+    border-style: hidden;
+    font-size: medium;
+    cursor: pointer;
+}
+#headlines {
+    display: grid;
+    margin-right: 10vw;
+    margin-left: 10vw;
+}
 
+.collapsible {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    background-color: #9ae7cd;
+    border-radius: 10px;
+    border-style: hidden;
+    font-size: medium;
+    cursor: pointer;
+    display: flex;
+}
+.content {
+    padding: 0 18px;
+
+    overflow: hidden;
+    background-color: lightgrey;
+    border-radius: 10px;
+    transition: all 0.3s;
+
+}
+#libraryTitle {
+    font-size: 50px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+ }
 #blogBody {
     margin-left: 10vw;
     margin-right: 10vw;
@@ -87,9 +124,7 @@ nav{
     font-size: 1vw;
 }
 
-#libraryTitle {
-    font-size: 4vw;
-}
+
 
 #libraryContent {
     padding-top: 1vw;

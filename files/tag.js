@@ -4,6 +4,8 @@ const form = document.forms[0];
 const tagContainer = document.querySelector('.tag-container');
 const tags = [];
 
+
+
 const createTag = (tagValue) => {
     const value = tagValue.trim();
 
@@ -12,6 +14,7 @@ const createTag = (tagValue) => {
     const tag = document.createElement('span');
     const tagContent = document.createTextNode(value);
     tag.setAttribute('class', 'tag');
+    tag.setAttribute('id', 'tag');
     tag.appendChild(tagContent);
 
     const close = document.createElement('span');
@@ -25,6 +28,7 @@ const createTag = (tagValue) => {
 
     tagInput.value = '';
     tagInput.focus();
+
 };
 
 const handleRemoveTag = (e) => {
