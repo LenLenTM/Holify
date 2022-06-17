@@ -3,15 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale= 1.0">
     <title>Holify</title>
+    <meta name="viewport" content="width=device-width, initial-scale= 1.0">
     <link rel="stylesheet" href="desktopMain.css">
     <link href="https://fonts.cdnfonts.com/css/avenir" rel="stylesheet">
     <link rel="icon" type="image/png" href="resources/Holify.png">
+    <script src="mobileMainController.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 
-<body>
-
+<body id="body">
 
 <nav id="nav">
     <a href="mobileMain.html">
@@ -27,23 +28,18 @@
 </nav>
 
 <main>
-    <section></section>
-    <section>
-        <img src="resources/WorldMapNew.png" alt="world map" id="WorldMap">
-    </section>
+        <div id="worldMap"></div>
+        <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTWxNRa3H52kSbaahZtYq-EtnaaYbujGM&callback=initMap"></script>
+
+        <div id="buttons"></div>
 </main>
 
 <aside>
 
-        <h2>"City Name"</h2>
-        <p>Languages </p>
-        <p>Currency</p>
-        <p>Weather</p>
-        <p>Pictures</p>
-        <p>Restaurants</p>
+
     <p>
-        <a href="https://tickets.oebb.at/de/ticket" target="_blank">
-            <button id="PlanTrip">Plan your Trip!</button>
+        <a href="https://tickets.oebb.at/de/ticket" target="_blank" id="PlanTrip">
+            Plan your Trip!
         </a>
     </p>
 
