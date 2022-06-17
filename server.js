@@ -1,6 +1,7 @@
 const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
+const session = require('express-session');
 
 const router = require('./api/routes/router.js');
 
@@ -25,4 +26,13 @@ app.listen(port, (error) => {
         console.log(`Server listening at http://localhost:${port}`)
     }
 });
+
+//for session management
+app.use(session({
+    secret: 'topsecret',
+    resave: true,
+    saveUninitialized: true
+}));
+
+
 
