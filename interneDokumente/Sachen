@@ -30,3 +30,10 @@ https://openjavascript.info/2022/01/03/using-fetch-to-make-get-post-put-and-dele
 
 Write JSON to local file:
 https://www.tutorialkart.com/nodejs/node-js-write-json-object-to-file/
+
+
+-----------Packages----------
+
+npm install node-fetch
+npm i google-img-scrap
+npm install express-session

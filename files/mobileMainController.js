@@ -127,24 +127,22 @@ function getFiveBiggestCities(){
     markerList = [];
     responseArray = [];
     progressBar();
-    let url = 'https://api.api-ninjas.com/v1/city?min_lat=' + latMin + '&max_lat=' + latMax + '&min_lon=' + lonMin + '&max_lon=' + lonMax + '&limit=50&min_population=200000';
+
+    let url = 'http://localhost:3456/api/getCity/' + latMin + '/' + latMax + '/' + lonMin + '/' + lonMax+ '/10';
 
     fetch(url, {
         method: 'GET',
-        headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
         contentType: 'application/json',
-    }).then(response => response.json()
-        .then(data2 => {
-            console.log('Success(wide): ', data2);
-            for (let i = 0; i < data2.length; i++) {
-                responseArray.push(new City(data2[i].name, data2[i].latitude, data2[i].longitude, data2[i].country, data2[i].population));
+    }).then(response => response.json())
+        .then(data => {
+            for (let i = 0; i < data.length; i++) {
+                responseArray.push(new City(data[i].name, data[i].latitude, data[i].longitude, data[i].country, data[i].population));
             }
             responseArray.sort((a, b) => b.population - a.population);
             responseArray = responseArray.slice(0, 5);
-            console.log(responseArray);
             createMarker(responseArray, true);
             document.getElementById('progBar').remove();
-        }));
+        })
 }
 
 /* Get up to 5 cities where the user clicked */
@@ -155,21 +153,17 @@ function clickNearestCities() {
     latMax = (latitude + 1);
     lonMin = (longitude - 1);
     lonMax = (longitude + 1);
-
-    /* generating the url */
-    let url2 = 'https://api.api-ninjas.com/v1/city?min_lat=' + (latMin - 1) + '&max_lat=' + (latMax +1 ) + '&min_lon=' + (lonMin - 1) + '&max_lon=' + (lonMax + 1) + '&limit=5&min_population=25000';
     responseArray = [];
     responseArrayBackup = [];
     removeMarker();
+    let url2 = 'http://localhost:3456/api/getCity/' + (latMin - 1) + '/' + (latMax +1 ) + '/' + (lonMin - 1) + '/' + (lonMax + 1) + '/1';
 
     /* backup search with bigger radius */
     fetch(url2, {
         method: 'GET',
-        headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
         contentType: 'application/json',
     }).then(response => response.json()
         .then(data2 => {
-        console.log('Success(wide): ', data2);
         for (let i = 0; i < data2.length; i++) {
             responseArrayBackup.push(new City(data2[i].name, data2[i].latitude, data2[i].longitude, data2[i].country, data2[i].population));
         }
@@ -179,20 +173,15 @@ function clickNearestCities() {
 }
 
 function mainFetch(){
-    let url = 'https://api.api-ninjas.com/v1/city?min_lat=' + latMin + '&max_lat=' + latMax + '&min_lon=' + lonMin + '&max_lon=' + lonMax + '&limit=5&min_population=25000';
+    let url = 'http://localhost:3456/api/getCity/' + latMin + '/' + latMax + '/' + lonMin + '/' + lonMax + '/1';
 
     fetch(url, {
         method: 'GET',
-        headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
         contentType: 'application/json',
     }).then(response => response.json()
         .then(data => {
-            console.log('Success(normal): ', data);
             for (let i = 0; i < data.length; i++) {
                 responseArray.push(new City(data[i].name, data[i].latitude, data[i].longitude, data[i].country, data[i].population));
-            }
-            for (let i = 0; i < responseArray.length; i++){
-                console.log(responseArray[i]);
             }
             /* if no cities where found set page back to start */
             if ((responseArray.length === 0) && (responseArrayBackup.length === 0)) {
@@ -257,7 +246,13 @@ function createPopUp(responseArray) {
     if (responseArray !== 0) {
         let nameArray = [];
         for (let i = 0; i < responseArray.length; i++) {
-            nameArray.push(responseArray[i].name);
+            if(responseArray[i].name.length > 16){
+                let name = responseArray[i].name.slice(0, 16) + '.';
+                nameArray.push(name);
+            }
+            else{
+                nameArray.push(responseArray[i].name);
+            }
         }
 
         let divPop = document.createElement('div');
@@ -282,7 +277,7 @@ function createPopUp(responseArray) {
             citiesContainer.push(eval('let ' + name + digit + ' = document.createElement(\'a\');'));
             divContainer.push(eval('let' + div + digit + ' = document.createElement(\'div\');'));
         }
-        for (let i = 0; i < responseArray.length; i++) {
+        for (let i = 0; i < 5; i++) {
             let url = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country;
             citiesContainer[i] = document.createElement('a');
             citiesContainer[i].setAttribute('href', url);
@@ -392,15 +387,13 @@ function appendSearchBar() {
     document.getElementById('buttons').append(search);
 }
 
-function searchFiledActivated(event){
+function searchFiledActivated(event) {
     if (event.keyCode === 13) {
         event.preventDefault();
         let entry = document.getElementById('searchText').value;
 
-        let url = 'http://localhost:3456/api/getcity/' + entry;
+        let url = 'http://localhost:3456/api/getCity/' + entry;
 
-        console.log(url);
-        let city;
         progressBar();
         document.getElementById('progBar').style.top = '70%';
 
@@ -409,32 +402,7 @@ function searchFiledActivated(event){
             contentType: 'application/json'
         })
             .then(response => response.json())
-            .then(City => {
-
-                console.log(City);
-                /**if (data.length === 0 || entry === "") {
-                    document.getElementById('searchText').setAttribute('placeholder', 'not a valid city!');
-                    let addCSS = document.createElement('style');
-                    addCSS.innerHTML = "::placeholder {color: red; opacity: 40%;}";
-                    document.body.append(addCSS);
-                    document.getElementById('searchText').value = "";
-                } else {
-                    city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
-                    window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;
-                } **/
-            })
-
-        //let url = 'https://api.api-ninjas.com/v1/city?name=' + entry;
-
-        /**
-        fetch(url, {
-            method: 'GET',
-            headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
-            v,
-        }).then(response => response.json()
             .then(data => {
-                console.log('Success(city): ', data);
-                document.getElementById('progBar').remove();
                 if (data.length === 0 || entry === "") {
                     document.getElementById('searchText').setAttribute('placeholder', 'not a valid city!');
                     let addCSS = document.createElement('style');
@@ -445,7 +413,8 @@ function searchFiledActivated(event){
                     city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
                     window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;
                 }
-            })); **/
+                document.getElementById('progBar').remove();
+            });
     }
 }
 
