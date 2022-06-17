@@ -36,3 +36,12 @@ app.listen(port, (error) => {
     }
 });
 
+//for session management
+app.use(session({
+    secret: 'topsecret',
+    resave: true,
+    saveUninitialized: true
+}));
+
+
+
