@@ -7,7 +7,7 @@
     <script src="cityInformationController.js"></script>
     <link rel="stylesheet" href="cityInformationStyle.css">
 </head>
-<body id="body" onload="initPage()">
+<body id="body" onload="initPage()" class="grid">
 
     <nav id="nav">
         <a href="desktopMain.html">
@@ -21,10 +21,17 @@
         <a href="blogLibrary.html">
             <img src="resources/Options.png" id="options">
         </a>
+        <div id="bar"></div>
     </nav>
 
-    <main>
-
+    <main id="main">
+        <div class="pictures" id="pictures"></div>
+        <div class="infos" id="infos"></div>
+        <div id="weatherInformation">
+            <div class="days-box" id="days-box"></div>
+            <div class="weather-box" id="weatherBox"></div>
+            <div class="temperature-box" id="temperature-box"></div>
+        </div>
     </main>
 
 </body>
