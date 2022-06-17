@@ -26,7 +26,11 @@ function collectData() {
 }
 
 function blogToJSON(string) {
-    return JSON.stringify(string);
+    let test = JSON.stringify(string)
+    console.log(test)
+    return test;
+
+
 }
 
 function saveJSON (JSON) {
