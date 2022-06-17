@@ -1,5 +1,10 @@
 /* -----------------------------------   Overall   --------------------------------- */
 
+@font-face {
+    font-family: 'Avenir';
+    src: url('/resources/fonts/Avenir.woff') format('woff');
+}
+
 body {
     margin: 0;
     background-color: #9ae7cd;

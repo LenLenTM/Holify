@@ -176,6 +176,7 @@ function cityInformation(){
 }
 
 function drawInformation(){
+    console.log(cityData);
     let country = document.createElement('p');
     country.innerText = 'Country: ' + cityData.country.name.toUpperCase();
     let population = document.createElement('p');

@@ -325,6 +325,9 @@ function createMarker(responseArray, boolean) {
         if (boolean) {
             let label = {text: responseArray[i].name, fontFamily: 'Avenir', color: 'grey'};
             let marker = new google.maps.Marker({position: position, icon: icon, label: label, map: map});
+            marker.addListener('click', function (){
+                window.location.href = 'cityInformation.html?city=' + responseArray[i].name;
+            })
             markerList.push(marker);
         }
         else {
