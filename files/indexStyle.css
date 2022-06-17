@@ -21,7 +21,6 @@ body {
 
 .font {
     display: flex;
-    alignment: center;
     text-align: center;
     width: 100%;
 }
