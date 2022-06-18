@@ -109,7 +109,7 @@ function loadFont(){
 }
 function zoomMap(event) {
     map.panTo(event.latLng);
-    map.setZoom(4.5);
+    map.setZoom(3.5);
     interactionMode = 'zoom';
     appendBackUp();
     removeSearchBar();
@@ -152,10 +152,10 @@ function getFiveBiggestCities(){
 function clickNearestCities() {
 
     /* define the square around the click in which to search for cities */
-    latMin = (latitude - 1);
-    latMax = (latitude + 1);
-    lonMin = (longitude - 1);
-    lonMax = (longitude + 1);
+    latMin = (latitude - 2);
+    latMax = (latitude + 2);
+    lonMin = (longitude - 2);
+    lonMax = (longitude + 2);
 
     /* generating the url */
     let url2 = 'https://api.api-ninjas.com/v1/city?min_lat=' + (latMin - 1) + '&max_lat=' + (latMax +1 ) + '&min_lon=' + (lonMin - 1) + '&max_lon=' + (lonMax + 1) + '&limit=5&min_population=25000';
