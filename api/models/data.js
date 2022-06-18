@@ -37,8 +37,9 @@ class Data {
             method: 'GET',
             headers: {
                 'X-RapidAPI-Host': 'community-open-weather-map.p.rapidapi.com',
-                'X-RapidAPI-Key': '0f52931f6cmsh872610cb50d77e2p105401jsn7a4fb537d6e9'
+                'X-RapidAPI-Key': '84508662f6mshe3596176d549f2dp16b030jsn84019cae481b'
             }
+            //old api key: 0f52931f6cmsh872610cb50d77e2p105401jsn7a4fb537d6e9
         }).then(response => response.json());
 
         return await response;
@@ -51,8 +52,9 @@ class Data {
             method: 'GET',
             headers: {
                 'X-RapidAPI-Host': 'world-geo-data.p.rapidapi.com',
-                'X-RapidAPI-Key': '0f52931f6cmsh872610cb50d77e2p105401jsn7a4fb537d6e9'
+                'X-RapidAPI-Key': '84508662f6mshe3596176d549f2dp16b030jsn84019cae481b'
             }
+            //old key: 0f52931f6cmsh872610cb50d77e2p105401jsn7a4fb537d6e9
         }).then(response => response.json());
 
         return await response;

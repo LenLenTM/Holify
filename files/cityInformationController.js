@@ -43,10 +43,15 @@ function City(country, currency, population){
 }
 
 function initPage() {
+    checkCookie();
     navText();
     getWeather();
     window.setTimeout(cityInformation, 600);
     progressBar();
+}
+
+function checkCookie(){
+    console.log(document.cookie);
 }
 
 function navText(){
@@ -227,7 +232,12 @@ function getTransportRoute(response){
         contentType: 'application/json'
     }).then(response => response.json())
         .then(data => {
-            drawTransportRoute(data);
+            if(data.routes.length !== 0) {
+                drawTransportRoute(data);
+            }
+            else{
+                drawNoRoute();
+            }
         });
     //return await route;
 }
@@ -317,4 +327,22 @@ function drawTransportRoute(data){
         div.append(icon, divName, divTimes);
         document.getElementById('transit').append(div);
     }
+}
+
+function drawNoRoute(){
+    let div = document.createElement('div');
+    div.setAttribute('id', 'stage0');
+    div.style.top = '65%';
+
+    let p1 = document.createElement('p');
+    p1.setAttribute('id', 'origin');
+    p1.innerText = 'No Route found!';
+    p1.style.top = '38%';
+
+    let icon = document.createElement('img');
+    icon.src = 'resources/TransportIcons/TransportIcons_NoRoute.png';
+    icon.setAttribute('id', 'transIcon');
+
+    div.append(icon, p1);
+    document.getElementById('transit').append(div);
 }
