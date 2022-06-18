@@ -17,8 +17,8 @@ routes.put('/editPost/ ', requestController.editPost);
 routes.delete('/deletePost/ ', requestController.deletePost);
 
 routes.get('/login/:username/:password', requestController.login);
-routes.post('/register/:username/:password', requestController.register);
+routes.post('/register/:cookie/:email/:username/:password/:xoj', requestController.register);
 routes.put('/editUser/', requestController.editUser);
-routes.delete('/deleteUser/:username', requestController.deleteUser);
+routes.delete('/deleteUser/:username/:password', requestController.deleteUser);
 
 module.exports = routes;

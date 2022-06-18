@@ -1,5 +1,16 @@
 const fetch = require('node-fetch');
 const {response} = require("express");
+const fs = require('fs');
+
+class User{
+    constructor(cookie, email, username, password, xoj) {
+        this.cookie = cookie;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.xoj = xoj;
+    }
+}
 
 class Data {
 
@@ -86,6 +97,40 @@ class Data {
             method: 'GET',
         }).then(response => response.json())
         return await response;
+    }
+
+    checkIfUserExists(email){
+        let userData = fs.readFileSync('userDB.json');
+        let userDataArray = JSON.parse(userData);
+        for(let i = 0; i < userDataArray.length; i++){
+            if(userDataArray[i].email === email){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    register(cookie, email, username, password, xoj){
+        let user = new User(cookie, email, username, password, xoj);
+        let userData = fs.readFileSync('userDB.json');
+        let userDataArray = JSON.parse(userData);
+        userDataArray.push(user);
+        userData = JSON.stringify(userDataArray);
+        fs.writeFileSync('userDB.json', userData);
+    }
+
+    deleteUser(username, password){
+        let userData = fs.readFileSync('userDB.json');
+        let userDataArray = JSON.parse(userData);
+        let tempArray = [];
+
+        for(let i = 0; i < userDataArray.length; i++){
+            if(userDataArray[i].username !== username && userDataArray[i].password !== password){
+                tempArray.push(userDataArray[i]);
+            }
+        }
+        userData = JSON.stringify(tempArray);
+        fs.writeFileSync('userDB.json', userData);
     }
 }
 

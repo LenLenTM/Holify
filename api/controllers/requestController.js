@@ -58,13 +58,35 @@ class RequestController {
     login(){
     }
 
-    register(){
+    register(req, res){
+        let cookie = req.params.cookie;
+        let email = req.params.email;
+        let username = req.params.username;
+        let password = req.params.password;
+        let xoj = req.params.xoj;
+
+        if(model.checkIfUserExists(email)){
+            model.register(cookie, email, username, password, xoj);
+            res.status(202).send('Registration successfull.');
+        }
+        else {
+            res.status(602).send('This email-address is already registered.');
+        }
     }
 
     editUser(){
     }
 
-    deleteUser(){
+    deleteUser(req, res){
+        let username = req.params.username;
+        let password = req.params.password;
+
+        if(model.deleteUser(username, password)){
+            res.status(202).send('User deleted.');
+        }
+        else {
+            res.status(602).send('Wrong password or username.');
+        }
     }
 }
 
