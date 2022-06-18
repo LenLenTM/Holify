@@ -1,11 +1,22 @@
 const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
+const session = require('express-session');
 
 const router = require('./api/routes/router.js');
 
 const app = express();
 const port = 3456;
+
+app.use(session({
+    secret: 'cats',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 3600,
+        httpOnly: false
+    }
+}))
 
 app.use(express.static(path.join(__dirname, 'files')));
 
