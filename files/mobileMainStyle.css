@@ -99,14 +99,14 @@ nav {
     text-align: center;
 }
 #citiesDiv > a {
-    font-family: "Avenir";
+    font-family: "Avenir", sans-serif;
     font-weight: bold;
     font-size: 1.1em;
     line-height: 3;
     color: grey;
 }
 #errorMessage {
-    font-family: "Avenir";
+    font-family: "Avenir", sans-serif;
     font-size: 1.5em;
     line-height: 1.7;
     color: grey;
