@@ -26,8 +26,8 @@ function City(name, latitude, longitude, country, population) {
 function initMap() {
     console.log("Test");
     map = new google.maps.Map(document.getElementById("worldMap"), {
-        zoom: zoom,
-        center: {lat: 0, lng: 0},
+        zoom: 2,
+        center: {lat: 0, lng: 10 },
         styles: mapStyle,
         disableDefaultUI: true,
         backgroundColor: '#9ae7cd',
@@ -297,7 +297,7 @@ function createPopUp(responseArray) {
     }
 }
 
-/* if popup exists delete its childs and itself and set page back to start */
+/* if popup exists delete its children and itself and set page back to start */
 function closePopUp() {
     if (document.getElementById('popup')) {
         let popup = document.getElementById('divPop');
