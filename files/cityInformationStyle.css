@@ -17,29 +17,34 @@ nav {
     color: grey;
     z-index: 1;
 }
+
 #navText {
     position: absolute;
     top: 9px;
     left: 90px;
 }
+
 #logo {
     width: 70px;
     margin-left: 10px;
     margin-top: 10px;
 }
+
 #user {
     height: 70px;
     position: absolute;
     top: 12px;
     right: 80px;
 }
+
 #options {
     height: 56px;
     position: absolute;
     right: 10px;
     top: 18px;
 }
-#bar{
+
+#bar {
     position: absolute;
     height: 10px;
     width: 100%;
@@ -47,149 +52,339 @@ nav {
     background-color: #9ae7cd;
 }
 
-/* -----------------------------------   Main   --------------------------------- */
+@media only screen and (max-width: 499px) {
+    /* -----------------------------------   Main   --------------------------------- */
+    #progBar {
+        position: absolute;
+        width: 30%;
+        opacity: 80%;
+        left: 35%;
+        top: 35%;
+    }
 
-#progBar {
-    position: absolute;
-    width: 30%;
-    opacity: 80%;
-    left: 35%;
-    top: 35%;
+    main {
+        background-color: #9ae7cd;
+        overflow: auto;
+    }
+
+    #weatherInformation {
+        position: absolute;
+        top: 49%;
+        width: 100%;
+    }
+
+    .weather-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        position: absolute;
+        top: 50px;
+    }
+
+    #icon {
+        width: 12%;
+        padding: 12px;
+    }
+
+    .days-box {
+        display: flex;
+        flex-direction: row;
+        flex: 0 0 100%;
+        justify-content: center;
+    }
+
+    #day {
+        display: inline;
+        font-family: Avenir;
+        color: grey;
+        padding: 28px;
+    }
+
+    .temperature-box {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        position: absolute;
+        top: 75px;
+    }
+
+    #temperature {
+        display: inline;
+        font-family: Avenir;
+        color: grey;
+        padding: 21px;
+    }
+
+    .pictures {
+        position: absolute;
+        display: flex;
+        flex-wrap: wrap;
+        width: 96%;
+        height: 26%;
+        flex: 40%;
+        left: 2%;
+        top: 12%;
+        background-color: white;
+    }
+
+    #img1, #img2, #img3, #img4 {
+        width: 48%;
+        height: 46%;
+        object-fit: cover;
+        padding: 1%;
+    }
+    #noImage{
+        font-family: Avenir;
+        font-size: xxx-large;
+        color: grey;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        top: 18%;
+    }
+
+    #infos {
+        position: absolute;
+        width: 96%;
+        left: 2%;
+        height: 14%;
+        top: 39%;
+        background-color: white;
+    }
+
+    #three {
+        padding-top: 2%;
+        font-family: Avenir;
+        font-size: small;
+        color: grey;
+    }
+
+    #infos p {
+        padding-left: 6%;
+    }
+
+    #transit {
+        font-family: Avenir;
+        font-size: small;
+        color: grey;
+    }
+
+    [id^="stage"] {
+        position: absolute;
+        width: 96%;
+        left: 2%;
+        height: 8.5%;
+        background-color: white;
+    }
+
+    #origin {
+        position: absolute;
+        margin-top: 0;
+        top: 17%;
+        left: 24%
+    }
+
+    #destination {
+        position: absolute;
+        margin-top: 0;
+        top: 17%;
+        left: 62%
+    }
+
+    #transIcon {
+        position: absolute;
+        width: 20%;
+        top: 0%;
+        left: 0%;
+    }
+
+    #departure-time {
+        position: absolute;
+        top: 30%;
+        left: 24%;
+    }
+
+    #arrival-time {
+        position: absolute;
+        top: 30%;
+        left: 62%;
+    }
 }
 
-main {
-    background-color: #9ae7cd;
-    overflow: auto;
-}
+@media only screen and (min-width: 500px){
 
-#weatherInformation{
-    position: absolute;
-    top: 49%;
-    width: 100%;
-}
+    #main{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+                "c1 c4"
+                "c2 c4"
+                "c3 c4";
+        width: 100%;
+    }
+    #pictures {grid-area: c1}
+    #infos {grid-area: c2}
+    #weatherInformation {grid-area: c3}
+    #transit {grid-area: c4}
 
-.weather-box{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    position: absolute;
-    top: 50px;
-}
+    #progBar {
+        position: absolute;
+        width: 16%;
+        opacity: 80%;
+        left: 42%;
+        top: 35%;
+    }
+    main {
+        background-color: #9ae7cd;
+        overflow: auto;
+    }
 
-#icon{
-    width: 12%;
-    padding: 12px;
-}
+    .pictures {
+        position: absolute;
+        display: flex;
+        flex-wrap: wrap;
+        width: 48%;
+        height: 36%;
+        flex: 40%;
+        left: 1%;
+        top: 12%;
+        background-color: white;
+    }
+    #img1, #img2, #img3, #img4 {
+        width: 48%;
+        height: 46%;
+        object-fit: cover;
+        padding: 1%;
+    }
+    #noImage{
+        font-family: Avenir;
+        font-size: xxx-large;
+        color: grey;
+        position: absolute;
+        left: 39%;
+        top: 25%;
+    }
 
-.days-box{
-    display: flex;
-    flex-direction: row;
-    flex: 0 0 100%;
-    flex-direction: row;
-    justify-content: center;
-}
+    #weatherInformation {
+        position: absolute;
+        top: 48%;
+        width: 50%;
+        height: 20%;
+    }
+    .weather-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        position: absolute;
+        top: 25%;
+    }
+    #icon {
+        width: 12%;
+        padding: 12px;
+    }
+    .days-box {
+        position: absolute;
+        width: 100%;
+        top: -12%;
+        left: 0%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    #day {
+        display: inline;
+        font-family: Avenir;
+        color: grey;
+        padding: 28px;
+    }
+    .temperature-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        position: absolute;
+        width: 100%;
+        top: 55%;
+        left: 0%;
+    }
+    #temperature {
+        display: inline;
+        font-family: Avenir;
+        color: grey;
+        padding: 21px;
+    }
 
-#day{
-    display: inline;
-    font-family: Avenir;
-    color: grey;
-    padding: 28px;
-}
 
-.temperature-box{
-    display: flex;
-    flex-direction: row;
-    flex: 0 0 100%;
-    flex-direction: row;
-    justify-content: center;
-    position: absolute;
-    top: 70px;
-}
+    #infos {
+        position: absolute;
+        width: 48%;
+        left: 1%;
+        height: 30%;
+        top: 68%;
+        background-color: white;
+    }
+    #three {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding-top: 2%;
+        font-family: Avenir;
+        font-size: medium;
+        color: grey;
+        height: 80%;
+    }
+    #infos p {
+        padding-left: 6%;
+    }
 
-#temperature{
-    display: inline;
-    font-family: Avenir;
-    color: grey;
-    padding: 21px;
-}
+    /*-----------------------------*/
 
-.pictures{
-    position: absolute;
-    display: flex;
-    flex-wrap: wrap;
-    width: 96%;
-    height: 26%;
-    flex: 40%;
-    left: 2%;
-    top: 12%;
-    background-color: white;
-}
+    #transit {
+        font-family: Avenir;
+        font-size: small;
+        color: grey;
+    }
 
-#img1, #img2, #img3, #img4{
-    width: 48%;
-    height: 46%;
-    object-fit: cover;
-    padding: 1%;
-}
+    [id^="stage"] {
+        position: absolute;
+        width: 48%;
+        left: 51%;
+        height: 8.5%;
+        background-color: white;
+    }
 
-#infos{
-    position: absolute;
-    width: 96%;
-    left: 2%;
-    height: 14%;
-    top: 39%;
-    background-color: white;
-}
-#three{
-    padding-top: 2%;
-    font-family: Avenir;
-    font-size: small;
-    color: grey;
-}
-#infos p{
-    padding-left: 6%;
-}
+    #origin {
+        position: absolute;
+        margin-top: 0;
+        top: 17%;
+        left: 24%
+    }
 
-#transit{
-    font-family: Avenir;
-    font-size: small;
-    color: grey;
-}
-[id^="stage"]{
-    position: absolute;
-    width: 96%;
-    left: 2%;
-    height: 8.5%;
-    background-color: white;
-}
+    #destination {
+        position: absolute;
+        margin-top: 0;
+        top: 17%;
+        left: 62%
+    }
 
-#origin{
-    position: absolute;
-    margin-top: 0;
-    top: 17%;
-    left: 24%
-}
-#destination{
-    position: absolute;
-    margin-top: 0;
-    top: 17%;
-    left: 62%
-}
-#transIcon{
-    position: absolute;
-    width: 20%;
-    top: 0%;
-    left: 0%;
-}
-#departure-time{
-    position: absolute;
-    top: 30%;
-    left: 24%;
-}
-#arrival-time{
-    position: absolute;
-    top: 30%;
-    left: 62%;
-}
+    #transIcon {
+        position: absolute;
+        width: 14%;
+        top: 0%;
+        left: 0%;
+    }
 
+    #departure-time {
+        position: absolute;
+        top: 30%;
+        left: 24%;
+    }
+
+    #arrival-time {
+        position: absolute;
+        top: 30%;
+        left: 62%;
+    }
+
+}
 

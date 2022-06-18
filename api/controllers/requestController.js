@@ -26,7 +26,6 @@ class RequestController {
 
     async getCityInformation(req, res){
         let id = req.params.id;
-
         res.send(await model.getCityInformation(id));
     }
 
