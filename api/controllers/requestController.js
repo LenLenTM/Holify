@@ -36,6 +36,17 @@ class RequestController {
         res.send(await model.getImages(city));
     }
 
+    async getTransportRoute(req, res){
+        let origin = req.params.origin;
+        let destination = req.params.destination;
+
+        res.send(await model.getTransportRoute(origin, destination));
+    }
+
+    async userLocation(req, res){
+        res.send(await model.userLocation());
+    }
+
     newPost(){
     }
 

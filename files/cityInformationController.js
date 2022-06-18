@@ -46,6 +46,7 @@ function initPage() {
     navText();
     getWeather();
     window.setTimeout(cityInformation, 600);
+    progressBar();
 }
 
 function navText(){
@@ -55,6 +56,13 @@ function navText(){
     navText.innerHTML = parameter.get('city');
     navText.setAttribute('id', 'navText');
     document.getElementById('cityName').append(navText);
+}
+
+function progressBar(){
+    let load = document.createElement('img');
+    load.src = '../resources/loading.gif';
+    load.setAttribute('id', 'progBar');
+    document.getElementById('main').append(load);
 }
 
 function getWeather(){
@@ -71,11 +79,13 @@ function getWeather(){
         contentType: 'application/json'
     }).then(response => response.json())
         .then(data => {
+            console.log(data);
             weatherResponse = new WeatherResponse(data.city, data.cnt, data.cod, data.list, data.message);
             for (let i = 1; i < weatherResponse.list.length; i++){
                 weather = new Weather(weatherResponse.list[i].clouds, weatherResponse.list[i].dt, weatherResponse.list[i].dt_txt, weatherResponse.list[i].main, weatherResponse.list[i].pop, weatherResponse.list[i].rain, weatherResponse.list[i].sys, weatherResponse.list[i].visibility, weatherResponse.list[i].weather, weatherResponse.list[i].wind);
                 allWeather.push(weather);
             }
+            userLocation();
             filterInformation(allWeather);
             displayWeather();
             getImages();
@@ -148,6 +158,7 @@ function getImages(){
                 if(cityImages.length === 4){break}
             }
             drawImages();
+            document.getElementById('progBar').remove();
         })
 }
 
@@ -180,9 +191,130 @@ function drawInformation(){
     let country = document.createElement('p');
     country.innerText = 'Country: ' + cityData.country.name.toUpperCase();
     let population = document.createElement('p');
-    population.innerText = 'Population: ' + cityData.population;
+    population.innerText = 'Population: ' + numberWithCommas(cityData.population);
     let currency = document.createElement('p');
     currency.innerText = 'Currency: ' + cityData.currency.name.toUpperCase();
 
-    document.getElementById('infos').append(country, population, currency);
+    document.getElementById('three').append(country, population, currency);
+}
+
+//https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+//-------until here
+
+function userLocation(){
+    let url = 'http://localhost:3456/api/userLocation';
+    fetch(url, {
+        method: 'GET',
+        contentType: 'application/json'
+    }).then(response => response.json())
+        .then(data => {
+            getTransportRoute(data);
+        });
+}
+
+function getTransportRoute(response){
+    let origin = response.location.latitude + ',' + response.location.longitude;
+
+    let destination = weatherResponse.city.coord.lat + ',' + weatherResponse.city.coord.lon;
+
+    let url = 'http://localhost:3456/api/getTransportRoute/' + origin + '/' + destination;
+
+    let route = fetch(url, {
+        method: 'GET',
+        contentType: 'application/json'
+    }).then(response => response.json())
+        .then(data => {
+            drawTransportRoute(data);
+        });
+    //return await route;
+}
+
+function drawTransportRoute(data){
+    let stages = data.routes[0].sections;
+    console.log(stages);
+    let vehicleImage;
+
+    for(let i = 0; i < stages.length; i++){
+        let div = document.createElement('div');
+        div.setAttribute('id', 'stage' + i);
+
+        let vehicle = stages[i].transport.mode;
+        switch (vehicle){
+            case 'highSpeedTrain':
+            case 'intercityTrain':
+            case 'interRegionalTrain':
+            case 'regionalTrain':
+            case 'cityTrain':
+                vehicleImage = 'resources/TransportIcons/TransportIcons_Train.png';
+                break;
+            case 'bus':
+            case 'privateBus':
+            case 'busRapid':
+                vehicleImage = 'resources/TransportIcons/TransportIcons_Bus.png';
+                break;
+            case 'ferry':
+                vehicleImage = 'resources/TransportIcons/TransportIcons_Ship.png';
+                break;
+            case 'subway':
+            case 'lightRail':
+            case 'inclined':
+            case 'monorail':
+                vehicleImage = 'resources/TransportIcons/TransportIcons_Subway.png';
+                break;
+            case 'aerial':
+            case 'flight':
+                vehicleImage = 'resources/TransportIcons/TransportIcons_Airplane.png';
+                break;
+            case 'walk':
+            case 'pedestrian':
+                vehicleImage = 'resources/TransportIcons/TransportIcons_Pedestrian.png';
+                break;
+            default:
+                vehicleImage = 'resources/TransportIcons/TransportIcons_Bus.png';
+        }
+        let icon = document.createElement('img');
+        icon.src = vehicleImage;
+        icon.setAttribute('id', 'transIcon');
+
+        let p1 = document.createElement('p');
+        p1.setAttribute('id', 'origin');
+        if(i === 0){
+            p1.innerText = 'Origin';
+        }
+        else{
+            p1.innerText = stages[i].departure.place.name.toString().slice(0, 22);
+        }
+
+        let p2 = document.createElement('p');
+        p2.setAttribute('id', 'destination');
+        if(i === (stages.length - 1)){
+            p2.innerText = 'Destination';
+        }
+        else{
+            p2.innerText = stages[i].arrival.place.name.toString().slice(0, 22);
+        }
+
+        let p3 = document.createElement('p');
+        p3.setAttribute('id', 'departure-time');
+        p3.innerText = stages[i].departure.time.toString().slice(11, 16);
+
+        let p4 = document.createElement('p');
+        p4.setAttribute('id', 'arrival-time');
+        p4.innerText = stages[i].arrival.time.toString().slice(11, 16);
+
+        let divName = document.createElement('div');
+        divName.setAttribute('id', 'stations' + i)
+        let divTimes = document.createElement('div');
+        divTimes.setAttribute('id', 'times' + i);
+
+        div.style.top = (i * 9) + 65 + '%';
+
+        divName.append(p1, p2);
+        divTimes.append(p3, p4);
+        div.append(icon, divName, divTimes);
+        document.getElementById('transit').append(div);
+    }
 }

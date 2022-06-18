@@ -68,6 +68,23 @@ class Data {
         });
         return test;
     }
+
+    async getTransportRoute(origin, destination){
+        let url = 'https://transit.router.hereapi.com/v8/routes?apiKey=aS8UvScT_UJ5MMroiqglho8U-dCcC6fNDIqfxvR5nXs&origin=' + origin + '&destination=' + destination;
+
+        let response = fetch(url, {
+            method: 'GET',
+            contentType: 'application/json',
+        }).then(response => response.json())
+        return await response;
+    }
+
+    async userLocation(){
+        let response = fetch("https://api.geoapify.com/v1/ipinfo?&apiKey=b94f067fb31b473592762ee5c90520e1", {
+            method: 'GET',
+        }).then(response => response.json())
+        return await response;
+    }
 }
 
 module.exports = new Data();

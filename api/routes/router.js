@@ -9,6 +9,8 @@ routes.get('/getCity/:latMin/:latMax/:lonMin/:lonMax/:scope', requestController.
 routes.get('/getWeather/:city/:country', requestController.getWeather);
 routes.get('/getCityInformation/:id', requestController.getCityInformation);
 routes.get('/getImages/:city', requestController.getImages);
+routes.get('/userLocation', requestController.userLocation);
+routes.get('/getTransportRoute/:origin/:destination', requestController.getTransportRoute);
 
 routes.post('/newPost/ ', requestController.newPost);
 routes.put('/editPost/ ', requestController.editPost);
