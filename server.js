@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 // Include the book routes
 app.use('/api', router);
 
-
 app.listen(port, (error) => {
     if (error) {
         console.log(error);

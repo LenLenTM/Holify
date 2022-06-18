@@ -92,20 +92,11 @@ function initMap() {
     fadeOutTip();
 }
 window.initMap = initMap;
-window.loadFont();
 
 function calculateZoom(){
 
 }
 
-function loadFont(){
-    let junction_font = new FontFace('Junction Regular', '../resources/fonts/Avenir.ttc');
-    junction_font.load().then(function(loaded_face) {
-        document.fonts.add(loaded_face);
-        document.body.style.fontFamily = '"Junction Regular", Avenir';
-    }).catch(function(error) {
-    });
-}
 function zoomMap(event) {
     map.panTo(event.latLng);
     map.setZoom(4.5);

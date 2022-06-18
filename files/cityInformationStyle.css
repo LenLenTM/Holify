@@ -50,6 +50,14 @@ nav {
 
 /* -----------------------------------   Main   --------------------------------- */
 
+#progBar {
+    position: absolute;
+    width: 30%;
+    opacity: 80%;
+    left: 35%;
+    top: 35%;
+}
+
 main {
     background-color: #9ae7cd;
     overflow: auto;
@@ -57,7 +65,7 @@ main {
 
 #weatherInformation{
     position: absolute;
-    top: 61%;
+    top: 49%;
     width: 100%;
 }
 
@@ -127,17 +135,62 @@ main {
 
 #infos{
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 96%;
     left: 2%;
-    height: 26%;
+    height: 14%;
     top: 39%;
     background-color: white;
+}
+#three{
+    padding-top: 2%;
     font-family: Avenir;
+    font-size: small;
     color: grey;
 }
 #infos p{
-    padding-left: 8%;
+    padding-left: 6%;
 }
+
+#transit{
+    font-family: Avenir;
+    font-size: small;
+    color: grey;
+}
+[id^="stage"]{
+    position: absolute;
+    width: 96%;
+    left: 2%;
+    height: 8.5%;
+    background-color: white;
+}
+
+#origin{
+    position: absolute;
+    margin-top: 0;
+    top: 17%;
+    left: 24%
+}
+#destination{
+    position: absolute;
+    margin-top: 0;
+    top: 17%;
+    left: 62%
+}
+#transIcon{
+    position: absolute;
+    width: 20%;
+    top: 0%;
+    left: 0%;
+}
+#departure-time{
+    position: absolute;
+    top: 30%;
+    left: 24%;
+}
+#arrival-time{
+    position: absolute;
+    top: 30%;
+    left: 62%;
+}
+
+
