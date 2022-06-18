@@ -1,4 +1,4 @@
-let interactionMode = 'start'; /* modes: start -> zoom -> popup */
+ let interactionMode = 'start'; /* modes: start -> zoom -> popup */
 let zoom = 0.6;
 let latitude;
 let longitude;
