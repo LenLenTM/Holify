@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const session = require('express-session');
 
+const fs = require('fs');
+
 const router = require('./api/routes/router.js');
 
 const app = express();
@@ -25,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Parse JSON bodies (from requests)
 app.use(bodyParser.json());
 
-// Include the book routes
+
 app.use('/api', router);
 
 app.listen(port, (error) => {

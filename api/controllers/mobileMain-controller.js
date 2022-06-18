@@ -2,7 +2,6 @@ const model = require("../models/mobileMain-Model.js");
 
 class MobileMainController {
 
-    getCategories(){}
 
     getCity(req, res){
         console.log("we got here!");
