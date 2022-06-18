@@ -11,6 +11,7 @@ let latMin;
 let latMax;
 let lonMin;
 let lonMax;
+let lightWeight = false;
 
 /* Cities received from Cities API */
 function City(name, latitude, longitude, country, population) {
@@ -21,9 +22,12 @@ function City(name, latitude, longitude, country, population) {
         this.population = population;
 }
 
-
 /* Initialize GoogleMap */
 function initMap() {
+    let paraString = window.location.search;
+    let parameter = new URLSearchParams(paraString);
+    if (parameter.get('lw')){lightWeight = true;}
+
     map = new google.maps.Map(document.getElementById("worldMap"), {
         zoom: zoom,
         center: {lat: 0, lng: 0},
@@ -405,7 +409,12 @@ function searchFiledActivated(event) {
                     document.getElementById('searchText').value = "";
                 } else {
                     city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
-                    window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;
+                    if(lightWeight === true){
+                        window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country + '&lw=true';
+                    }
+                    else {
+                        window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;
+                    }
                 }
                 document.getElementById('progBar').remove();
             });
@@ -458,6 +467,32 @@ function removeTip() {
     if (document.getElementById('tip')) {
         document.getElementById('tip').remove();
     }
+}
+
+function userLogin(){
+    if(document.getElementById(loginPopUp)){
+        document.getElementById(loginPopUp).remove();
+    }
+    else {
+        let loginPopUp = document.createElement('div');
+        loginPopUp.setAttribute('id', 'loginPopUp');
+        let logIn = document.createElement('div');
+        logIn.setAttribute('id', 'login');
+        logIn.setAttribute('onclick', '')
+
+        //If()   if user is loged in
+        let logInText = document.createElement('p');
+        logInText.setAttribute('id', 'logIntext');
+        logInText.innerText = 'LOGIN';
+        //else LOGOUT
+
+        logIn.append(logInText);
+        loginPopUp.append(logIn, logOut);
+    }
+}
+
+function dropDownMenu(){
+
 }
 
 /* Google Map Styling - setting the land color to the background color. later

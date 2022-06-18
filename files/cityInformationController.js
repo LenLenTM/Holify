@@ -8,6 +8,7 @@ let mainInfo = [];
 let weatherOutput = [];
 let cityData;
 let cityImages = [];
+let lightWeight = false;
 
 function WeatherResponse(city, cnt, cod, list, message){
     this.city = city;
@@ -43,6 +44,11 @@ function City(country, currency, population){
 }
 
 function initPage() {
+
+    let paraString = window.location.search;
+    let parameter = new URLSearchParams(paraString);
+    if (parameter.get('lw')){lightWeight = true;}
+
     checkCookie();
     navText();
     getWeather();
@@ -90,6 +96,7 @@ function getWeather(){
                 weather = new Weather(weatherResponse.list[i].clouds, weatherResponse.list[i].dt, weatherResponse.list[i].dt_txt, weatherResponse.list[i].main, weatherResponse.list[i].pop, weatherResponse.list[i].rain, weatherResponse.list[i].sys, weatherResponse.list[i].visibility, weatherResponse.list[i].weather, weatherResponse.list[i].wind);
                 allWeather.push(weather);
             }
+            console.log(weatherResponse);
             userLocation();
             filterInformation(allWeather);
             displayWeather();
@@ -143,28 +150,45 @@ function displayWeather(){
 }
 
 function getImages(){
-    cityImages = [];
-    let url = 'http://localhost:3456/api/getImages/' + weatherResponse.city.name;
-    fetch (url, {
-        method: 'GET',
-        contentType: 'application/json'
-    }).then(response => response.json())
-        .then(data => {
-            for(let i = 0; i < 10; i ++){
-                let duplicate = false;
-                for(let j = 0; j < 4; j++){
-                    if(cityImages[j] === data.result[i].url){
-                        duplicate = true;
-                        break;
+    if(lightWeight === false) {
+        cityImages = [];
+        let url = 'http://localhost:3456/api/getImages/' + weatherResponse.city.name;
+        fetch(url, {
+            method: 'GET',
+            contentType: 'application/json'
+        }).then(response => response.json())
+            .then(data => {
+                for (let i = 0; i < 10; i++) {
+                    let duplicate = false;
+                    for (let j = 0; j < 4; j++) {
+                        if (cityImages[j] === data.result[i].url) {
+                            duplicate = true;
+                            break;
+                        }
+                    }
+                    if (duplicate) {
+                        continue;
+                    }
+                    cityImages.push(data.result[i].url);
+                    if (cityImages.length === 4) {
+                        break
                     }
                 }
-                if(duplicate){continue;}
-                cityImages.push(data.result[i].url);
-                if(cityImages.length === 4){break}
-            }
-            drawImages();
-            document.getElementById('progBar').remove();
-        })
+                drawImages();
+                document.getElementById('progBar').remove();
+            })
+    }
+    else{
+        drawNoImages();
+    }
+}
+
+function drawNoImages(){
+    let noImages = document.createElement('p');
+    noImages.setAttribute('id', 'noImage');
+    noImages.innerText = weatherResponse.city.name.toString().toUpperCase();
+    document.getElementById('pictures').append(noImages);
+    document.getElementById('progBar').remove();
 }
 
 function drawImages(){
@@ -186,13 +210,11 @@ function cityInformation(){
     }).then(response => response.json())
         .then(data => {
             cityData = new City(data.country, data.currency, data.population);
-            console.log(cityData);
             drawInformation();
         });
 }
 
 function drawInformation(){
-    console.log(cityData);
     let country = document.createElement('p');
     country.innerText = 'Country: ' + cityData.country.name.toUpperCase();
     let population = document.createElement('p');
@@ -309,18 +331,37 @@ function drawTransportRoute(data){
 
         let p3 = document.createElement('p');
         p3.setAttribute('id', 'departure-time');
-        p3.innerText = stages[i].departure.time.toString().slice(11, 16);
+        let text1;
+        if(window.innerWidth < 500){
+            text1 = stages[i].departure.time.toString().slice(11, 16);
+        }
+        else {
+            text1 = stages[i].departure.time.toString().slice(11, 22)
+        }
+        p3.innerText = text1;
 
         let p4 = document.createElement('p');
         p4.setAttribute('id', 'arrival-time');
-        p4.innerText = stages[i].arrival.time.toString().slice(11, 16);
+        let text2;
+        if(window.innerWidth < 500){
+            text2 = stages[i].arrival.time.toString().slice(11, 16);
+        }
+        else {
+            text2 = stages[i].arrival.time.toString().slice(11, 22);
+        }
+        p4.innerText = text2;
 
         let divName = document.createElement('div');
         divName.setAttribute('id', 'stations' + i)
         let divTimes = document.createElement('div');
         divTimes.setAttribute('id', 'times' + i);
 
-        div.style.top = (i * 9) + 65 + '%';
+        if(window.innerWidth < 500) {
+            div.style.top = (i * 9) + 65 + '%';
+        }
+        else{
+            div.style.top = (i * 9) + 12 + '%';
+        }
 
         divName.append(p1, p2);
         divTimes.append(p3, p4);
@@ -332,7 +373,12 @@ function drawTransportRoute(data){
 function drawNoRoute(){
     let div = document.createElement('div');
     div.setAttribute('id', 'stage0');
-    div.style.top = '65%';
+    if(window.innerWidth < 500) {
+        div.style.top = '65%';
+    }
+    else{
+        div.style.top = '12%';
+    }
 
     let p1 = document.createElement('p');
     p1.setAttribute('id', 'origin');
@@ -345,4 +391,12 @@ function drawNoRoute(){
 
     div.append(icon, p1);
     document.getElementById('transit').append(div);
+}
+
+function userLoginCity(){
+
+}
+
+function dropDownMenuCity(){
+
 }
