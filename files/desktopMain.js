@@ -89,6 +89,7 @@ function initMap() {
             closePopUp();
         }
     });
+    checkCookie();
     appendSearchBar();
     appendTip();
     fadeOutTip();
