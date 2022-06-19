@@ -5,40 +5,46 @@
 
 * {font-family: "Avenir", sans-serif}
 
-
 body { margin: 0}
 
 #header {
-    grid-area: n;
+    position: fixed;
     width: 100%;
-    height: 110px;
+    height: 100px;
     background-color: white;
-    font-size: 1.8em;
+    font-family: Avenir;
+    font-size: 1.0em;
     color: grey;
-
 }
 #navText {
     position: absolute;
-    top: -25px;
-    left: 120px;
-
+    top: 25px;
+    left: 90px;
+    margin: 0;
 }
 #logo {
-    width: 80px;
-    margin-left: 15px;
-    margin-top: 15px;
+    width: 70px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 #user2 {
     height: 70px;
     position: absolute;
-    top: 20px;
+    top: 12px;
     right: 80px;
 }
 #options {
     height: 56px;
     position: absolute;
     right: 10px;
-    top: 25px;
+    top: 18px;
+}
+#username{
+    position: absolute;
+    transform: translate(50%, 0%);
+    top: 6.5%;
+    right: 26.3%;
+    font-size: small;
 }
 
 #image {
@@ -48,6 +54,8 @@ body { margin: 0}
 
 }
 nav{
+    position: absolute;
+    top: 100px;
     text-align: center;
     background-color: #9ae7cd;
 }
@@ -104,17 +112,8 @@ label {
 
 #titleLabel {align-self: center}
 
-#titleBar{
-    display: flex;
-    justify-content: space-evenly;
-    align-self: center;
-    flex-direction: row;
-}
-
-
 #title, #user {
     width: 50vw
-
 }
 #secondRow {
     display: flex;
@@ -162,37 +161,15 @@ address {
     }
 
 
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch;
-    }
-
     a {
         display: flex;
         justify-content: space-between;
         align-items: stretch;
     }
 
-    #logo {
-        height: 80px;
-        width: 80px;
-        align-self: center;
-        margin-left: 1vw;
-
-    }
-
-
     #order2 {
         flex-grow: 1;
         align-self: center;
-    }
-
-    #userIcon {
-        height: 20vw;
-        width: 18vw;
-        align-self: center;
-        margin-right: 3vw;
     }
 
     #option {

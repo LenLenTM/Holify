@@ -12,6 +12,10 @@ class Blog {
     }
 }
 
+function initEditorPage(){
+    checkCookie();
+}
+
 function collectData() {
     for(let i = 0; i < document.getElementsByClassName('tag').length; i++) {
         tagArray.push(document.getElementsByClassName('tag').item(i).firstChild.nodeValue);

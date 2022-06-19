@@ -49,6 +49,13 @@ nav {
     right: 10px;
     top: 18px;
 }
+#username{
+    position: absolute;
+    transform: translate(50%, 0%);
+    top: 6.5%;
+    right: 26.3%;
+    font-size: small;
+}
 /* -----------------------------------   Main   --------------------------------- */
 main {
     grid-area: m;

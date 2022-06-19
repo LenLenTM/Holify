@@ -58,6 +58,13 @@ nav {
     top: 92px;
     background-color: #9ae7cd;
 }
+#username{
+    position: absolute;
+    transform: translate(50%, 0%);
+    top: 6.5%;
+    right: 26.3%;
+    font-size: small;
+}
 
 @media only screen and (max-width: 499px) {
     /* -----------------------------------   Main   --------------------------------- */
