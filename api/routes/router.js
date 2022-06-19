@@ -7,7 +7,7 @@ routes.get('/getCity/:city', requestController.getCity);
 routes.get('/getCity/:latMin/:latMax/:lonMin/:lonMax/:scope', requestController.getCityByCoords);
 
 routes.get('/getWeather/:city/:country', requestController.getWeather);
-routes.get('/getCityInformation/:id', requestController.getCityInformation);
+routes.get('/getCityInformation/:country', requestController.getCityInformation);
 routes.get('/getImages/:city', requestController.getImages);
 routes.get('/userLocation', requestController.userLocation);
 routes.get('/getTransportRoute/:origin/:destination', requestController.getTransportRoute);

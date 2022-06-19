@@ -321,7 +321,7 @@ function createMarker(responseArray, boolean) {
             let label = {text: responseArray[i].name, fontFamily: 'Avenir', color: 'grey'};
             let marker = new google.maps.Marker({position: position, icon: icon, label: label, map: map});
             marker.addListener('click', function (){
-                window.location.href = 'cityInformation.html?city=' + responseArray[i].name;
+                window.location.href = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country;
             })
             markerList.push(marker);
         }
@@ -408,6 +408,7 @@ function searchFiledActivated(event) {
                     document.body.append(addCSS);
                     document.getElementById('searchText').value = "";
                 } else {
+                    console.log(data);
                     city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
                     if(lightWeight === true){
                         window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country + '&lw=true';

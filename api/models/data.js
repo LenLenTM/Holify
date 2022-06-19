@@ -56,16 +56,12 @@ class Data {
         return await response;
     }
 
-    async getCityInformation(id){
-        let url = 'https://world-geo-data.p.rapidapi.com/cities/' + id;
+    async getCityInformation(country){
+        let url = 'https://restcountries.com/v3.1/alpha/' + country;
 
         let response = fetch(url, {
             method: 'GET',
-            headers: {
-                'X-RapidAPI-Host': 'world-geo-data.p.rapidapi.com',
-                'X-RapidAPI-Key': '84508662f6mshe3596176d549f2dp16b030jsn84019cae481b'
-            }
-            //old key: 0f52931f6cmsh872610cb50d77e2p105401jsn7a4fb537d6e9
+            contentType: 'application/json'
         }).then(response => response.json());
 
         return await response;
@@ -120,6 +116,8 @@ class Data {
     }
 
     deleteUser(username, password){
+        let string = ''
+        /**
         let userData = fs.readFileSync('userDB.json');
         let userDataArray = JSON.parse(userData);
         let tempArray = [];
@@ -130,7 +128,7 @@ class Data {
             }
         }
         userData = JSON.stringify(tempArray);
-        fs.writeFileSync('userDB.json', userData);
+        fs.writeFileSync('userDB.json', userData); **/
     }
 }
 
