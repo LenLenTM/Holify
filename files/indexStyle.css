@@ -14,14 +14,13 @@ body {
     width: 30%;
     left: 36.5%;
     top: 42%;
-    font-family: Avenir;
+    font-family: Avenir, sans-serif;
     color: grey;
     font-size: 30px;
 }
 
 .font {
     display: flex;
-    alignment: center;
     text-align: center;
     width: 100%;
 }

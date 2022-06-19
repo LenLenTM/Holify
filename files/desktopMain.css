@@ -1,6 +1,5 @@
 * {font-family: "Avenir", sans-serif}
 
-
 body {
     margin: 0;
     background-color: #9ae7cd;
@@ -10,17 +9,7 @@ body {
     "n n"
     "n n"
     "m m"
-    "a a"
     "f f";
-}
-
-@media (min-width: 750px) {
-    body {
-        grid-template-areas:
-        "n n n"
-        "a m m"
-        "f f f";
-    }
 }
 
 /* -----------------------------------   Nav   --------------------------------- */
@@ -37,7 +26,6 @@ nav {
     position: absolute;
     top: -10px;
     left: 120px;
-
 }
 #logo {
     width: 80px;
@@ -52,62 +40,124 @@ nav {
 }
 #options {
     height: 56px;
-    alignment: right;
     position: absolute;
     right: 10px;
     top: 18px;
 }
-
-
-
-
+/* -----------------------------------   Main   --------------------------------- */
 main {
     grid-area: m;
-    background-color: #9ae7cd;
-    margin-right: 25px;
-    margin-top: 25px;
-}
+    height: 100%;
+    width: 70%;
+    margin-right: 15%;
+    margin-left: 15%;
 
-#WorldMap{
+}
+#worldMap {
+    display: flex;
     width: 100%;
-    padding-top: 30px;
-    padding-left: 15px;
+    height: 1000px;
+    overflow: hidden;
+    align-self: center;
 }
 
-aside {
-    width: 200px;
-    height: 450px;
-    grid-area: a;
-    background-color: white;
-    margin-top: 110px;
-    margin-left: 50px;
-    margin-right: 10px;
-    border-radius: 20px;
-    border-color: gray;
-    padding: 5px 5em;
-    color: gray;
+#buttons {
+    height: 100%;
 
 }
 
-#PlanTrip{
-    align-content: center;
-    border-color: lightgray;
-    color: gray;
-    border-radius: 40px;
-    padding-left: 30px;
-    padding-right: 30px;
-    font-weight: lighter;
-}
-
-h2, p {
-    text-align: center;
-    padding-bottom: 10%;
-    font-weight: lighter;
-
-}
+/* -----------------------------------   Main   --------------------------------- */
 
 footer {
     grid-area: f;
     font-size: small;
     margin: 15px;
+}
+
+/* -----------------------------------   PopUp  --------------------------------- */
+
+
+#tip {
+    position: absolute;
+    text-align: center;
+    font-family: Avenir, sans-serif;
+    color: grey;
+    opacity: 60%;
+    height: 24px;
+    border-radius: 30px;
+    border: none;
+    padding-top: 6px;
+}
+#searchText {
+    position: absolute;
+    height: 24px;
+    border-radius: 30px;
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    color: grey;
+    padding-top: 8px;
+}
+::placeholder {
+    color: lightgray;
+}
+#backUp {
+    position: absolute;
+    width: 15%;
+}
+#popup {
+    width: 80%;
+    position: absolute;
+    left: 10%;
+    top: 80px;
+    opacity: 70%;
+}
+.citiesBox {
+    position: absolute;
+    left: 25%;
+    top: 135px;
+    width: 50%;
+    text-align: center;
+}
+#citiesDiv > a {
+    font-weight: bold;
+    font-size: 1.1em;
+    line-height: 3;
+    color: grey;
+}
+#errorMessage {
+    font-size: 1.5em;
+    line-height: 1.7;
+    color: grey;
+}
+
+/* https://stackoverflow.com/questions/12499886/how-to-hide-or-disable-the-google-logo-footer-copyright-on-google-maps-javascr */
+
+a[href^="http://maps.google.com/maps"],
+a[href^="https://maps.google.com/maps"],
+a[href^="https://www.google.com/maps"] {
+    display: none !important;
+}
+.gm-bundled-control .gmnoprint {
+    display: block;
+}
+.gmnoprint:not(.gm-bundled-control) {
+    display: none;
+}
+
+#progBar {
+    position: absolute;
+    width: 100px;
+    opacity: 80%;
+    left: 35%;
+    top: 35%;
+}
+
+#warning {
+    position: absolute;
+    font-family: 'Avenir', sans-serif;
+    font-size: 30px;
+    color: grey;
+    top: 50px;
+    left: 50px;
 }
