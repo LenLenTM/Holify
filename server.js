@@ -18,6 +18,7 @@ app.use(session({
     }
 }))
 
+
 app.use(express.static(path.join(__dirname, 'files')));
 
 // Parse urlencoded bodies (for form data)

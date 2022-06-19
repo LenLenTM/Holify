@@ -13,6 +13,7 @@ let lonMin;
 let lonMax;
 let lightWeight = false;
 
+
 /* Cities received from Cities API */
 function City(name, latitude, longitude, country, population) {
         this.name = name;

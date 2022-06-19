@@ -5,7 +5,6 @@ const tagContainer = document.querySelector('.tag-container');
 const tags = [];
 
 
-
 const createTag = (tagValue) => {
     const value = tagValue.trim();
 

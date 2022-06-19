@@ -10,6 +10,7 @@ function getStartLightweight(){
     } else (location.replace("../desktopMain.html?lw=true"));
 }
 
+
 async function testRoutX() {
 
     /**

@@ -12,6 +12,7 @@ let latMax;
 let lonMin;
 let lonMax;
 
+
 /* Cities received from Cities API */
 function City(name, latitude, longitude, country, population) {
     this.name = name;
