@@ -181,6 +181,29 @@ class Data {
         }
         return false;
     }
+
+    username(cookie){
+        let userData = fs.readFileSync('userDB.json');
+        let userDataArray = JSON.parse(userData);
+
+        for(let i = 0; i < userDataArray.length; i++){
+
+            let value = '';
+            let storedCookie = userDataArray[i].cookie.toString();
+
+            let cookieArray = storedCookie.toString().split('');
+
+            for(let i = 0; i < cookieArray.length; i++){
+                let num = cookieArray[i].charCodeAt(0).toString();
+                value = value + num;
+            }
+
+            if(value === cookie){
+                return userDataArray[i].username;
+            }
+        }
+        return 'NO';
+    }
 }
 
 module.exports = new Data();

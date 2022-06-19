@@ -90,13 +90,11 @@ function getWeather(){
         contentType: 'application/json'
     }).then(response => response.json())
         .then(data => {
-            console.log(data);
             weatherResponse = new WeatherResponse(data.city, data.cnt, data.cod, data.list, data.message);
             for (let i = 1; i < weatherResponse.list.length; i++){
                 weather = new Weather(weatherResponse.list[i].clouds, weatherResponse.list[i].dt, weatherResponse.list[i].dt_txt, weatherResponse.list[i].main, weatherResponse.list[i].pop, weatherResponse.list[i].rain, weatherResponse.list[i].sys, weatherResponse.list[i].visibility, weatherResponse.list[i].weather, weatherResponse.list[i].wind);
                 allWeather.push(weather);
             }
-            console.log(weatherResponse);
             userLocation();
             filterInformation(allWeather);
             displayWeather();
@@ -207,7 +205,6 @@ function cityInformation(){
     let parameter = new URLSearchParams(paraString);
     let country = parameter.get('country');
 
-    console.log(weatherResponse);
     let url = 'http://localhost:3456/api/getCityInformation' + '/' + country;
     fetch(url, {
         method: 'GET',
@@ -217,10 +214,6 @@ function cityInformation(){
             let string = JSON.stringify(data);
             string = string.substring(string.indexOf(`name":"`) + 7);
             string = string.substring(0, string.indexOf('"'));
-
-            console.log(data);
-            console.log(data[0].name.common);
-
             cityData = new City(data[0].name.common, string, weatherResponse.city.population);
             drawInformation();
         });
@@ -278,7 +271,6 @@ function getTransportRoute(response){
 
 function drawTransportRoute(data){
     let stages = data.routes[0].sections;
-    console.log(stages);
     let vehicleImage;
 
     for(let i = 0; i < stages.length; i++){

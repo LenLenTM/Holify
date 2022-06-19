@@ -130,6 +130,7 @@ class RequestController {
 
     logOut(req, res){
         let cookie = req.params.cookie;
+        console.log('here');
 
         if(model.logOut(cookie)){
             res.status(202).send('Logged out.');
@@ -137,6 +138,11 @@ class RequestController {
         else {
             res.status(619).send('Session timed out. Please log in again.');
         }
+    }
+
+    username(req, res){
+        let cookie = req.params.cookie;
+        res.send(model.username(cookie));
     }
 }
 
