@@ -49,11 +49,10 @@ nav {
     right: 10px;
     top: 18px;
 }
-#username{
+#usernameNav{
     position: absolute;
-    transform: translate(50%, 0%);
-    top: 6.5%;
-    right: 26.3%;
+    top: 60px;
+    right: 94px;
     font-size: small;
 }
 
@@ -139,6 +138,8 @@ a[href^="https://www.google.com/maps"] {
 .gmnoprint:not(.gm-bundled-control) {
     display: none;
 }
+
+/* -------------- until here -------------------------*/
 
 #progBar {
     position: absolute;

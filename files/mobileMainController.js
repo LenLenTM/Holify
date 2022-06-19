@@ -1,4 +1,4 @@
- let interactionMode = 'start'; /* modes: start -> zoom -> popup */
+let interactionMode = 'start'; /* modes: start -> zoom -> popup */
 let zoom = 0.6;
 let latitude;
 let longitude;
@@ -94,9 +94,6 @@ function initMap() {
     fadeOutTip();
 }
 window.initMap = initMap;
-
-function calculateZoom(){
-}
 
 function checkCookie(){
     let value = '';
@@ -409,9 +406,10 @@ function appendSearchBar() {
 }
 
 function searchFiledActivated(event) {
-    if (event.keyCode === 13) {
-        event.preventDefault();
-        let entry = document.getElementById('searchText').value;
+    let entry = document.getElementById('searchText').value;
+    event.preventDefault();
+
+    if (event.keyCode === 13 && entry.length > 3) {
 
         let url = 'http://localhost:3456/api/getCity/' + entry;
 
