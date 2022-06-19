@@ -104,16 +104,21 @@ nav{
 }
 
 /* -----------------------------------   Blogpost   --------------------------------- */
+button {
+}
 
 #headlines {
-    display: grid;
-    margin-right: 10vw;
-    margin-left: 10vw;
+
 }
 #headlines button {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
     border-radius: 15px;
     font-size: x-large;
     background: #9ae7cd;
+    max-width: 1000px;
+
 }
 #tags {
     font-size: initial;
@@ -124,7 +129,12 @@ nav{
     border-style: solid;
     border-width: 1px;
     border-radius: 15px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
     padding: 10px;
+    max-width: 1000px;
+
 }
 address {
     bottom: 0;
@@ -177,16 +187,13 @@ address {
 
     /* -----------------------------------   Main   --------------------------------- */
 
-    #titleBar {
-        flex-direction: column;
-        align-self: center;
-        justify-content: center;
-        text-align: center;
-        align-items: center;
+
+
+    #headlines button {
+       width: 100%;
     }
 
     #title {
-        max-width: 50vw
     }
 
     /* -----------------------------------   Address   --------------------------------- */

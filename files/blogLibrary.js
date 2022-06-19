@@ -37,8 +37,6 @@ function blogPostConstructor() {
         let tagNode = document.createTextNode(blogPost.tags);
         tagDiv.append(tagNode);
 
-
-
         contentDiv.append(titleDiv,tagDiv)
         button.append(contentDiv);
 
@@ -55,7 +53,14 @@ function blogPostConstructor() {
 
         button.addEventListener("click", collapse );
 
-        contentBox.append(userDiv,timeDiv,textDiv);
+        let editButton = document.createElement("button");
+        editButton.setAttribute("id", "editButton");
+        let editButtonText = document.createTextNode("Edit Blog");
+        editButton.append(editButtonText);
+
+        editButton.addEventListener("click", editBlog)
+
+        contentBox.append(userDiv,timeDiv,textDiv, editButton);
         document.getElementById("headlines").append(button, contentBox);
 }
 
@@ -66,7 +71,7 @@ function collapse() {
         let button = document.getElementById(blogPost.title + "button")
         if(button.value === "YES") {
                 document.getElementById(blogPost.title).style.visibility = "visible";
-                document.getElementById(blogPost.title).style.position = "static";
+                document.getElementById(blogPost.title).style.position = "relative";
                 button.value = "NO";
         }else if (button.value === "NO") {
                 document.getElementById(blogPost.title).style.visibility = "hidden";
