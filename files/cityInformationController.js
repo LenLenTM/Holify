@@ -214,23 +214,25 @@ function cityInformation(){
         contentType: 'application/json'
     }).then(response => response.json())
         .then(data => {
+            let string = JSON.stringify(data);
+            string = string.substring(string.indexOf(`name":"`) + 7);
+            string = string.substring(0, string.indexOf('"'));
+
             console.log(data);
-            let currencyContainer = data[0].currencies;
-            console.log(currencyContainer);
-            let text = JSON.parse(data);
-            console.log(text);
-            cityData = new City(data[0].name.common, currencyContainer.name, weatherResponse.city.population);
+            console.log(data[0].name.common);
+
+            cityData = new City(data[0].name.common, string, weatherResponse.city.population);
             drawInformation();
         });
 }
 
 function drawInformation(){
     let country = document.createElement('p');
-    country.innerText = 'Country: ' + cityData.country.name.toUpperCase();
+    country.innerText = 'Country: ' + cityData.country.toUpperCase();
     let population = document.createElement('p');
     population.innerText = 'Population: ' + numberWithCommas(cityData.population);
     let currency = document.createElement('p');
-    currency.innerText = 'Currency: ' + cityData.currency.name.toUpperCase();
+    currency.innerText = 'Currency: ' + cityData.currency.toUpperCase();
 
     document.getElementById('three').append(country, population, currency);
 }
@@ -401,12 +403,4 @@ function drawNoRoute(){
 
     div.append(icon, p1);
     document.getElementById('transit').append(div);
-}
-
-function userLoginCity(){
-
-}
-
-function dropDownMenuCity(){
-
 }

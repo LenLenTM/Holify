@@ -55,26 +55,65 @@ class RequestController {
     deletePost(){
     }
 
-    login(){
+    login(req, res){
+        let username = req.params.username;
+        let password = req.params.password;
+        let cookie = req.params.cookie;
+
+        if(model.checkIfUserExistsByName(username)){
+            if(model.login(username, password, cookie)){
+                res.status(202).send('You are logged in now.');
+            }
+            else {
+                res.status(621).send('Wrong Password.');
+            }
+        }
+        else {res.status(620).send(`Username doesn't exist.`)}
     }
+
+    //https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
+    validateEmail(email){
+        return email.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    };
+    //until here
 
     register(req, res){
         let cookie = req.params.cookie;
         let email = req.params.email;
         let username = req.params.username;
         let password = req.params.password;
-        let xoj = req.params.xoj;
+        let xoj = false;
 
-        if(model.checkIfUserExists(email)){
-            model.register(cookie, email, username, password, xoj);
-            res.status(202).send('Registration successfull.');
+        if(this.validateEmail(email) && username.length > 4 && password.length > 7) {
+            if (model.checkIfUserExists(email)) {
+                model.register(cookie, email, username, password, xoj);
+                res.status(202).send('Registration successfull.');
+            } else {
+                res.status(602).send('This email-address is already registered.');
+            }
         }
-        else {
-            res.status(602).send('This email-address is already registered.');
-        }
+        else if(!this.validateEmail(email)){res.status(617).send('Enter a valid email address.');}
+        else if(username.length < 5){res.status(618).send('Username too short.');}
+        else{res.status(618).send('Password must be at least 8 signs long.');}
     }
 
-    editUser(){
+    editUser(req, res){
+        let cookie = req.params.cookie;
+        let email = req.params.email;
+        let username = req.params.username;
+        let password = req.params.password;
+
+        if(this.validateEmail(email) && username.length > 4 && password.length > 7){
+            if(model.editUser(cookie, email, username, password)) {
+                res.status(202).send('Changed data.');
+            }
+            else res.status(619).send('Session timed out. Please log in again.');
+        }
+        else if(!this.validateEmail(email)){res.status(617).send('Enter a valid email address.');}
+        else if(username.length < 5){res.status(618).send('Username too short.');}
+        else{res.status(618).send('Password must be at least 8 signs long.');}
     }
 
     deleteUser(req, res){
@@ -86,6 +125,17 @@ class RequestController {
         }
         else {
             res.status(602).send('Wrong password or username.');
+        }
+    }
+
+    logOut(req, res){
+        let cookie = req.params.cookie;
+
+        if(model.logOut(cookie)){
+            res.status(202).send('Logged out.');
+        }
+        else {
+            res.status(619).send('Session timed out. Please log in again.');
         }
     }
 }

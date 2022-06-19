@@ -470,32 +470,6 @@ function removeTip() {
     }
 }
 
-function userLogin(){
-    if(document.getElementById(loginPopUp)){
-        document.getElementById(loginPopUp).remove();
-    }
-    else {
-        let loginPopUp = document.createElement('div');
-        loginPopUp.setAttribute('id', 'loginPopUp');
-        let logIn = document.createElement('div');
-        logIn.setAttribute('id', 'login');
-        logIn.setAttribute('onclick', '')
-
-        //If()   if user is loged in
-        let logInText = document.createElement('p');
-        logInText.setAttribute('id', 'logIntext');
-        logInText.innerText = 'LOGIN';
-        //else LOGOUT
-
-        logIn.append(logInText);
-        loginPopUp.append(logIn, logOut);
-    }
-}
-
-function dropDownMenu(){
-
-}
-
 /* Google Map Styling - setting the land color to the background color. later
 coloring it with the GeoJson data overlay back to white to get rid of antarctica */
 let mapStyle = [
