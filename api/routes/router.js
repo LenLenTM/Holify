@@ -21,5 +21,6 @@ routes.post('/register/:cookie/:email/:username/:password', requestController.re
 routes.put('/editUser/:cookie/:email/:username/:password', requestController.editUser);
 routes.delete('/deleteUser/:username/:password', requestController.deleteUser);
 routes.patch('/logOut/:cookie', requestController.logOut);
+routes.get('/username/:cookie', requestController.username);
 
 module.exports = routes;

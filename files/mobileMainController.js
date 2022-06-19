@@ -56,8 +56,6 @@ function initMap() {
         latitude = event.latLng.lat();
         longitude = event.latLng.lng();
 
-        console.log('L1 ' + latitude + " - " + longitude);
-
         if (interactionMode === 'start') {
             removeTip();
             zoomMap(event);
@@ -80,8 +78,6 @@ function initMap() {
         latitude = event.latLng.lat();
         longitude = event.latLng.lng();
 
-        console.log('L2 ' + latitude + " - " + longitude);
-
         if (interactionMode === 'zoom') {
             removeTip();
             clickNearestCities();
@@ -91,6 +87,7 @@ function initMap() {
             closePopUp();
         }
     });
+    checkCookie();
     appendSearchBar();
     appendTip();
     fadeOutTip();
@@ -98,7 +95,32 @@ function initMap() {
 window.initMap = initMap;
 
 function calculateZoom(){
+}
 
+function checkCookie(){
+    let value = '';
+    let cookie = 'connect.sid=s%3Av6whpb6LtXy7eHU2VhfEhyi6Pw1uPr_Y.0PIFoQ4on8TlM2pzAaA8gpaloqxSPrTNakZ7j3eI9Rs'; //document.cookie.toString();
+    let cookieArray = cookie.split('');
+    for(let i = 0; i < cookie.length; i++){
+        let num = cookieArray[i].charCodeAt(0).toString();
+        value = value + num;
+    }
+    let url = 'http://localhost:3456/api/username/' + value;
+    fetch(url, {
+        methode: 'GET'
+    }).then(function (response){
+        response.text()
+            .then(function (text){
+                let name = text;
+
+                if(name !== 'NO'){
+                    document.getElementById('user').src = 'resources/UserIcon_logged.png';
+                    let username = document.createElement('p');
+                    username.setAttribute('id', 'username');
+                    username.innerText = name.toUpperCase();
+                    document.getElementById('nav').append(username);
+                }
+            })})
 }
 
 function zoomMap(event) {
@@ -408,7 +430,6 @@ function searchFiledActivated(event) {
                     document.body.append(addCSS);
                     document.getElementById('searchText').value = "";
                 } else {
-                    console.log(data);
                     city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
                     if(lightWeight === true){
                         window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country + '&lw=true';

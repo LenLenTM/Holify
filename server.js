@@ -11,7 +11,7 @@ const port = 3456;
 app.use(session({
     secret: 'cats',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
         maxAge: 1000 * 3600,
         httpOnly: false

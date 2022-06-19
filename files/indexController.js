@@ -11,6 +11,8 @@ function getStartLightweight(){
 }
 
 async function testRoutX() {
+
+    /**
     let email = 'lena@muede.at';
     let cookie = 'empty';
     //let email = 'dsjkdsjk@gmail.com';
@@ -23,7 +25,7 @@ async function testRoutX() {
         method: 'DELETE'
     }).then(response => console.log(response));
 
-    /**
+
     let url = 'http://localhost:3456/api/register/' + cookie + '/' + email + '/' + username + '/' + password + '/' + xoj;
     fetch(url, {
         method: 'POST'
