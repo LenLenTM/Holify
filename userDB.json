@@ -1,15 +1,1 @@
-[
-  {
-    "cookie":"connect.sid=s%3Av6whpb6LtXy7eHU2VhfEhyi6Pw1uPr_Y.0PIFoQ4on8TlM2pzAaA8gpaloqxSPrTNakZ7j3eI9Rs",
-    "email":"1234@gmx.at",
-    "username":"hanso",
-    "password":"password",
-    "xoj":true
-  },{
-  "cookie":"falsches",
-  "email":"dsjkdsjk@gmail.com",
-  "username":"maria",
-  "password":"anotherpassword",
-  "xoj":false
-}
-]
+[{"cookie":"falsches","email":"dsjkdsjk@gmail.com","username":"maria","password":"anotherpassword","xoj":false},{"cookie":"","email":"@","username":"asasa","password":"asdasdasdas","xoj":false}]

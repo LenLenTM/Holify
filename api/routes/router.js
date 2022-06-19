@@ -19,8 +19,9 @@ routes.delete('/deletePost/ ', requestController.deletePost);
 routes.get('/login/:username/:password/:cookie', requestController.login);
 routes.post('/register/:cookie/:email/:username/:password', requestController.register);
 routes.put('/editUser/:cookie/:email/:username/:password', requestController.editUser);
-routes.delete('/deleteUser/:username/:password', requestController.deleteUser);
+routes.delete('/deleteUser/:cookie', requestController.deleteUser);
 routes.patch('/logOut/:cookie', requestController.logOut);
 routes.get('/username/:cookie', requestController.username);
+routes.get('/userdata/:username', requestController.getUser);
 
 module.exports = routes;
