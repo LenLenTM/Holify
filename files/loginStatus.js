@@ -217,6 +217,14 @@ function register(){
                     removePaneChildren();
                     location.reload()
                 }
+                else if (text === 'Name already taken.'){
+                    document.getElementById('usernameInput').value = '';
+                    document.getElementById('usernameInput').setAttribute('placeholder', text);
+                }
+                else if(text === 'Email address already taken.'){
+                    document.getElementById('emailInput').value = '';
+                    document.getElementById('emailInput').setAttribute('placeholder', text);
+                }
                 else if(text === 'Enter a valid email address.'){
                     document.getElementById('emailInput').value = '';
                     document.getElementById('emailInput').setAttribute('placeholder', text);
