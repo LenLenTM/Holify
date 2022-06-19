@@ -1,3 +1,5 @@
+/* -----------------------------------   Overall   --------------------------------- */
+
 @font-face {
     font-family: 'Avenir';
     src: url('resources/fonts/Avenir.woff') format('woff');
@@ -7,19 +9,25 @@
 
 body { margin: 0}
 
+/* -----------------------------------   Header   --------------------------------- */
+
 #header {
-    grid-area: n;
+    display: flex;
     width: 100%;
     height: 110px;
     background-color: white;
     font-size: 1.8em;
     color: grey;
+    text-align: center;
+
 
 }
+
+/* -----------------------------------   Nav   --------------------------------- */
+
 #navText {
-    position: absolute;
-    top: -25px;
-    left: 120px;
+    align-self: center;
+
 
 }
 #logo {
@@ -73,7 +81,9 @@ nav{
 
 .dropdown:hover .dropbtn {background-color: lightgray;}
 
+/* -----------------------------------   Main   --------------------------------- */
 
+/* -----------------------------------   Searchbar   --------------------------------- */
 
 #searchbarDIV {
     justify-content: center;
@@ -92,6 +102,9 @@ nav{
     cursor: pointer;
     border-radius: 10px;
 }
+
+/* -----------------------------------   Blogpost   --------------------------------- */
+
 #headlines {
     display: grid;
     margin-right: 10vw;
@@ -118,8 +131,52 @@ address {
     font-size: 0.75vw;
 }
 
+/* -----------------------------------   Mobile Version   --------------------------------- */
+
+/* -----------------------------------   Main   --------------------------------- */
 
 @media (max-width: 800px) {
+
+    #header {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+    #navText {
+        font-size: 43px;
+        margin-left: -45px;
+    }
+
+    #logo {
+        height: 80px;
+        width: 80px;
+        align-self: center;
+        margin-left: 1vw;
+
+    }
+
+    #option {
+        align-self: center;
+        height: 18vw;
+        width: 18vw;
+        margin-right: 1vw;
+    }
+
+    /* -----------------------------------   Nav   --------------------------------- */
+
+
+    .dropbtn {
+        background-color: #9ae7cd;
+        color: white;
+        padding: 1vw;
+        font-size: 5vw;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* -----------------------------------   Main   --------------------------------- */
+
     #titleBar {
         flex-direction: column;
         align-self: center;
@@ -132,56 +189,7 @@ address {
         max-width: 50vw
     }
 
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch;
-    }
-
-    a {
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch;
-    }
-
-    #logo {
-        height: 80px;
-        width: 80px;
-        align-self: center;
-        margin-left: 1vw;
-
-    }
-
-    #holifyTitle {
-
-        align-self: center;
-        font-size: 8vw;
-        color: grey;
-        margin-left: 1vw;
-    }
-
-    #order2 {
-        flex-grow: 1;
-        align-self: center;
-    }
-
-
-
-    #option {
-        align-self: center;
-        height: 18vw;
-        width: 18vw;
-        margin-right: 1vw;
-    }
-
-    .dropbtn {
-        background-color: #9ae7cd;
-        color: white;
-        padding: 1vw;
-        font-size: 5vw;
-        border: none;
-        cursor: pointer;
-    }
+    /* -----------------------------------   Address   --------------------------------- */
 
     address {
         bottom: 0;
