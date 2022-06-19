@@ -202,14 +202,24 @@ function drawImages(){
 }
 
 function cityInformation(){
-    let geoID = weatherResponse.city.id;
-    let url = 'http://localhost:3456/api/getCityInformation' + '/' + geoID;
+
+    let paraString = window.location.search;
+    let parameter = new URLSearchParams(paraString);
+    let country = parameter.get('country');
+
+    console.log(weatherResponse);
+    let url = 'http://localhost:3456/api/getCityInformation' + '/' + country;
     fetch(url, {
         method: 'GET',
         contentType: 'application/json'
     }).then(response => response.json())
         .then(data => {
-            cityData = new City(data.country, data.currency, data.population);
+            console.log(data);
+            let currencyContainer = data[0].currencies;
+            console.log(currencyContainer);
+            let text = JSON.parse(data);
+            console.log(text);
+            cityData = new City(data[0].name.common, currencyContainer.name, weatherResponse.city.population);
             drawInformation();
         });
 }

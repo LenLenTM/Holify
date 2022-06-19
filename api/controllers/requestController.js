@@ -25,8 +25,8 @@ class RequestController {
     }
 
     async getCityInformation(req, res){
-        let id = req.params.id;
-        res.send(await model.getCityInformation(id));
+        let country = req.params.country;
+        res.send(await model.getCityInformation(country));
     }
 
     async getImages(req, res){
