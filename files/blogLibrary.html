@@ -5,33 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale= 1.0">
     <title>Holify - BLOG</title>
     <link rel="stylesheet" href="blogLibrary.css">
-    <link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet">
+    <!--<link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet"> -->
 </head>
 
 <body id="body">
-<header>
-    <a id = "order1" href = "mobileMain.html">
-        <img src="resources/Holify.png" alt="Holify Logo" id="logo">
+<header id = header>
+    <a href="mobileMain.html">
+        <div> <img src="resources/Holify.png" alt="Holify Logo" id="logo"> </div>
     </a>
-
-    <a id = "order2">
-        <h1 id="holifyTitle"> HOLIFY </h1>
+    <h1 id="navText">HOLIFY</h1>
+    <a href="login.html">
+        <img src="resources/UserIcon.png" id="user2" alt="user icon">
     </a>
-
-    <a id = "order3" href = "login.html">
-        <img src="resources/UserIcon.png" alt="User Icon" id="user">
+    <a href="blogEditor.html">
+        <img src="resources/Options.png" id="options" alt="options">
     </a>
-
-    <a id = "order4" href = "blogEditor.html">
-        <img src="resources/Options.png" alt="Option Button" id="option">
-    </a>
-
 </header>
 
 <nav>
     <div class="dropdown">
         <button class="dropbtn" id="africa" onclick="setSearchbar(id)">Africa</button>
-
 
     </div>
     <div class="dropdown">
@@ -60,34 +53,17 @@
     <div id="searchbarDIV">
         <label for=searchbar></label>
         <input type="text" id=searchbar placeholder="Search..">
+        <button type="button" id = "searchButton" onclick="">Go</button>
     </div>
 
 
-    <div id="blogBody">
-
-        <h1 id="libraryTitle"></h1>
-
-        <div id="authorBlock">
-            <div>by&nbsp;</div>
-            <div id="libraryUser"></div>
-        </div>
-        <br>
-        <div id="timeBlock">
-            <div>Posted&nbsp;</div>
-            <div id="libraryTime"></div>
-        </div>
-
-
-    <div id="libraryContent"></div>
-
+    <div id = "headlines">
     </div>
-
-
-
-
 </main>
 <script src="blogEditorController.js"></script>
 <script src="blogLibrary.js"></script>
-
+<script>blogPostConstructor()</script>
 </body>
+
+
 </html>
