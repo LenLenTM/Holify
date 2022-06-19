@@ -4,7 +4,6 @@ let blogPost = jsonToBlog(json);
 
 let date = blogPost.time;
 
-
 function blogPostConstructor() {
         let button = document.createElement("button");
         button.setAttribute("class", blogPost.title);

@@ -10,6 +10,7 @@ let cityData;
 let cityImages = [];
 let lightWeight = false;
 
+
 function WeatherResponse(city, cnt, cod, list, message){
     this.city = city;
     this.cnt = cnt;

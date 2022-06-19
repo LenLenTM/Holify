@@ -7,7 +7,6 @@ function validateForm() {
     let pw = document.getElementById("password").value;
     let pwRep = document.getElementById("password-repeat").value;
 
-
     if (email === false) {
         alert("No valid email");
         valid = false;
