@@ -60,9 +60,8 @@ nav {
 }
 #username{
     position: absolute;
-    transform: translate(50%, 0%);
-    top: 6.5%;
-    right: 26.3%;
+    top: 70px;
+    right: 102px;
     font-size: small;
 }
 

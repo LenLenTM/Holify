@@ -6,70 +6,8 @@
 * {font-family: "Avenir", sans-serif}
 
 body {
-    justify-content: center;
     margin: 0;
     background-color: #9ae7cd;
-    color: gray;
-
-}
-.imgcontainer {
-    display: grid;
-    justify-content: center;
-    margin-top: 10px;
-
-
-}
-#image2 {
-    width: 80px;
-}
-.formContainer {
-    display: grid;
-    justify-content: center;
-}
-form {
-    display: grid;
-    justify-content: center;
-    grid-row-gap: 10px;
-    border-radius: 20px;
-    width: 250px;
-    background-color: white;
-    margin-top: 20px;
-}
-
-input {
-    max-width: 200px;
-}
-
-.container {
-    display: grid;
-    max-width: 20vw;
-    margin-bottom: 5px;
-    grid-row-gap: 10px;
-    justify-content: center;
-}
-.formTitle,.username, .password, .checkbox, .signUpBotton, .forgotPassButton, .email, .clearfix{
-    display: grid;
-    max-width: 20vw;
-    justify-content: center;
-    grid-row-gap: 2px;
-}
-
-.cancelbtn {
-    margin-top: 5px;
-    margin-bottom: 5px;
-
-}
-button {
-    background-color: #9ae7cd;
-    color: white;
-    border-style: hidden;
-    font-size: medium;
-    cursor: pointer;
-}
-
-#termsParagraph {
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 
@@ -77,40 +15,38 @@ button {
 /* -----------------------------------   Nav   --------------------------------- */
 
 nav {
-     grid-area: n;
      width: 100%;
-     height: 110px;
+     height: 100px;
      background-color: white;
-     font-size: 1.8em;
+     font-size: 1.3em;
      color: grey;
  }
 #navText {
     position: absolute;
-    top: -10px;
-    left: 120px;
-
+    top: 7px;
+    left: 100px;
 }
 #logo {
     width: 80px;
-    margin-left: 15px;
-    margin-top: 15px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 #user {
-    height: 70px;
+    height: 80px;
     position: absolute;
     top: 12px;
-    right: 80px;
+    right: 92px;
 }
 #options {
-    height: 56px;
+    height: 70px;
     position: absolute;
     right: 10px;
-    top: 18px;
+    top: 15px;
+}
+#username{
+    position: absolute;
+    top: 70px;
+    right: 102px;
+    font-size: small;
 }
 
-#image {
-    width: 80px;
-    margin-left: 15px;
-    margin-top: 15px;
-
-}
