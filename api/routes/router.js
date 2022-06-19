@@ -13,12 +13,13 @@ routes.get('/userLocation', requestController.userLocation);
 routes.get('/getTransportRoute/:origin/:destination', requestController.getTransportRoute);
 
 routes.post('/newPost/ ', requestController.newPost);
-routes.put('/editPost/ ', requestController.editPost);
+routes.patch('/editPost/ ', requestController.editPost);
 routes.delete('/deletePost/ ', requestController.deletePost);
 
-routes.get('/login/:username/:password', requestController.login);
-routes.post('/register/:cookie/:email/:username/:password/:xoj', requestController.register);
-routes.put('/editUser/', requestController.editUser);
+routes.get('/login/:username/:password/:cookie', requestController.login);
+routes.post('/register/:cookie/:email/:username/:password', requestController.register);
+routes.put('/editUser/:cookie/:email/:username/:password', requestController.editUser);
 routes.delete('/deleteUser/:username/:password', requestController.deleteUser);
+routes.patch('/logOut/:cookie', requestController.logOut);
 
 module.exports = routes;

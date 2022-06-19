@@ -95,6 +95,17 @@ class Data {
         return await response;
     }
 
+    checkIfUserExistsByName(username){
+        let userData = fs.readFileSync('userDB.json');
+        let userDataArray = JSON.parse(userData);
+        for(let i = 0; i < userDataArray.length; i++){
+            if(userDataArray[i].username === username){
+                return false;
+            }
+        }
+        return true;
+    }
+
     checkIfUserExists(email){
         let userData = fs.readFileSync('userDB.json');
         let userDataArray = JSON.parse(userData);
@@ -116,8 +127,6 @@ class Data {
     }
 
     deleteUser(username, password){
-        let string = ''
-        /**
         let userData = fs.readFileSync('userDB.json');
         let userDataArray = JSON.parse(userData);
         let tempArray = [];
@@ -128,7 +137,49 @@ class Data {
             }
         }
         userData = JSON.stringify(tempArray);
-        fs.writeFileSync('userDB.json', userData); **/
+        fs.writeFileSync('userDB.json', userData);
+    }
+
+    login(username, password, cookie){
+        let userData = fs.readFileSync('userDB.json');
+        let userDataArray = JSON.parse(userData);
+        for(let i = 0; i < userDataArray.length; i++){
+            if(userDataArray[i].username === username && userDataArray[i].password === password){
+                userDataArray[i].cookie = cookie;
+                userData = JSON.stringify(userDataArray);
+                fs.writeFileSync('userDB.json', userData);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    editUser(cookie, email, username, password){
+        let userData = fs.readFileSync('userDB.json');
+        let userDataArray = JSON.parse(userData);
+        for(let i = 0; i < userDataArray; i++){
+            if(userDataArray[i].cookie === cookie){
+                userDataArray[i].email = email;
+                userDataArray[i].username = username;
+                userDataArray[i].password = password;
+                userData = JSON.stringify(userDataArray);
+                fs.writeFileSync('userDB.json', userData);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    logOut(cookie){
+        let userData = fs.readFileSync('userDB.json');
+        let userDataArray = JSON.parse(userData);
+        for(let i = 0; i < userDataArray; i++){
+            if(userDataArray[i].cookie === cookie){
+                userDataArray[i].cookie = '';
+                return true;
+            }
+        }
+        return false;
     }
 }
 
