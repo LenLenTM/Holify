@@ -79,11 +79,13 @@ class RequestController {
         let xoj = false;
 
         if(email.includes('@') && username.length > 3 && password.length > 7) {
-            if (model.checkIfUserExists(email)) {
+            if (model.checkIfUserExists(email) && model.checkIfUserExistsByName(username)) {
                 model.register(cookie, email, username, password, xoj);
                 res.status(202).send('Registration successfull.');
-            } else {
-                res.status(602).send('This email-address is already registered.');
+            } else if (!model.checkIfUserExists(email)){
+                res.status(602).send('Email address already taken.');
+            } else if (!model.checkIfUserExistsByName(username)){
+                res.status(603).send('Name already taken.');
             }
         }
         else if(!email.includes('@')){res.status(617).send('Enter a valid email address.');}
