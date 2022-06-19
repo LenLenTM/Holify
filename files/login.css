@@ -66,6 +66,7 @@ button {
     border-style: hidden;
     font-size: medium;
     cursor: pointer;
+    border-radius: 15px
 }
 
 #termsParagraph {
@@ -73,9 +74,25 @@ button {
     margin-right: 10px;
 }
 
+input {
+    border-radius: 15px;
+}
+
+#myPopup {
+    visibility: hidden;
+    position: absolute;
+    border-radius: 15px;
+    border-style: dashed;
+    background: white;
+    bottom: 5px;
+    max-width: 500px;
+
+}
 
 
-/* -----------------------------------   Nav   --------------------------------- */
+
+
+                               /* -----------------------------------   Nav   --------------------------------- */
 
 nav {
      grid-area: n;
@@ -113,5 +130,4 @@ nav {
     width: 80px;
     margin-left: 15px;
     margin-top: 15px;
-
 }

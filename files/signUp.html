@@ -54,15 +54,9 @@
 
 
 
-            <p id = "termsParagraph">By creating an account you agree to our <a href="#" style="color:dodgerblue" onclick="popup()">Terms & Privacy</a>.</p>
-            <span class="popuptext" id="myPopup">Popup text...</span>
         </div>
-            <script>
-                function popup() {
-                    let popup = document.getElementById("myPopup");
-                    popup.classList.toggle("show");
-                }
-            </script>
+
+
             <div class="clearfix">
                 <button type="submit" class="signupbtn" onclick="validateForm()">Sign Up</button>
                 <button type="button" class="cancelbtn" onclick="location.href='login.html'">Cancel</button>
@@ -71,6 +65,18 @@
 
 
     </form>
+    <p id = "termsParagraph">By creating an account you agree to our <a href="#" style="color:dodgerblue" onmouseenter="popup()" onmouseleave="popdown()">Terms & Privacy</a>.</p>
+    <span class="popuptext" id="myPopup"><h2>Terms & Privacy:</h2><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></span>
+    <script>
+        function popup() {
+            document.getElementById("myPopup").style.visibility = "visible";
+            document.getElementById("myPopup").style.postition = "relative";
+        }
+        function popdown() {
+            document.getElementById("myPopup").style.visibility = "hidden";
+            document.getElementById("myPopup").style.postition = "absolute";
+        }
+    </script>
 </div>
 </body>
 </html>
