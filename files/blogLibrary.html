@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale= 1.0">
     <title>Holify - BLOG</title>
     <link rel="stylesheet" href="blogLibrary.css">
-    <link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet">
+    <!--<link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet"> -->
 </head>
 
 <body id="body">
@@ -25,7 +25,6 @@
 <nav>
     <div class="dropdown">
         <button class="dropbtn" id="africa" onclick="setSearchbar(id)">Africa</button>
-
 
     </div>
     <div class="dropdown">
@@ -54,32 +53,17 @@
     <div id="searchbarDIV">
         <label for=searchbar></label>
         <input type="text" id=searchbar placeholder="Search..">
-        <button type="button" id = searchButton>Go</button>
+        <button type="button" id = "searchButton" onclick="">Go</button>
     </div>
 
 
     <div id = "headlines">
-
     </div>
-    <script>blogPostConstructor()</script>
 </main>
 <script src="blogEditorController.js"></script>
 <script src="blogLibrary.js"></script>
-
+<script>blogPostConstructor()</script>
 </body>
-<p><button class="collapsible" onclick="blogPostConstructor()"></button> <p id="libraryTitle"></p> <p id= "tags">></p>
-<div class = "content">
-    <div id="authorBlock">
-        <div>by&nbsp;</div>
-        <div id="libraryUser"></div>
-    </div>
-    <br>
-    <div id="timeBlock">
-        <div>Posted&nbsp;</div>
-        <div id="libraryTime"></div>
-        <div id="blogBody">
-            <div id="libraryContent"></div>
-        </div>
-    </div>
-</div></p>
+
+
 </html>

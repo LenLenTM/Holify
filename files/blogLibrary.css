@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Avenir';
+    src: url('resources/fonts/Avenir.woff') format('woff');
+}
+
 * {font-family: "Avenir", sans-serif}
 
 body { margin: 0}
@@ -73,6 +78,10 @@ nav{
 #searchbarDIV {
     justify-content: center;
     text-align: center;
+    }
+#searchbar {
+    border-radius: 10px;
+    margin-bottom: 5px;
 }
 #searchButton {
     margin-top: 1vw;
@@ -81,58 +90,34 @@ nav{
     border-style: hidden;
     font-size: medium;
     cursor: pointer;
+    border-radius: 10px;
 }
 #headlines {
     display: grid;
     margin-right: 10vw;
     margin-left: 10vw;
 }
-
-.collapsible {
-    margin-bottom: 5px;
-    margin-top: 5px;
-    background-color: #9ae7cd;
-    border-radius: 10px;
-    border-style: hidden;
-    font-size: medium;
-    cursor: pointer;
-    display: flex;
+#headlines button {
+    border-radius: 15px;
+    font-size: x-large;
+    background: #9ae7cd;
 }
-.content {
-    padding: 0 18px;
-
-    overflow: hidden;
-    background-color: lightgrey;
-    border-radius: 10px;
-    transition: all 0.3s;
+#tags {
+    font-size: initial;
 
 }
-#libraryTitle {
-    font-size: 50px;
-    margin-bottom: 5px;
-    margin-top: 5px;
- }
-#blogBody {
-    margin-left: 10vw;
-    margin-right: 10vw;
+
+.contentBox {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 15px;
+    padding: 10px;
 }
-
-#authorBlock, #timeBlock  {
-    display: flex;
-    font-style: italic ;
-    font-size: 1vw;
-}
-
-
-
-#libraryContent {
-    padding-top: 1vw;
-}
-
 address {
     bottom: 0;
     font-size: 0.75vw;
 }
+
 
 @media (max-width: 800px) {
     #titleBar {
@@ -143,7 +128,7 @@ address {
         align-items: center;
     }
 
-    #title,#user {
+    #title {
         max-width: 50vw
     }
 
@@ -180,12 +165,7 @@ address {
         align-self: center;
     }
 
-    #user {
-        height: 20vw;
-        width: 18vw;
-        align-self: center;
-        margin-right: 3vw;
-    }
+
 
     #option {
         align-self: center;
@@ -201,17 +181,6 @@ address {
         font-size: 5vw;
         border: none;
         cursor: pointer;
-    }
-
-    #authorBlock, #timeBlock  {
-        font-size: 3vw;
-    }
-
-    #libraryTitle {
-        font-size: 8vw;
-    }
-    #libraryTime, #libraryUser {
-        font-size: 3vw;
     }
 
     address {
