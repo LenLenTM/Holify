@@ -2,6 +2,7 @@ let loginStatus = false;
 let pane;
 
 function initLogin(){
+    document.addEventListener('keypress', activateKey)
     pane = document.createElement('div');
     pane.setAttribute('id', 'pane');
     checkCookie();
@@ -15,15 +16,35 @@ function removePaneChildren(){
         }
 }
 
-function checkCookie(){
+function activateKey(event){
+    let key = window.event.keyCode;
+    event.preventDefault();
+    if(key === 13){
+        if(document.getElementById('Login')){
+            login();
+        }
+        else if(document.getElementById('Register')){
+            register();
+        }
+        else if(document.getElementById('Edit')){
+            editUser();
+        }
+    }
+}
+
+function calculateCookieID(){
     let value = '';
-    let cookie = '12'; //document.cookie.toString();
+    let cookie = document.cookie.toString();
     let cookieArray = cookie.split('');
     for(let i = 0; i < cookie.length; i++){
         let num = cookieArray[i].charCodeAt(0).toString();
         value = value + num;
     }
-    let url = 'http://localhost:3456/api/username/12' //+ value;
+    return value;
+}
+
+function checkCookie(){
+    let url = 'http://localhost:3456/api/username/12' //+ calculateCookieID();
     fetch(url, {
         methode: 'GET'
     }).then(function (response){
@@ -61,7 +82,7 @@ function setUp(){
                 let inputLogOut = document.createElement('button');
                 inputLogOut.setAttribute('id', 'inputLogOut');
                 inputLogOut.innerHTML = 'LogOut';
-                inputLogOut.setAttribute('onclick', 'logOut()');
+                inputLogOut.setAttribute('onclick', 'logout()');
                 let inputEdit = document.createElement('button');
                 inputEdit.setAttribute('id', 'inputEdit');
                 inputEdit.innerHTML = 'Edit Profile';
@@ -82,14 +103,7 @@ function setUp(){
 }
 
 function logOut(){
-    let value = '';
-    let cookie = '12'//document.cookie.toString();
-    let cookieArray = cookie.split('');
-    for(let i = 0; i < cookie.length; i++){
-        let num = cookieArray[i].charCodeAt(0).toString();
-        value = value + num;
-    }
-    let url = 'http://localhost:3456/api/logOut/12' //+ value;
+    let url = 'http://localhost:3456/api/logOut/12' //+ calculateCookieID();
     fetch(url, {
         method: 'PATCH'
     }).then(function (response){
@@ -115,8 +129,10 @@ function openLoginForm(){
 
     let loginButton = document.createElement('button');
     loginButton.innerHTML = 'Login';
+    loginButton.setAttribute('id', 'Login')
     loginButton.setAttribute('onclick', 'login()');
     let registerButton = document.createElement('button');
+    registerButton.setAttribute('id', 'Register');
     registerButton.innerHTML = 'Create new profile';
     registerButton.setAttribute('onclick', 'setupRegister()');
 
@@ -125,30 +141,38 @@ function openLoginForm(){
 }
 
 function login(){
-    let username = document.getElementById('usernameInput').value;
-    let password = document.getElementById('passwordInput').value;
+    if(document.getElementById('usernameInput').value.length > 3 && document.getElementById('passwordInput').value.length > 7) {
+        let username = document.getElementById('usernameInput').value;
+        let password = document.getElementById('passwordInput').value;
 
-    let value = '';
-    let cookie = document.cookie.toString();
-    let cookieArray = cookie.split('');
-    for(let i = 0; i < cookie.length; i++){
-        let num = cookieArray[i].charCodeAt(0).toString();
-        value = value + num;
+        let url = 'http://localhost:3456/api/login/' + username + '/' + password + '/12' //+ calculateCookieID();
+        fetch(url, {
+            methode: 'GET'
+        }).then(function (response) {
+            response.text()
+                .then(function (text) {
+                    let answer = text;
+                    console.log(answer);
+                    if (text === 'You are logged in now.') {
+                        loginStatus = true;
+                        removePaneChildren();
+                        location.reload();
+                    } else if (text === 'Wrong Password.') {
+                        document.getElementById('passwordInput').value = '';
+                        document.getElementById('passwordInput').setAttribute('placehoder', 'Wrong Password.');
+                    } else if (text === `Username doesn't exist.`) {
+                        document.getElementById('usernameInput').value = '';
+                        document.getElementById('usernameInput').setAttribute('placeholder', `Username doesn't exist.`);
+                    }
+                })
+        })
     }
-
-    let url = 'http://localhost:3456/api/login/' + username + '/' + password + '/12' //+ value;
-    fetch(url, {
-        methode: 'GET'
-    }).then(function (response){
-        response.text()
-            .then(function (text){
-                let answer = text;
-                console.log(answer);
-                if(text === 'You are logged in now.'){
-                    loginStatus = true;
-                }
-                removePaneChildren();
-                location.reload()})});
+    else if(document.getElementById('usernameInput').value.length < 4){
+        document.getElementById('usernameInput').value = 'Username too short.';
+    }
+    else if(document.getElementById('passwordInput').value.length < 8){
+        document.getElementById('passwordInput').value = 'Password too short.'
+    }
 }
 
 function setupRegister(){
@@ -173,18 +197,13 @@ function setupRegister(){
 }
 
 function register(){
-
-    let value = '';
-    let cookie = document.cookie.toString();
-    let cookieArray = cookie.split('');
-    for(let i = 0; i < cookie.length; i++){
-        let num = cookieArray[i].charCodeAt(0).toString();
-        value = value + num;
-    }
     let email = document.getElementById('emailInput').value;
+    if(email.length === 0){email = ' ';}
     let username = document.getElementById('usernameInput').value;
+    if(username.length === 0){username = ' ';}
     let password = document.getElementById('passwordInput').value;
-    let url = 'http://localhost:3456/api/register/12/' + email + '/' + username + '/' + password;
+    if(password.length === 0){password = ' ';}
+    let url = 'http://localhost:3456/api/register/12/' + email + '/' + username + '/' + password; //calculateCookieID();
 
     fetch(url, {
         method: 'POST'
@@ -226,6 +245,7 @@ function goEdit(){
     passwordInput.setAttribute('placeholder', 'Password');
     passwordInput.setAttribute('id', 'passwordInput');
     let editButton = document.createElement('button');
+    editButton.setAttribute('id', 'Edit');
     editButton.innerHTML = 'Edit';
     editButton.setAttribute('onclick', 'editUser()');
 
@@ -233,18 +253,13 @@ function goEdit(){
 }
 
 function editUser(){
-
-    let value = '';
-    let cookie = document.cookie.toString();
-    let cookieArray = cookie.split('');
-    for(let i = 0; i < cookie.length; i++){
-        let num = cookieArray[i].charCodeAt(0).toString();
-        value = value + num;
-    }
     let email = document.getElementById('emailInput').value;
+    if(email.length === 0){email = ' ';}
     let username = document.getElementById('usernameInput').value;
+    if(username.length === 0){username = ' ';}
     let password = document.getElementById('passwordInput').value;
-    let url = 'http://localhost:3456/api/editUser/12/' + email + '/' + username + '/' + password;
+    if(password.length === 0){password = ' ';}
+    let url = 'http://localhost:3456/api/editUser/12/' + email + '/' + username + '/' + password; //calculateCookieID();
 
     fetch(url, {
         method: 'PUT'
@@ -282,14 +297,7 @@ function deleteUser(){
 }
 
 function deleteUserForSure(){
-    let value = '';
-    let cookie = document.cookie.toString();
-    let cookieArray = cookie.split('');
-    for(let i = 0; i < cookie.length; i++){
-        let num = cookieArray[i].charCodeAt(0).toString();
-        value = value + num;
-    }
-    let url = 'http://localhost:3456/api/deleteUser/12'
+    let url = 'http://localhost:3456/api/deleteUser/12' //+ calculateCookieID();
     fetch(url, {
         method: 'DELETE'
     }).then(function (response){
