@@ -456,7 +456,7 @@ function searchFiledActivated(event) {
                     document.getElementById('searchText').value = "";
                 } else {
                     city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
-                    if(lightWeight === true){
+                    if(light === true){
                         window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country + '&light=true';
                     }
                     else {

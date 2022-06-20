@@ -64,30 +64,54 @@ function checkCookie(){
 
 function collectData() {
 
-    return new Blog(
-        document.getElementById('title').value,
-        tinyMCE.activeEditor.getContent(),
-        document.getElementById('usernameNav').textContent
-    );
+    if(document.getElementById('title').value.length > 0) {
+        let blog = new Blog(
+            document.getElementById('title').value,
+            //document.getElementById('blogContent').value,
+            tinyMCE.activeEditor.getContent(),
+            document.getElementById('usernameNav').textContent
+        );
+        console.log(tinyMCE.activeEditor.getContent());
+        console.log(tinyMCE.activeEditor.getContent({format: 'tetx'}));
+
+        let blogJson = blogToJSON(blog);
+        saveJSON(blogJson);
+    }
+    else{
+        document.getElementById('title').setAttribute('placeholder', 'You need a title');
+    }
 }
 
 function blogToJSON(string) {
     let json = JSON.stringify(string)
-    console.log(json);
     return json;
 
 
 }
 
-function saveJSON (JSON) {
-    fetch('http://localhost:3456/api/newPost', {
+async function saveJSON (blogEntry) {
+    console.log(blogEntry);
+
+    let data = new FormData();
+    data.append('json', blogEntry);
+    let response = fetch('http://localhost:3456/api/newPost', {
         method: 'POST',
-        contentType: 'application/json',
-        body: JSON
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: blogEntry
     }).then(function(res){res.text()
         .then(function (text){
             console.log(text);
+            if(light === true){
+                location.href = "blogLibrary.html?light=true";
+            }
+            else{
+                location.href = "blogLibrary.html";
+            }
         })})
+    let answer = await response;
+    console.log(answer);
 }
 
 function jsonToBlog (json) {

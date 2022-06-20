@@ -48,12 +48,8 @@ class RequestController {
     }
 
     newPost(req, res){
-        //let post = req.body();
-        let body;
-        req.on('data', function (data){
-            body = data;
-        });
-        res.send(model.newPost(body))
+        console.log(req.body);
+        res.send(model.newPost(req.body));
     }
 
     deletePost(req, res){

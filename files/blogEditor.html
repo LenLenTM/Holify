@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale= 1.0">
     <title>Holify - BLOG</title>
     <link rel="stylesheet" href="blogEditor.css">
-    <!--<link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet"> -->
+    <script src="blogEditorController.js"></script>
 </head>
 
 <body onload="initEditorPage()">
@@ -24,21 +24,17 @@
 
 
 <main>
-    <form autocomplete="off" id="form">
+    <div autocomplete="off" id="form">
         <script src='resources/tinymce/tinymce.min.js'></script>
-
         <script>tinymce.init({
             selector: "#blogContent"
         });
         </script>
         <textarea name="title" id="title" cols="30" rows="2" placeholder= "Title for your adventure"></textarea>
         <textarea name="blog" id="blogContent" ></textarea>
-
-        <input type="submit" value="Submit" id="submitButton" onclick="saveJSON(blogToJSON(collectData())); //location.href='blogLibrary.html'">
-    </form>
+        <button id="submitButton" onclick="collectData()">Submit</button>
+    </div>
 </main>
-
-<script src="blogEditorController.js"></script>
 
 </body>
 </html>

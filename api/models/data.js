@@ -116,7 +116,7 @@ class Data {
         let userData = fs.readFileSync('userDB.json');
         let userDataArray = JSON.parse(userData);
         for(let i = 0; i < userDataArray.length; i++){
-            if(userDataArray[i].username === username){
+            if(userDataArray[i].username.toUpperCase() === username.toUpperCase()){
                 return false;
             }
         }
@@ -233,11 +233,16 @@ class Data {
         blogData = JSON.stringify(blogDataArray);
         fs.writeFileSync("blogPost.json", blogData);
 
+        let content = json.content;
+        let content1 = content.substring(0, content.indexOf('<img'));
+        let content2 = content.substring(content.indexOf('">'), content.indexOf('"'));
+
+        content = content1 + content2;
+        console.log(content);
+
         let blogDataLight = fs.readFileSync('blogPostLight.json');
         let blogDataArrayLight = JSON.parse(blogDataLight);
         blogDataArrayLight.push(json);
-        let index = (blogDataArrayLight.length - 1);
-        blogDataArrayLight[index].
         blogDataLight = JSON.stringify(blogDataArrayLight);
         fs.writeFileSync("blogPostLight.json", blogDataLight);
 
