@@ -136,6 +136,8 @@ class RequestController {
     username(req, res){
         let cookie = req.params.cookie;
         res.send(model.username(cookie));
+
+        let post = req.body();
     }
 
     getUser(req, res){
