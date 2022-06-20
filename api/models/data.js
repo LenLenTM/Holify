@@ -222,12 +222,12 @@ class Data {
         return "Blog added";
     }
 
-    deletePost(time){
+    deletePost(title){
         let blogData = fs.readFileSync('blogPost.json');
         let blogDataArray = JSON.parse(blogData);
         let temp = [];
         for(let i = 0; i < blogDataArray.length; i++){
-            if(!blogDataArray[i].time === time){
+            if(!(blogDataArray[i].title === title)){
                 temp.push(blogDataArray[i]);
             }
         }
@@ -238,7 +238,7 @@ class Data {
         let blogDataArrayLight = JSON.parse(blogDataLight);
         let tempLight = [];
         for(let i = 0; i < blogDataArrayLight.length; i++){
-            if(!blogDataArrayLight[i].time === time){
+            if(!(blogDataArrayLight[i].title === title)){
                 tempLight.push(blogDataArrayLight[i]);
             }
         }

@@ -119,6 +119,12 @@ button[id$='delete']{
     top: 2%;
     right: 1%;
 }
+#openEditor{
+    position: absolute;
+    right: 10px;
+    top: 120px;
+    height: 30px;
+}
 
 /*--------------------------*/
 

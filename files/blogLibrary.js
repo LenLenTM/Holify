@@ -12,7 +12,6 @@ function initLibrary(){
         let parameter = new URLSearchParams(paraString);
         if (parameter.get('light')){light = true;}
         checkCookie();
-        getLibrary();
 }
 
 function userLogin(){
@@ -21,6 +20,14 @@ function userLogin(){
         }
         else{
                 location.href = "login.html";
+        }
+}
+function openEditor(){
+        if(light === true){
+                location.href = "blogEditor.html?light=true";
+        }
+        else{
+                location.href = "blogEditor.html";
         }
 }
 
@@ -45,7 +52,13 @@ function checkCookie(){
                                     username.setAttribute('id', 'usernameNav');
                                     username.innerText = name.toUpperCase();
                                     document.getElementById('userIconContainer').append(username);
+                                    let editor = document.createElement('button');
+                                    editor.innerHTML = 'New Post';
+                                    editor.setAttribute('id', 'openEditor');
+                                    editor.setAttribute('onclick', 'openEditor()');
+                                    document.getElementById('main').append(editor);
                             }
+                            getLibrary();
                     })})
 }
 
