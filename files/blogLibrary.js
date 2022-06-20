@@ -1,15 +1,35 @@
-let json = localStorage.getItem('blogPost');
-console.log(json);
-let blogPost = jsonToBlog(json);
+/**let json = localStorage.getItem('blogPost');
+ let blogPost = jsonToBlog(json);
+ let date = blogPost.time; **/
 
-let date = blogPost.time;
+let blogPost;
 
+function initLibrary(){
+        getLibrary();
+}
 
-function blogPostConstructor() {
+function getLibrary(){
+        let url = 'http://localhost:3456/api/getLibrary'
+        fetch(url, {
+                method: 'GET',
+                contentType: 'application/json'
+        }).then(response => response.json())
+            .then(data => {
+                    console.log(blogPost);
+                    for(let i = 0; i < data.length; i++){
+                            blogPostConstructor(data[i]);
+                    }
+            })
+}
+
+function blogPostConstructor(blogPost) {
+
         let button = document.createElement("button");
         button.setAttribute("class", blogPost.title);
         button.setAttribute("value", "YES");
-        button.setAttribute("id", blogPost.title + "button")
+        button.setAttribute("id", blogPost.title);
+        button.setAttribute("onClick", "collapse(this.id)");
+
 
         let titleNode = document.createTextNode(blogPost.title);
         button.append(titleNode);
@@ -42,16 +62,16 @@ function blogPostConstructor() {
 
         let contentBox = document.createElement("div");
         contentBox.setAttribute("class", "contentBox");
-        contentBox.setAttribute("id", blogPost.title);
+        contentBox.setAttribute("id", blogPost.title + "collapse");
         contentBox.style.visibility = "hidden";
-        contentBox.style.position = "absolute"
+        contentBox.style.position = "absolute";
 
         let textDiv = document.createElement("div");
         textDiv.setAttribute("id", "content");
 
         textDiv.innerHTML = blogPost.content;
 
-        button.addEventListener("click", collapse );
+        //button.addEventListener("click",  collapse(blogPost.title));
 
         let editButton = document.createElement("button");
         editButton.setAttribute("id", "editButton");
@@ -67,15 +87,22 @@ function blogPostConstructor() {
 function setSearchbar (str) {
         return document.getElementById('searchbar').value = str;
 }
-function collapse() {
-        let button = document.getElementById(blogPost.title + "button")
+function collapse(id) {
+
+
+        let button = document.getElementById(id);
         if(button.value === "YES") {
-                document.getElementById(blogPost.title).style.visibility = "visible";
-                document.getElementById(blogPost.title).style.position = "relative";
+                document.getElementById(id + "collapse").style.visibility = "visible";
+                document.getElementById(id + "collapse").style.position = "relative";
                 button.value = "NO";
+
         }else if (button.value === "NO") {
-                document.getElementById(blogPost.title).style.visibility = "hidden";
-                document.getElementById(blogPost.title).style.position = "absolute";
+                document.getElementById(id + "collapse").style.visibility = "hidden";
+                document.getElementById(id + "collapse").style.position = "absolute";
                 button.value = "YES"
         }
+
+
+
+
 }
