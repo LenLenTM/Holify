@@ -1,12 +1,11 @@
-let tagArray = [];
+let light = false;
 
 
 class Blog {
-    constructor(title, content, tags, user) {
+    constructor(title, content, user) {
 
         this.title = title;
         this.content = content;
-        this.tags = tags;
         let date = new Date();
         this.time = date.toLocaleString("at-DE");
         this.user = user;
@@ -14,18 +13,38 @@ class Blog {
 }
 
 function initEditorPage(){
+    let paraString = window.location.search;
+    let parameter = new URLSearchParams(paraString);
+    if (parameter.get('light')){light = true;}
     checkCookie();
+}
+
+function userLogin(){
+    if(light === true){
+        location.href = "login.html?light=true";
+    }
+    else{
+        location.href = "login.html";
+    }
+}
+function blogLibrary(){
+    if(light === true){
+        location.href = "blogLibrary.html?light=true";
+    }
+    else{
+        location.href = "blogLibrary.html";
+    }
 }
 
 function checkCookie(){
     let value = '';
-    let cookie = 'connect.sid=s%3Av6whpb6LtXy7eHU2VhfEhyi6Pw1uPr_Y.0PIFoQ4on8TlM2pzAaA8gpaloqxSPrTNakZ7j3eI9Rs'; //document.cookie.toString();
+    let cookie = document.cookie.toString();
     let cookieArray = cookie.split('');
     for(let i = 0; i < cookie.length; i++){
         let num = cookieArray[i].charCodeAt(0).toString();
         value = value + num;
     }
-    let url = 'http://localhost:3456/api/username/' + value;
+    let url = 'http://localhost:3456/api/username/12' //+ value;
     fetch(url, {
         methode: 'GET'
     }).then(function (response){
@@ -34,26 +53,21 @@ function checkCookie(){
                 let name = text;
 
                 if(name !== 'NO'){
-                    document.getElementById('user').src = 'resources/UserIcon_logged.png';
+                    document.getElementById('user2').src = 'resources/UserIcon_logged.png';
                     let username = document.createElement('p');
-                    username.setAttribute('id', 'username');
+                    username.setAttribute('id', 'usernameNav');
                     username.innerText = name.toUpperCase();
-                    document.getElementById('nav').append(username);
+                    document.getElementById('userIconContainer').append(username);
                 }
             })})
 }
 
 function collectData() {
-    for(let i = 0; i < document.getElementsByClassName('tag').length; i++) {
-        tagArray.push(document.getElementsByClassName('tag').item(i).firstChild.nodeValue);
-        console.log(tagArray);
-    }
 
     return new Blog(
         document.getElementById('title').value,
         tinyMCE.activeEditor.getContent(),
-        tagArray,
-        document.getElementById('user').value
+        document.getElementById('usernameNav').textContent
     );
 }
 
@@ -66,7 +80,6 @@ function blogToJSON(string) {
 }
 
 function saveJSON (JSON) {
-    localStorage.setItem('blogPost', JSON);
     fetch('http://localhost:3456/api/newPost', {
         method: 'POST',
         contentType: 'application/json',
@@ -80,4 +93,3 @@ function saveJSON (JSON) {
 function jsonToBlog (json) {
     return JSON.parse(json);
 }
-

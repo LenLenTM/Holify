@@ -2,36 +2,42 @@
     font-family: 'Avenir';
     src: url('resources/fonts/Avenir.woff') format('woff');
 }
-
 * {font-family: "Avenir", sans-serif}
 
-body { margin: 0}
+body {
+    margin: 0;
+    background-color: #9ae7cd;
+}
 
-#header {
+nav {
     position: fixed;
     width: 100%;
-    height: 100px;
+    height: 90px;
     background-color: white;
     font-family: Avenir;
-    font-size: 1.0em;
+    font-size: 1.5em;
     color: grey;
+    z-index: 1;
 }
+
 #navText {
     position: absolute;
-    top: 25px;
+    top: 9px;
     left: 90px;
-    margin: 0;
 }
+
 #logo {
     width: 70px;
     margin-left: 10px;
     margin-top: 10px;
 }
-#user2 {
-    height: 70px;
+#userIconContainer{
     position: absolute;
     top: 12px;
     right: 80px;
+}
+#user {
+    height: 70px;
 }
 #options {
     height: 56px;
@@ -39,192 +45,79 @@ body { margin: 0}
     right: 10px;
     top: 18px;
 }
-#username{
-    position: absolute;
-    transform: translate(50%, 0%);
-    top: 6.5%;
-    right: 26.3%;
+#usernameNav{
+    font-family: Avenir;
+    color: grey;
+    position: relative;
+    top: -30px;
+    left: 5%;
     font-size: small;
 }
 
-#image {
-    width: 80px;
-    margin-left: 15px;
-    margin-top: 15px;
-
-}
-nav{
+#bar {
     position: absolute;
-    top: 100px;
-    text-align: center;
+    height: 10px;
+    width: 100%;
+    top: 90px;
     background-color: #9ae7cd;
 }
-.dropbtn {
-    background-color: #9ae7cd;
-    color: white;
-    padding: 1vw;
-    font-size: 1.5vw;
-    border: none;
-    cursor: pointer;
+
+/*-------------------------------*/
+
+#form{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 90px;
+    width: 100%;
 }
-.dropdown {
+#title{
+    margin: 10px;
     position: relative;
-    display: inline-block;
-    align-items: center;
-    cursor: pointer;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: lightgray;
-    min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 100;
-    font-size: 1.5vw;
-}
-
-.dropdown-content a {
-
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    z-index: 100;
-
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: lightgray;}
-main {
-    justify-content: center;
+    alignment: center;
+    width: 50%;
+    height: 30px;
+    left: 22%;
+    resize: none;
+    border: none;
+    border-radius: 20px;
     text-align: center;
+    line-height: 30px;
+}
+.tox{
+    width: 100%;
+}
+#submitButton{
+    position: absolute;
+    width: 50%;
+    border: none;
+    border-radius: 20px;
+    left: 25%;
+    height: 30px;
+    color: grey;
+    background-color: white;
+    top: 105%;
 }
 
-label {
-    margin-top: 1vw;
-    display: flex;
-    justify-content: center;
-}
+/*----------------------------------------*/
 
-#titleLabel {align-self: center}
-
-#title, #user {
-    width: 50vw
-}
-#secondRow {
-    display: flex;
-}
-address {
-    bottom: 0;
-    font-size: 0.75vw;
-}
-#submitButton, #add-button {
-    margin-top: 1vw;
-    background-color: #9ae7cd;
-    color: white;
-    border-style: hidden;
-    font-size: medium;
-    cursor: pointer;
+@media only screen and (min-width: 500px) {
+    #add-button{
+        width: 20%;
+        left: 60%;
+        height: 30px;
+        top: 82%;
     }
-
-#submitButton {
-    height: 3vw ;
-    width: 10vw;
-}
-
-.tag {
-    color: white;
-    background-color: #9ae7cd;
-    border-width: 0.1vw;
-    border-style: groove;
-    border-color: #9ae7cd;
-    border-radius: 0.5vw;
-    margin-right: 1vw;
-}
-.remove-tag {
-    color: white;
-    margin-left: 1vw;
-    cursor: pointer;
-}
-
-@media (max-width: 800px) {
-    #titleBar {
-        flex-direction: column;
-        align-self: center;
-        justify-content: center;
-        text-align: center;
-        align-items: center;
+    #input{
+        width: 30%;
+        left: 25%;
     }
-
-
-    a {
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch;
+    #submitButton{
+        width: 30%;
+        left: 35%;
     }
-
-    #order2 {
-        flex-grow: 1;
-        align-self: center;
+    #title{
+        width: 36%;
+        left: 32%;
     }
-
-    #option {
-        align-self: center;
-        height: 18vw;
-        width: 18vw;
-        margin-right: 1vw;
-    }
-
-    .dropbtn {
-        background-color: #9ae7cd;
-        color: white;
-        padding: 1vw;
-        font-size: 5vw;
-        border: none;
-        cursor: pointer;
-
-
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: lightgray;
-        min-width: 160px;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        font-size: 4vw;
-    }
-
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
-
-
-
-    address {
-        bottom: 0;
-        font-size: 2vw;
-    }
-
-    #submitButton {
-        margin-top: 2vw;
-        background-color: #9ae7cd;
-        color: white;
-        height: 10vw;
-        width: 20vw;
-        border-style: hidden;
-        font-size: medium;
-        cursor: pointer;
-    }
-
-
-
-
 }

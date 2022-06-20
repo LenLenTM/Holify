@@ -220,7 +220,7 @@ class Data {
         let blogData = fs.readFileSync('blogPost.json');
         let blogDataArray = JSON.parse(blogData);
         blogDataArray.push(json);
-        blogData = JSON.string(blogDataArray);
+        blogData = JSON.stringify(blogDataArray);
         fs.writeFileSync("blogPost.json", blogData);
 
         let blogDataLight = fs.readFileSync('blogPostLight.json');
@@ -228,18 +228,18 @@ class Data {
         blogDataArrayLight.push(json);
         let index = (blogDataArrayLight.length - 1);
         blogDataArrayLight[index].
-        blogDataLight = JSON.string(blogDataArrayLight);
+        blogDataLight = JSON.stringify(blogDataArrayLight);
         fs.writeFileSync("blogPostLight.json", blogDataLight);
 
         return "Blog added";
     }
 
-    deletePost(time){
+    deletePost(title){
         let blogData = fs.readFileSync('blogPost.json');
         let blogDataArray = JSON.parse(blogData);
         let temp = [];
         for(let i = 0; i < blogDataArray.length; i++){
-            if(!blogDataArray[i].time === time){
+            if(!(blogDataArray[i].title === title)){
                 temp.push(blogDataArray[i]);
             }
         }
@@ -250,7 +250,7 @@ class Data {
         let blogDataArrayLight = JSON.parse(blogDataLight);
         let tempLight = [];
         for(let i = 0; i < blogDataArrayLight.length; i++){
-            if(!blogDataArrayLight[i].time === time){
+            if(!(blogDataArrayLight[i].title === title)){
                 tempLight.push(blogDataArrayLight[i]);
             }
         }
