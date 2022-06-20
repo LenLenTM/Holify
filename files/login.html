@@ -4,24 +4,61 @@
     <meta charset="UTF-8">
     <title>Holify - Login</title>
     <link rel="stylesheet" href="login.css">
-    <script src="loginStatus.js"></script>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=0">
-    <!--<link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet"> -->
-</head>
-<body onload="initLogin()">
-    <nav id="nav">
-        <img src="resources/Options.png" id="options" alt="blog" onclick="openBlog()">
-        <a href="index.html">
-            <img src="resources/Holify.png" alt="Holify Logo" id="logo">
-        </a>
-        <p id="navText">HOLIFY</p>
-        <div id="userIconContainer">
-            <img src="resources/UserIcon.png" id="user" alt="login">
-        </div>
-    </nav>
-    <div id="container">
+    <link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet">
+    <link rel="icon" type="image/png" href="resources/Holify.png">
 
-    </div>
+
+</head>
+<body>
+<nav id="nav">
+    <a href="mobileMain.html">
+        <div> <img src="resources/Holify.png" alt="Holify Logo" id="logo"> </div>
+    </a>
+    <h1 id="navText">HOLIFY</h1>
+    <a href="login.html">
+        <img src="resources/UserIcon.png" id="user" alt="user icon">
+    </a>
+    <a href="blogEditor.html">
+        <img src="resources/Options.png" id="options" alt="options">
+    </a>
+</nav>
+<div class = formContainer>
+    <form action="" method="post">
+        <div class="imgcontainer" id = "imagecontainer">
+            <img src="resources/Holify.png" alt="Holify logo" id = "image2">
+        </div>
+
+        <div class="container">
+            <div class = "username">
+                <label >Username</label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+            </div>
+
+            <div class = "password">
+                <label> Password</label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+            </div>
+
+            <div class = "checkbox">
+                <button type="submit">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+
+            <div class = "signUpBotton">
+                <label>No Account?</label>
+                <button type="button" onclick="location.href='signUp.html'">Register</button>
+            </div>
+
+            <div class = "forgotPassButton">
+                <label>Forgot Password?</label>
+                <button type="button" onclick="location.href='resetPassword.html'">Reset Password</button>
+            </div>
+
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

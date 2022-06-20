@@ -6,35 +6,103 @@
     <meta name="viewport" content="width=device-width, initial-scale= 1.0">
     <title>Holify - BLOG</title>
     <link rel="stylesheet" href="blogEditor.css">
-    <script src="blogEditorController.js"></script>
+    <link href="http://fonts.cdnfonts.com/css/avenir" rel="stylesheet">
+    <link rel="icon" type="image/png" href="resources/Holify.png">
 </head>
 
-<body onload="initEditorPage()">
-<header id = header>
-    <a href="index.html">
-        <div> <img src="resources/Holify.png" alt="Holify Logo" id="logo"> </div>
+<body>
+<header>
+    <a id = "order1" href = "mobileMain.html">
+        <img src="resources/Holify.png" alt="Holify Logo" id="logo">
     </a>
-    <p id="navText">HOLIFY</p>
-    <div id="userIconContainer">
-        <img src="resources/UserIcon.png" id="user2" alt="login" onclick="userLogin()">
+
+    <a id = "order2">
+        <h1> HOLIFY </h1>
+    </a>
+
+    <a id = "order3" href = "login.html">
+        <img src="resources/UserIcon.png" alt="User Icon" id="userIcon">
+    </a>
+
+    <a id = "order4" href = "blogEditor.html">
+        <img src="resources/Options.png" alt="Option Button" id="option">
+    </a>
+
+</header>
+
+<nav>
+    <div class="dropdown">
+        <button class="dropbtn" id="africa">Africa</button>
+
     </div>
-    <img src="resources/Options.png" id="options" alt="blog" onclick="blogLibrary()">
+    <div class="dropdown">
+        <button class="dropbtn" id="asia" >Asia</button>
+
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="europe" >Europe </button>
+
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="oceania" >Oceania</button>
+
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="northamerica" >North America</button>
+
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" id="southamerica" >South America</button>
+
+    </div>
 </nav>
 
-
-
 <main>
-    <div autocomplete="off" id="form">
+    <form autocomplete="off">
         <script src='resources/tinymce/tinymce.min.js'></script>
+
         <script>tinymce.init({
             selector: "#blogContent"
         });
         </script>
-        <textarea name="title" id="title" cols="30" rows="2" placeholder= "Title for your adventure"></textarea>
-        <textarea name="blog" id="blogContent" ></textarea>
-        <button id="submitButton" onclick="collectData()">Submit</button>
-    </div>
+
+        <label for="user"> Here's space to write your name!</label>
+        <textarea name="user" id="user" cols="30" rows="2" placeholder= "Write your name"></textarea>
+
+        <label for="title"> What is the title of your adventure? </label>
+        <textarea name="title" id="title" cols="30" rows="2" placeholder= "Write your title"></textarea>
+
+        <label for="blogContent">Tell us your travel experiences!</label><textarea name="blog" id="blogContent" ></textarea>
+
+        <h2>Tags</h2>
+        <p>Press comma or click the add button to create a tag.</p>
+        <div class="input-container">
+            <label for="input"></label><input type="text" id="input" placeholder="Enter tags . . .">
+            <button id="add-button">Add</button>
+
+        </div>
+        <div class="tag-container" id = "tag-container">
+            <br>
+        </div>
+
+        <input type="submit" value="Submit" id="submitButton" onclick="tester = new Blog(document.getElementById('title').value,tinyMCE.activeEditor.getContent(),document.querySelectorAll('[id=tagID]'), document.getElementById('user').value);  testJSON = blogToJSON(tester); saveJSON(testJSON);console.log(document.querySelectorAll('[id=tagID]'));location.href='blogLibrary.html'">
+    </form>
 </main>
 
+<script src="tag.js"></script>
+<script src="blogEditorController.js"></script>
+
+
+
+<address>
+    Written by <a href="mailto:nikolaus.kapfer-rupp@stud.fh-campuswien.ac.at">Nikolaus Kapfer-Rupp</a><br>
+    Visit us at:<br>
+    wwww.holify.com<br>
+    Favoritenstraße 226, 1100 Wien
+    <br>
+    Austria
+</address>
+
 </body>
+
 </html>

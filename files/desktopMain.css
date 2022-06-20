@@ -31,6 +31,7 @@ nav {
     position: absolute;
     top: -10px;
     left: 120px;
+    font-weight: lighter;
 }
 #logo {
     width: 80px;
@@ -60,25 +61,22 @@ nav {
 main {
     grid-area: m;
     height: 100%;
-    width: 70%;
-    margin-right: 15%;
-    margin-left: 15%;
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
 
 }
 #worldMap {
     display: flex;
     width: 100%;
-    height: 1000px;
+    height: 1100px;
     overflow: hidden;
     align-self: center;
-}
-
-#buttons {
-    height: 100%;
 
 }
 
-/* -----------------------------------   Main   --------------------------------- */
+
+/* -----------------------------------   Footer   --------------------------------- */
 
 footer {
     grid-area: f;
@@ -127,7 +125,7 @@ footer {
 .citiesBox {
     position: absolute;
     left: 25%;
-    top: 135px;
+    top: 25%;
     width: 50%;
     text-align: center;
 }
@@ -161,7 +159,7 @@ a[href^="https://www.google.com/maps"] {
     position: absolute;
     width: 100px;
     opacity: 80%;
-    left: 35%;
+    left: 48%;
     top: 35%;
 }
 
