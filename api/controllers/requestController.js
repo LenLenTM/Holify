@@ -48,6 +48,7 @@ class RequestController {
     }
 
     newPost(req, res){
+        console.log(req.body);
         res.send(model.newPost(req.body));
     }
 

@@ -64,14 +64,22 @@ function checkCookie(){
 
 function collectData() {
 
-    let blog = new Blog(
-        document.getElementById('title').value,
-        //document.getElementById('blogContent').value,
-        tinyMCE.activeEditor.getContent(),
-        document.getElementById('usernameNav').textContent
-    );
-    let blogJson = blogToJSON(blog);
-    saveJSON(blogJson);
+    if(document.getElementById('title').value.length > 0) {
+        let blog = new Blog(
+            document.getElementById('title').value,
+            //document.getElementById('blogContent').value,
+            tinyMCE.activeEditor.getContent(),
+            document.getElementById('usernameNav').textContent
+        );
+        console.log(tinyMCE.activeEditor.getContent());
+        console.log(tinyMCE.activeEditor.getContent({format: 'tetx'}));
+
+        let blogJson = blogToJSON(blog);
+        saveJSON(blogJson);
+    }
+    else{
+        document.getElementById('title').setAttribute('placeholder', 'You need a title');
+    }
 }
 
 function blogToJSON(string) {
@@ -95,6 +103,12 @@ async function saveJSON (blogEntry) {
     }).then(function(res){res.text()
         .then(function (text){
             console.log(text);
+            if(light === true){
+                location.href = "blogLibrary.html?light=true";
+            }
+            else{
+                location.href = "blogLibrary.html";
+            }
         })})
     let answer = await response;
     console.log(answer);

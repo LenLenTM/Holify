@@ -24,17 +24,16 @@
 
 
 <main>
-    <form autocomplete="off" id="form">
+    <div autocomplete="off" id="form">
         <script src='resources/tinymce/tinymce.min.js'></script>
         <script>tinymce.init({
             selector: "#blogContent"
         });
         </script>
-
         <textarea name="title" id="title" cols="30" rows="2" placeholder= "Title for your adventure"></textarea>
         <textarea name="blog" id="blogContent" ></textarea>
-        <input type="submit" value="Submit" id="submitButton" onclick="collectData(); //location.href='blogLibrary.html'">
-    </form>
+        <button id="submitButton" onclick="collectData()">Submit</button>
+    </div>
 </main>
 
 </body>
