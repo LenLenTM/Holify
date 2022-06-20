@@ -11,6 +11,7 @@ let latMin;
 let latMax;
 let lonMin;
 let lonMax;
+let light = false;
 
 
 /* Cities received from Cities API */
@@ -25,7 +26,10 @@ function City(name, latitude, longitude, country, population) {
 
 /* Initialize GoogleMap */
 function initMap() {
-    console.log("Test");
+    let paraString = window.location.search;
+    let parameter = new URLSearchParams(paraString);
+    if (parameter.get('light')){light = true;}
+
     map = new google.maps.Map(document.getElementById("worldMap"), {
         zoom: 2.4,
         center: {lat: 0, lng: 10 },
@@ -57,14 +61,10 @@ function initMap() {
         console.log('L1 ' + latitude + " - " + longitude);
 
         if (interactionMode === 'start') {
-            removeTip();
             zoomMap(event);
-            appendTip();
-            fadeOutTip();
             getFiveBiggestCities();
         }
         else if (interactionMode === 'zoom') {
-            removeTip();
             clickNearestCities();
             progressBar();
         }
@@ -81,7 +81,6 @@ function initMap() {
         console.log('L2 ' + latitude + " - " + longitude);
 
         if (interactionMode === 'zoom') {
-            removeTip();
             clickNearestCities();
             progressBar();
         }
@@ -91,21 +90,35 @@ function initMap() {
     });
     checkCookie();
     appendSearchBar();
-    appendTip();
-    fadeOutTip();
 }
 window.initMap = initMap;
-window.loadFont();
+
+function userLogin(){
+    if(light === true){
+        location.href = "login.html?light=true";
+    }
+    else{
+        location.href = "login.html";
+    }
+}
+function blogLibrary(){
+    if(light === true){
+        location.href = "blogLibrary.html?light=true";
+    }
+    else{
+        location.href = "blogLibrary.html";
+    }
+}
 
 function checkCookie(){
     let value = '';
-    let cookie = 'connect.sid=s%3Av6whpb6LtXy7eHU2VhfEhyi6Pw1uPr_Y.0PIFoQ4on8TlM2pzAaA8gpaloqxSPrTNakZ7j3eI9Rs'; //document.cookie.toString();
+    let cookie = document.cookie.toString();
     let cookieArray = cookie.split('');
     for(let i = 0; i < cookie.length; i++){
         let num = cookieArray[i].charCodeAt(0).toString();
         value = value + num;
     }
-    let url = 'http://localhost:3456/api/username/' + value;
+    let url = 'http://localhost:3456/api/username/12' //+ value;
     fetch(url, {
         methode: 'GET'
     }).then(function (response){
@@ -116,9 +129,9 @@ function checkCookie(){
                 if(name !== 'NO'){
                     document.getElementById('user').src = 'resources/UserIcon_logged.png';
                     let username = document.createElement('p');
-                    username.setAttribute('id', 'username');
+                    username.setAttribute('id', 'usernameNav');
                     username.innerText = name.toUpperCase();
-                    document.getElementById('nav').append(username);
+                    document.getElementById('userIconContainer').append(username);
                 }
             })})
 }
@@ -265,7 +278,6 @@ function createErrorMessage(){
 
     citiesDiv.append(p);
     document.getElementById('worldMap').append(divPop, citiesDiv);
-    removeTip();
 
     window.setTimeout(closePopUp, 1000);
 }
@@ -307,11 +319,20 @@ function createPopUp(responseArray) {
             divContainer.push(eval('let' + div + digit + ' = document.createElement(\'div\');'));
         }
         for (let i = 0; i < responseArray.length; i++) {
-            let url = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country;
+            let url;
+            if(light === true){
+                url = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country + '&light=true';
+            }
+            else{
+                url = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country;
+            }
             citiesContainer[i] = document.createElement('a');
             citiesContainer[i].setAttribute('href', url);
             divContainer[i] = document.createElement('div');
             divContainer[i].setAttribute('id', 'city' + (i + 1));
+            if(nameArray[i].length > 16){
+                nameArray[i].slice(0, 17);
+            }
             divContainer[i].innerText = nameArray[i].toUpperCase();
             citiesContainer[i].appendChild(divContainer[i]);
             citiesDiv.append(citiesContainer[i]);
@@ -405,19 +426,18 @@ function appendSearchBar() {
     search.setAttribute('id', 'searchText');
     search.setAttribute('placeholder', 'Search for a city ...');
     search.addEventListener("keydown", searchFiledActivated);
-    search.style.width = '52%';     /* generate a relative style which works for all mobiles */
-    search.style.top = `${(window.innerHeight + 200)}` + 'px';
-    search.style.left = `${(screen.width / 2) - (26 * screen.width / 100)}` + 'px';
-    search.style.width = `${(52 * 100 /screen.width)}`
-    search.style.resize = 'none';
     let addCSS = document.createElement('style');
     addCSS.innerHTML = "::placeholder {color: lightgray;}";
     document.body.append(addCSS);
-    document.getElementById('buttons').append(search);
+    document.getElementById('nav').append(search);
 }
 
 function searchFiledActivated(event){
+    let entry = document.getElementById('searchText').value;
     if (event.keyCode === 13) {
+        event.preventDefault();
+    }
+    if (event.keyCode === 13 && entry.length > 3) {
         event.preventDefault();
         let entry = document.getElementById('searchText').value;
 
@@ -433,32 +453,7 @@ function searchFiledActivated(event){
             contentType: 'application/json'
         })
             .then(response => response.json())
-            .then(City => {
-
-                console.log(City);
-                /**if (data.length === 0 || entry === "") {
-                    document.getElementById('searchText').setAttribute('placeholder', 'not a valid city!');
-                    let addCSS = document.createElement('style');
-                    addCSS.innerHTML = "::placeholder {color: red; opacity: 40%;}";
-                    document.body.append(addCSS);
-                    document.getElementById('searchText').value = "";
-                } else {
-                    city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
-                    window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;
-                } **/
-            })
-
-        //let url = 'https://api.api-ninjas.com/v1/city?name=' + entry;
-
-        /**
-         fetch(url, {
-            method: 'GET',
-            headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
-            v,
-        }).then(response => response.json()
-         .then(data => {
-                console.log('Success(city): ', data);
-                document.getElementById('progBar').remove();
+            .then(data => {
                 if (data.length === 0 || entry === "") {
                     document.getElementById('searchText').setAttribute('placeholder', 'not a valid city!');
                     let addCSS = document.createElement('style');
@@ -467,9 +462,15 @@ function searchFiledActivated(event){
                     document.getElementById('searchText').value = "";
                 } else {
                     city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
-                    window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;
+                    if(light === true){
+                        window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country + '&light=true';
+                    }
+                    else {
+                        window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;
+                    }
                 }
-            })); **/
+                document.getElementById('progBar').remove();
+            });
     }
 }
 
@@ -479,47 +480,6 @@ function removeSearchBar() {
     }
 }
 
-function appendTip() {
-    if (!document.getElementById('tip')) {
-        let tip = document.createElement('textarea');
-        tip.setAttribute('id', 'tip')
-        if (interactionMode === 'start' || interactionMode === 'popup') {
-            tip.innerText = 'Tab map to zoom in';
-        } else if (interactionMode === 'zoom') {
-            tip.innerText = 'Tab to get cities';
-        }
-
-        tip.style.width = '40%'; /* generate a relative style which works for all mobiles */
-        tip.style.top = `${(window.innerHeight - 600)}` + 'px';
-        tip.style.left = `${(screen.width / 2) - (20 * screen.width / 100)}` + 'px';
-        tip.style.resize = 'none';
-        tip.setAttribute('readonly', '');
-        document.getElementById('buttons').append(tip);
-    }
-}
-
-/* fade out the tip
-* following methode is from:
-*  https://stackoverflow.com/questions/29017379/how-to-make-fadeout-effect-with-pure-javascript */
-function fadeOutTip() {
-    let tip = document.getElementById("tip");
-    let fadeEffect = setInterval(function () {
-        if (!tip.style.opacity) {
-            tip.style.opacity = 0.7;
-        }
-        if (tip.style.opacity > 0) {
-            tip.style.opacity -= 0.1;
-        } else {
-            clearInterval(fadeEffect);
-        }
-    }, 500);
-} /* until here */
-
-function removeTip() {
-    if (document.getElementById('tip')) {
-        document.getElementById('tip').remove();
-    }
-}
 
 /* Google Map Styling - setting the land color to the background color. later
 coloring it with the GeoJson data overlay back to white to get rid of antarctica */

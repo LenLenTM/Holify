@@ -13,8 +13,7 @@ body {
     grid-template-areas:
     "n n"
     "n n"
-    "m m"
-    "f f";
+    "m m";
 }
 
 /* -----------------------------------   Nav   --------------------------------- */
@@ -22,27 +21,29 @@ body {
 nav {
     grid-area: n;
     width: 100%;
-    height: 110px;
+    height: 90px;
     background-color: white;
-    font-size: 1.8em;
+    font-family: Avenir;
+    font-size: 1.5em;
     color: grey;
 }
 #navText {
     position: absolute;
-    top: -10px;
-    left: 120px;
-    font-weight: lighter;
+    top: 9px;
+    left: 90px;
 }
 #logo {
-    width: 80px;
-    margin-left: 15px;
-    margin-top: 15px;
+    width: 70px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
-#user {
-    height: 70px;
+#userIconContainer{
     position: absolute;
     top: 12px;
     right: 80px;
+}
+#user {
+    height: 70px;
 }
 #options {
     height: 56px;
@@ -50,21 +51,33 @@ nav {
     right: 10px;
     top: 18px;
 }
-#username{
-    position: absolute;
-    transform: translate(50%, 0%);
-    top: 6.5%;
-    right: 26.3%;
+#usernameNav{
+    font-family: Avenir;
+    color: grey;
+    position: relative;
+    top: -30px;
+    left: 5%;
     font-size: small;
+}
+#searchText {
+    position: absolute;
+    top: 28px;
+    left: 35%;
+    width: 30%;
+    height: 24px;
+    border-radius: 30px;
+    border-color: lightgray;
+    text-align: center;
+    font-weight: bold;
+    color: grey;
+    padding-top: 8px;
+    resize: none;
 }
 /* -----------------------------------   Main   --------------------------------- */
 main {
     grid-area: m;
-    height: 100%;
-    width: 90%;
-    margin-right: 5%;
-    margin-left: 5%;
-
+    height: 70%;
+    width: 100%;
 }
 #worldMap {
     display: flex;
@@ -72,7 +85,6 @@ main {
     height: 1100px;
     overflow: hidden;
     align-self: center;
-
 }
 
 
@@ -98,16 +110,7 @@ footer {
     border: none;
     padding-top: 6px;
 }
-#searchText {
-    position: absolute;
-    height: 24px;
-    border-radius: 30px;
-    border: none;
-    text-align: center;
-    font-weight: bold;
-    color: grey;
-    padding-top: 8px;
-}
+
 ::placeholder {
     color: lightgray;
 }
@@ -116,19 +119,20 @@ footer {
     width: 15%;
 }
 #popup {
-    width: 80%;
+    width: 26%;
     position: absolute;
-    left: 10%;
+    left: 37%;
     top: 80px;
     opacity: 70%;
 }
-.citiesBox {
-    position: absolute;
-    left: 25%;
-    top: 25%;
-    width: 50%;
+#citiesDiv{
     text-align: center;
+    position: absolute;
+    width: 24%;
+    left: 38%;
+    top: 200px;
 }
+
 #citiesDiv > a {
     font-weight: bold;
     font-size: 1.1em;
@@ -157,7 +161,7 @@ a[href^="https://www.google.com/maps"] {
 
 #progBar {
     position: absolute;
-    width: 100px;
+    width: 200px;
     opacity: 80%;
     left: 48%;
     top: 35%;

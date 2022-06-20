@@ -18,15 +18,13 @@
 
 <nav id="nav">
     <a href="index.html">
-        <div> <img src="resources/Holify.png" alt="Holify Logo" id="logo"> </div>
+        <img src="resources/Holify.png" id="logo" alt="logo">
     </a>
-    <h1 id="navText">HOLIFY</h1>
-    <a href="login.html">
-        <img src="resources/UserIcon.png" id="user" alt="user icon">
-    </a>
-    <a href="blogLibrary.html">
-        <img src="resources/Options.png" id="options" alt="options">
-    </a>
+    <p id="navText">HOLIFY</p>
+    <div id="userIconContainer">
+        <img src="resources/UserIcon.png" id="user" alt="login" onclick="userLogin()">
+    </div>
+    <img src="resources/Options.png" id="options" alt="blog" onclick="blogLibrary()">
 </nav>
 
 <main>
@@ -35,15 +33,6 @@
     </div>
     <div id="buttons"></div>
 </main>
-
-<footer id="footer">
-    <address>
-        <div>© Holify</div>
-        <div>Written by <a href="mailto:janedoe@example.com">Lena, Susi, Niko & Magdalena</a></div>
-        <div>Visit us at: <a href="https://www.fh-campuswien.ac.at/" target="_blank">FH Campus Vienna</a></div>
-        <div> Favoritenstr. 226 <br>1100 Vienna, Austria</div>
-    </address>
-</footer>
 
 </body>
 </html>
