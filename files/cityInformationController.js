@@ -102,7 +102,7 @@ function checkCookie(){
             })})
 }
 
-//new DOM element with  created
+//new DOM element with city created
 function navText(){
     paraString = window.location.search;
     parameter = new URLSearchParams(paraString);
