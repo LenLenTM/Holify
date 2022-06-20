@@ -187,7 +187,7 @@ function displayWeather(){
 }
 
 function getImages(){
-    if(lightWeight === false) {
+    if(light === false) {
         cityImages = [];
         let url = 'http://localhost:3456/api/getImages/' + weatherResponse.city.name;
         fetch(url, {
