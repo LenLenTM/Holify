@@ -1,18 +1,19 @@
+//event handler in html, click on logo - resource replaced using responsive design
 function getStart(){
     if (window.innerWidth < 800){
         location.replace("./mobileMain.html");
     } else (location.replace("../desktopMain.html"));
 }
-
+//light weight version for desktop and mobile devices, responsive design
 function getStartLightweight(){
     if (window.innerWidth < 800){
         location.replace("./mobileMain.html?light=true");
     } else (location.replace("../desktopMain.html?light=true"));
-}
 
-async function testRoutX() {
 
-    /**
+/** async function testRoutX() {
+
+
     let email = 'lena@muede.at';
     let cookie = 'empty';
     //let email = 'dsjkdsjk@gmail.com';

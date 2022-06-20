@@ -37,3 +37,12 @@ https://www.tutorialkart.com/nodejs/node-js-write-json-object-to-file/
 npm install node-fetch
 npm i google-img-scrap
 npm install express-session
+
+----------REST web services------
+https://developers.google.com/maps - world map
+https://api-ninjas.com/api/city - City API, city information
+https://openweathermap.org - weather information,
+https://restcountries.com - city information
+https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html - transport route
+(https://www.geoapify.com - get user location)
+
