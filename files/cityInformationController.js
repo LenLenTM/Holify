@@ -43,8 +43,11 @@ function City(country, currency, population){
     this.currency = currency;
     this.population = population;
 }
-
+// initialization of city information page, function called in cityinformation.html;
 function initPage() {
+
+    //URL is checked for 'light' which indicates lightweight version
+    //value of variable light is used for control in several functions;
     let paraString = window.location.search;
     let parameter = new URLSearchParams(paraString);
     if (parameter.get('light')){light = true;}
@@ -52,7 +55,7 @@ function initPage() {
     checkCookie();
     navText();
     getWeather();
-    window.setTimeout(cityInformation, 600);
+    window.setTimeout(cityInformation, 600); //timeout for information from getWeather() to arrive;
     progressBar();
 }
 
@@ -65,33 +68,33 @@ function userLogin(){
     }
 }
 function blogLibrary(){
-    if(lightWeight === true){
+    if(light === true){
         location.href = "blogLibrary.html?light=true";
     }
     else{
         location.href = "blogLibrary.html";
     }
 }
-
+//if user is registered and logged in then their name will be displayed next to user icon;
 function checkCookie(){
     let value = '';
     let cookie = 'connect.sid=s%3Av6whpb6LtXy7eHU2VhfEhyi6Pw1uPr_Y.0PIFoQ4on8TlM2pzAaA8gpaloqxSPrTNakZ7j3eI9Rs'; //document.cookie.toString();
-    let cookieArray = cookie.split('');
+    let cookieArray = cookie.split(''); //generates array from cookie String;
     for(let i = 0; i < cookie.length; i++){
-        let num = cookieArray[i].charCodeAt(0).toString();
+        let num = cookieArray[i].charCodeAt(0).toString(); //value at index to number (UTF-16 code) to String;
         value = value + num;
     }
     let url = 'http://localhost:3456/api/username/12' //+ value;
     fetch(url, {
         methode: 'GET'
-    }).then(function (response){
+    }).then(function (response){    //callback function(response) is argument of then() for success of promise;
         response.text()
-            .then(function (text){
-                let name = text;
+            .then(function (text){      //callback function(text);
+                let name = text;            //success of promise: variable name evalutes to text;
 
                 if(name !== 'NO'){
-                    document.getElementById('user').src = 'resources/UserIcon_logged.png';
-                    let username = document.createElement('p');
+                    document.getElementById('user').src = 'resources/UserIcon_logged.png';  //user icon green;
+                    let username = document.createElement('p');         //new DOM element for username created;
                     username.setAttribute('id', 'usernameNav');
                     username.innerText = name.toUpperCase();
                     document.getElementById('userIconContainer').append(username);
@@ -99,6 +102,7 @@ function checkCookie(){
             })})
 }
 
+//new DOM element with  created
 function navText(){
     paraString = window.location.search;
     parameter = new URLSearchParams(paraString);
@@ -219,7 +223,7 @@ function getImages(){
         drawNoImages();
     }
 }
-
+//for leightweight version, #noImage in media query in cityInformationStyle.css
 function drawNoImages(){
     let noImages = document.createElement('p');
     noImages.setAttribute('id', 'noImage');

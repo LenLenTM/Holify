@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MapTest</title>
+    <title>Holify</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="cityInformationController.js"></script>
     <link rel="stylesheet" href="cityInformationStyle.css">
 </head>
 
+<!-- onload="initPage()" event handler using the onload property of the window object
+ as soon as loaded, initPage() is executed -->
 <body id="body" onload="initPage()" class="grid">
-
+    <!-- sections in body: nav, main -->
     <nav id="nav">
         <a href="index.html">
             <img src="resources/Holify.png" id="logo" alt="Logo">
@@ -17,13 +19,16 @@
         <div id="cityName">
         </div>
         <div id="userIconContainer">
+            <!-- event handler using the onclick property of window object, user click starts execution of userLogin()-->
             <img src="resources/UserIcon.png" id="user" alt="login" onclick="userLogin()">
         </div>
+        <!-- eventhandler, user click starts execution of blogLibrary()-->
         <img src="resources/Options.png" id="options" alt="options" onclick="blogLibrary()">
         <div id="bar"></div>
     </nav>
 
     <main id="main">
+        <!--selectors needed for indexStyle.css -->
         <div class="pictures" id="pictures"></div>
         <div class="infos" id="infos">
             <div class="three" id="three"></div>
