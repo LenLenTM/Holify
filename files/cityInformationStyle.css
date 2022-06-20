@@ -169,7 +169,7 @@ nav {
         top: 39%;
         background-color: white;
     }
-
+    /* for city information: country, population, currency */
     #three {
         padding-top: 2%;
         font-family: Avenir;
@@ -246,7 +246,7 @@ nav {
     #weatherInformation {grid-area: c3}
     #transit {grid-area: c4}
 
-    /* removed in leightweight version, drawNoImages*/
+    /* removed in lightweight version, drawNoImages()*/
     #progBar {
         position: absolute;
         width: 16%;

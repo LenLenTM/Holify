@@ -75,7 +75,7 @@ function blogLibrary(){
         location.href = "blogLibrary.html";
     }
 }
-//if user is registered and logged in then their name will be displayed next to user icon;
+//called in initPage(), if user is registered and logged in then their name will be displayed next to user icon;
 function checkCookie(){
     let value = '';
     let cookie = 'connect.sid=s%3Av6whpb6LtXy7eHU2VhfEhyi6Pw1uPr_Y.0PIFoQ4on8TlM2pzAaA8gpaloqxSPrTNakZ7j3eI9Rs'; //document.cookie.toString();
@@ -102,7 +102,7 @@ function checkCookie(){
             })})
 }
 
-//new DOM element with city created
+//called in initPage(), new DOM element with city name is created next to Holify logo;
 function navText(){
     paraString = window.location.search;
     parameter = new URLSearchParams(paraString);
@@ -112,13 +112,15 @@ function navText(){
     document.getElementById('cityName').append(navText);
 }
 
+//called in initPage(), new DOM element with progess bar is created;
 function progressBar(){
     let load = document.createElement('img');
     load.src = '../resources/loading.gif';
     load.setAttribute('id', 'progBar');
     document.getElementById('main').append(load);
 }
-
+//---------------------- Weather information --------------------------;
+//called in initPage();
 function getWeather(){
 
     weatherResponse = [];
@@ -126,17 +128,18 @@ function getWeather(){
     allWeather = [];
     mainInfo = [];
 
+    //API from https://openweathermap.org ;
     let url = 'http://localhost:3456/api/getWeather/' + parameter.get('city') + '/' + parameter.get('country');
 
     fetch(url, {
         method: 'GET',
-        contentType: 'application/json'
-    }).then(response => response.json())
-        .then(data => {
-            weatherResponse = new WeatherResponse(data.city, data.cnt, data.cod, data.list, data.message);
+        contentType: 'application/json'     //original media type of resource;
+    }).then(response => response.json())    //callback arrow function, response evalutes to response.json;
+        .then(data => {                     //callback arrow function, data evaluates to output of function;
+            weatherResponse = new WeatherResponse(data.city, data.cnt, data.cod, data.list, data.message); //array;
             for (let i = 1; i < weatherResponse.list.length; i++){
                 weather = new Weather(weatherResponse.list[i].clouds, weatherResponse.list[i].dt, weatherResponse.list[i].dt_txt, weatherResponse.list[i].main, weatherResponse.list[i].pop, weatherResponse.list[i].rain, weatherResponse.list[i].sys, weatherResponse.list[i].visibility, weatherResponse.list[i].weather, weatherResponse.list[i].wind);
-                allWeather.push(weather);
+                allWeather.push(weather); //weather item added at end of allWeather array;
             }
             getUserLocation();
             filterInformation(allWeather);
@@ -145,27 +148,29 @@ function getWeather(){
         });
 }
 
+//called in getWeather(), information in allWeather array is filtered, only one per day and must be collected at 12.00 noon;
 function filterInformation(allWeather){
     weatherOutput = [];
     weatherOutput.push(new WeatherOutput(allWeather[0].dt_txt, (allWeather[0].main.temp - 273.15).toFixed(0), allWeather[0].weather[0].main));
     let date = new Date(weatherOutput[0].data);
     for (let i = 0; i < allWeather.length; i++){
         let arrayDate = new Date(allWeather[i].dt_txt);
-        if (arrayDate.getDay() !== date.getDay() && arrayDate.getHours() === 12){
+        if (arrayDate.getDay() !== date.getDay() && arrayDate.getHours() === 12){   //added to array only if arrayDate.getDay is new and taken at 12.00;
             weatherOutput.push(new WeatherOutput(allWeather[i].dt_txt, (allWeather[i].main.temp  - 273.15).toFixed(0), allWeather[i].weather[0].main));
         }
     }
 }
+//called in getWeather();
 function displayWeather(){
 
-    for(let i = 0; i < 5; i++){
-        let img = document.createElement('img');
+    for(let i = 0; i < 5; i++){     //weather of the next 5 days displayed;
+        let img = document.createElement('img');    //new DOM element created;
         //let path = "resources/UserIcon.png" +
-        img.src = 'resources/WeatherIcons_' + weatherOutput[i].weather + '.png';
+        img.src = 'resources/WeatherIcons_' + weatherOutput[i].weather + '.png'; //weatherOutput array from filterInformation(), weather icon chosen;
         img.setAttribute('id', 'icon');
         document.getElementById('weatherBox').append(img);
 
-        let date = new Date(weatherOutput[i].data);
+        let date = new Date(weatherOutput[i].data);  //display for name of day in new DOM element;
         let day = date.getDay();
         let text;
         switch(day){
@@ -182,7 +187,7 @@ function displayWeather(){
         p.setAttribute('id', 'day');
         document.getElementById('days-box').append(p);
 
-        let temp = weatherOutput[i].temp;
+        let temp = weatherOutput[i].temp;       //temperature added in new DOM element;
         let p2 = document.createElement('p');
         p2.setAttribute('id', 'temperature');
         p2.innerText = temp + '°C'
@@ -190,16 +195,18 @@ function displayWeather(){
     }
 }
 
+//---------------------------- Display Images of City -------------------------------------;
+//called in getWeather(), https://openweathermap.org gives useful information aside from weather;
 function getImages(){
-    if(light === false) {
+    if(light === false) {       //images not displayed in light weight version;
         cityImages = [];
-        let url = 'http://localhost:3456/api/getImages/' + weatherResponse.city.name;
+        let url = 'http://localhost:3456/api/getImages/' + weatherResponse.city.name;  //city name is found in weatherResponse in getWeather();
         fetch(url, {
             method: 'GET',
             contentType: 'application/json'
         }).then(response => response.json())
             .then(data => {
-                for (let i = 0; i < 10; i++) {
+                for (let i = 0; i < 10; i++) {      //max. 4 images are searched, duplicates are filtered;
                     let duplicate = false;
                     for (let j = 0; j < 4; j++) {
                         if (cityImages[j] === data.result[i].url) {
@@ -216,14 +223,14 @@ function getImages(){
                     }
                 }
                 drawImages();
-                document.getElementById('progBar').remove();
+                document.getElementById('progBar').remove();        //progBar is removed for images;
             })
     }
     else{
-        drawNoImages();
+        drawNoImages();     //light weight version;
     }
 }
-//for leightweight version, #noImage in media query in cityInformationStyle.css
+//for light weight version, #noImage in media query in cityInformationStyle.css;
 function drawNoImages(){
     let noImages = document.createElement('p');
     noImages.setAttribute('id', 'noImage');
@@ -232,6 +239,7 @@ function drawNoImages(){
     document.getElementById('progBar').remove();
 }
 
+//called in getImages(), images are included in new DOM elements;
 function drawImages(){
     for(let i = 0; i < 4; i++){
         let img = document.createElement('img');
@@ -243,6 +251,8 @@ function drawImages(){
     }
 }
 
+//---------------------- Display City Information ------------------------;
+//called in initPage(), https://restcountries.com , city population from weatherResponse;
 function cityInformation(){
 
     let paraString = window.location.search;
@@ -255,19 +265,20 @@ function cityInformation(){
         contentType: 'application/json'
     }).then(response => response.json())
         .then(data => {
-            let string = JSON.stringify(data);
+            let string = JSON.stringify(data);      //JavaScript to JSON-String;
             string = string.substring(string.indexOf(`name":"`) + 7);
             string = string.substring(0, string.indexOf('"'));
-            cityData = new City(data[0].name.common, string, weatherResponse.city.population);
+            cityData = new City(data[0].name.common, string, weatherResponse.city.population);  //population;
             drawInformation();
         });
 }
 
+//display city information in new DOM elements, country, population, currency;
 function drawInformation(){
     let country = document.createElement('p');
     country.innerText = 'Country: ' + cityData.country.toUpperCase();
     let population = document.createElement('p');
-    population.innerText = 'Population: ' + numberWithCommas(cityData.population);
+    population.innerText = 'Population: ' + numberWithCommas(cityData.population);  //function numberWithCommas();
     let currency = document.createElement('p');
     currency.innerText = 'Currency: ' + cityData.currency.toUpperCase();
 
@@ -280,9 +291,13 @@ function numberWithCommas(x) {
 }
 //-------until here
 
+// --------------------------- Transport Route from User Location to City ----------------- ;
+
+//navigator is property of window, geolocation property only in secure contexts available;
 function getUserLocation(){
     navigator.geolocation.getCurrentPosition(function (position){
         let location = {lat: position.coords.latitude, lon: position.coords.longitude};
+        console.log(location);
         getTransportRoute(location);
     })
 }
@@ -307,11 +322,12 @@ function userLocation(data){
     }
 } **/
 
+//called in getUserLocation, https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html ;
 function getTransportRoute(location){
     console.log(location);
     let origin = location.lat + ',' + location.lon;
 
-    let destination = weatherResponse.city.coord.lat + ',' + weatherResponse.city.coord.lon;
+    let destination = weatherResponse.city.coord.lat + ',' + weatherResponse.city.coord.lon;  //lat, lon information from weatherResponse;
 
     let url = 'http://localhost:3456/api/getTransportRoute/' + origin + '/' + destination;
 
@@ -321,25 +337,26 @@ function getTransportRoute(location){
     }).then(response => response.json())
         .then(data => {
             if(data.routes.length !== 0) {
-                drawTransportRoute(data);
+                drawTransportRoute(data);   //call of drawTransportRoute();
             }
             else{
-                drawNoRoute();
+                drawNoRoute();      //call of drawNoRoute();
             }
         });
     //return await route;
 }
 
+//display of transport route in new DOM elements, called in getTransportRoute(), parameter data evaluated there;
 function drawTransportRoute(data){
     let stages = data.routes[0].sections;
     let vehicleImage;
 
     for(let i = 0; i < stages.length; i++){
-        let div = document.createElement('div');
+        let div = document.createElement('div');        //create div for each stage of transport route;
         div.setAttribute('id', 'stage' + i);
 
         let vehicle = stages[i].transport.mode;
-        switch (vehicle){
+        switch (vehicle){                   //choose appropriate icon for means of transportation;
             case 'highSpeedTrain':
             case 'intercityTrain':
             case 'interRegionalTrain':
@@ -376,7 +393,7 @@ function drawTransportRoute(data){
         icon.src = vehicleImage;
         icon.setAttribute('id', 'transIcon');
 
-        let p1 = document.createElement('p');
+        let p1 = document.createElement('p');           //new DOM elements for names of stations and departure time;
         p1.setAttribute('id', 'origin');
         if(i === 0){
             p1.innerText = 'Origin';
@@ -397,7 +414,7 @@ function drawTransportRoute(data){
         let p3 = document.createElement('p');
         p3.setAttribute('id', 'departure-time');
         let text1;
-        if(window.innerWidth < 500){
+        if(window.innerWidth < 500){                            //responsive design;
             text1 = stages[i].departure.time.toString().slice(11, 16);
         }
         else {
@@ -416,9 +433,9 @@ function drawTransportRoute(data){
         }
         p4.innerText = text2;
 
-        let divName = document.createElement('div');
+        let divName = document.createElement('div');            //DOM element for station name;
         divName.setAttribute('id', 'stations' + i)
-        let divTimes = document.createElement('div');
+        let divTimes = document.createElement('div');           //DOM element for departure time;
         divTimes.setAttribute('id', 'times' + i);
 
         if(window.innerWidth < 500) {
@@ -431,10 +448,11 @@ function drawTransportRoute(data){
         divName.append(p1, p2);
         divTimes.append(p3, p4);
         div.append(icon, divName, divTimes);
-        document.getElementById('transit').append(div);
+        document.getElementById('transit').append(div);     //transit id defined in cityInformation.html;
     }
 }
 
+//light weight version, called in getTransportRoute(), 'no route found' displayed;
 function drawNoRoute(){
     let div = document.createElement('div');
     div.setAttribute('id', 'stage0');
