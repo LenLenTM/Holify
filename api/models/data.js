@@ -187,7 +187,6 @@ class Data {
         let userDataArray = JSON.parse(userData);
         for(let i = 0; i < userDataArray.length; i++){
             if(userDataArray[i].cookie === cookie){
-                console.log('yes');
                 userDataArray[i].cookie = '';
                 userData = JSON.stringify(userDataArray);
                 fs.writeFileSync('userDB.json', userData);
@@ -216,6 +215,14 @@ class Data {
                 return userDataArray[i];
             }
         }
+    }
+    newPost(json) {
+        let blogData = fs.readFileSync('blogPost.json');
+        let blogDataArray = JSON.parse(blogData);
+        blogDataArray.push(json);
+        blogData = JSON.string(blogDataArray);
+        fs.writeFileSync("blogPost.json", blogData);
+        return "Blog added";
     }
 }
 
