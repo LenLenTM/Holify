@@ -1,11 +1,28 @@
-let json = localStorage.getItem('blogPost');
-console.log(json);
+/**let json = localStorage.getItem('blogPost');
 let blogPost = jsonToBlog(json);
+let date = blogPost.time; **/
 
-let date = blogPost.time;
+let blogPost;
 
+function initLibrary(){
+        getLibrary();
+}
 
-function blogPostConstructor() {
+function getLibrary(){
+        let url = 'http://localhost:3456/api/getLibrary'
+        fetch(url, {
+                method: 'GET',
+                contentType: 'application/json'
+        }).then(response => response.json())
+            .then(data => {
+                    console.log(blogPost);
+                    for(let i = 0; i < data.length; i++){
+                            blogPostConstructor(data[i]);
+                    }
+            })
+}
+
+function blogPostConstructor(blogPost) {
         let button = document.createElement("button");
         button.setAttribute("class", blogPost.title);
         button.setAttribute("value", "YES");

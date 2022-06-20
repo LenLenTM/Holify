@@ -15,6 +15,7 @@ routes.get('/getTransportRoute/:origin/:destination', requestController.getTrans
 routes.post('/newPost/ ', requestController.newPost);
 routes.patch('/editPost/ ', requestController.editPost);
 routes.delete('/deletePost/ ', requestController.deletePost);
+routes.get('/getLibrary', requestController.getLibrary);
 
 routes.get('/login/:username/:password/:cookie', requestController.login);
 routes.post('/register/:cookie/:email/:username/:password', requestController.register);
