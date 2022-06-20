@@ -387,8 +387,10 @@ function createMarker(responseArray, boolean) {
 }
 
 function removeMarker(){
-    for (let i = 0; i < 5; i++){
-        markerList[i].setMap(null);
+    if(markerList.length !== 0) {
+        for (let i = 0; i < 5; i++) {
+            markerList[i].setMap(null);
+        }
     }
 }
 

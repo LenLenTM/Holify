@@ -224,7 +224,6 @@ function getImages(){
                     }
                 }
                 drawImages();
-                document.getElementById('progBar').remove();        //progBar is removed for images;
             })
     }
     else{
@@ -237,7 +236,6 @@ function drawNoImages(){
     noImages.setAttribute('id', 'noImage');
     noImages.innerText = weatherResponse.city.name.toString().toUpperCase();
     document.getElementById('pictures').append(noImages);
-    document.getElementById('progBar').remove();
 }
 
 //called in getImages(), images are included in new DOM elements;
@@ -440,6 +438,7 @@ function drawTransportRoute(data){
         divTimes.append(p3, p4);
         div.append(icon, divName, divTimes);
         document.getElementById('transit').append(div);     //transit id defined in cityInformation.html;
+        document.getElementById('progBar').remove();        //progBar is removed for images;
     }
 }
 
@@ -465,4 +464,5 @@ function drawNoRoute(){
 
     div.append(icon, p1);
     document.getElementById('transit').append(div);
+    document.getElementById('progBar').remove();
 }
