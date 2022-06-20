@@ -34,14 +34,12 @@
         });
         </script>
 
-        <label for="user"> Here's space to write your name!</label>
-        <textarea name="user" id="user" cols="30" rows="2" placeholder= "Write your name"></textarea>
-
         <label for="title"> What is the title of your adventure? </label>
         <textarea name="title" id="title" cols="30" rows="2" placeholder= "Write your title"></textarea>
 
         <label for="blogContent">Tell us your travel experiences!</label><textarea name="blog" id="blogContent" ></textarea>
 
+        <div id = tags>
         <h2>Tags</h2>
         <p>Press comma or click the add button to create a tag.</p>
         <div class="input-container">
@@ -52,8 +50,9 @@
         <div class="tag-container" id = "tag-container">
             <br>
         </div>
+        </div>
 
-        <input type="submit" value="Submit" id="submitButton" onclick="saveJSON(blogToJSON(collectData())); location.href='blogLibrary.html'">
+        <input type="submit" value="Submit" id="submitButton" onclick="saveJSON(blogToJSON(collectData())); //location.href='blogLibrary.html'">
     </form>
 </main>
 
