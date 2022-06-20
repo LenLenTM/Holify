@@ -66,7 +66,8 @@ function collectData() {
 
     let blog = new Blog(
         document.getElementById('title').value,
-        document.getElementById('blogContent').value,
+        //document.getElementById('blogContent').value,
+        tinyMCE.activeEditor.getContent(),
         document.getElementById('usernameNav').textContent
     );
     let blogJson = blogToJSON(blog);
