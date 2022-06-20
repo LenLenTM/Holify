@@ -78,7 +78,7 @@ class RequestController {
         let password = req.params.password;
         let xoj = false;
 
-        if(email.includes('@') && username.length > 3 && password.length > 7) {
+        if(email.includes('@') && username.length > 3 && username.length < 17 &&password.length > 7) {
             if (model.checkIfUserExists(email) && model.checkIfUserExistsByName(username)) {
                 model.register(cookie, email, username, password, xoj);
                 res.status(202).send('Registration successfull.');
@@ -90,6 +90,7 @@ class RequestController {
         }
         else if(!email.includes('@')){res.status(617).send('Enter a valid email address.');}
         else if(username.length < 4){res.status(618).send('Username too short.');}
+        else if(username.length > 16){res.status(618).send('Username too long.');}
         else{res.status(619).send('Password too short.');}
     }
 
@@ -137,7 +138,7 @@ class RequestController {
         res.send(model.username(cookie));
     }
 
-    async getUser(req, res){
+    getUser(req, res){
         let username = req.params.username;
         res.send(model.getUser(username));
     }

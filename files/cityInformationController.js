@@ -8,7 +8,7 @@ let mainInfo = [];
 let weatherOutput = [];
 let cityData;
 let cityImages = [];
-let lightWeight = false;
+let light = false;
 
 
 function WeatherResponse(city, cnt, cod, list, message){
@@ -45,16 +45,32 @@ function City(country, currency, population){
 }
 
 function initPage() {
-
     let paraString = window.location.search;
     let parameter = new URLSearchParams(paraString);
-    if (parameter.get('lw')){lightWeight = true;}
+    if (parameter.get('light')){light = true;}
 
     checkCookie();
     navText();
     getWeather();
     window.setTimeout(cityInformation, 600);
     progressBar();
+}
+
+function userLogin(){
+    if(lightWeight === true){
+        location.href = "login.html?light=true";
+    }
+    else{
+        location.href = "login.html";
+    }
+}
+function blogLibrary(){
+    if(lightWeight === true){
+        location.href = "blogLibrary.html?light=true";
+    }
+    else{
+        location.href = "blogLibrary.html";
+    }
 }
 
 function checkCookie(){
@@ -65,7 +81,7 @@ function checkCookie(){
         let num = cookieArray[i].charCodeAt(0).toString();
         value = value + num;
     }
-    let url = 'http://localhost:3456/api/username/' + value;
+    let url = 'http://localhost:3456/api/username/12' //+ value;
     fetch(url, {
         methode: 'GET'
     }).then(function (response){
@@ -76,9 +92,9 @@ function checkCookie(){
                 if(name !== 'NO'){
                     document.getElementById('user').src = 'resources/UserIcon_logged.png';
                     let username = document.createElement('p');
-                    username.setAttribute('id', 'username');
+                    username.setAttribute('id', 'usernameNav');
                     username.innerText = name.toUpperCase();
-                    document.getElementById('nav').append(username);
+                    document.getElementById('userIconContainer').append(username);
                 }
             })})
 }
@@ -118,7 +134,7 @@ function getWeather(){
                 weather = new Weather(weatherResponse.list[i].clouds, weatherResponse.list[i].dt, weatherResponse.list[i].dt_txt, weatherResponse.list[i].main, weatherResponse.list[i].pop, weatherResponse.list[i].rain, weatherResponse.list[i].sys, weatherResponse.list[i].visibility, weatherResponse.list[i].weather, weatherResponse.list[i].wind);
                 allWeather.push(weather);
             }
-            userLocation();
+            getUserLocation();
             filterInformation(allWeather);
             displayWeather();
             getImages();
@@ -218,6 +234,7 @@ function drawImages(){
         img.src = cityImages[i];
         let id = 'img' + (i + 1);
         img.setAttribute('id', id);
+        img.setAttribute('alt', 'Picture of' + weatherResponse.city.name);
         document.getElementById('pictures').append(img);
     }
 }
@@ -259,19 +276,36 @@ function numberWithCommas(x) {
 }
 //-------until here
 
-function userLocation(){
-    let url = 'http://localhost:3456/api/userLocation';
-    fetch(url, {
-        method: 'GET',
-        contentType: 'application/json'
-    }).then(response => response.json())
-        .then(data => {
-            getTransportRoute(data);
-        });
+function getUserLocation(){
+    navigator.geolocation.getCurrentPosition(function (position){
+        let location = {lat: position.coords.latitude, lon: position.coords.longitude};
+        getTransportRoute(location);
+    })
 }
+/**
+function userLocation(data){
 
-function getTransportRoute(response){
-    let origin = response.location.latitude + ',' + response.location.longitude;
+    let location = {lat: data.lat, lon: data.lon};
+    console.log(data);
+    if(data.cookie === '0'){
+        let url = 'http://localhost:3456/api/userLocation';
+        fetch(url, {
+            method: 'GET',
+            contentType: 'application/json'
+        }).then(response => response.json())
+            .then(data => {
+                let location = {lat: data.location.latitude, lon: data.location.longitude};
+                getTransportRoute(location);
+            });
+    }
+    else{
+        getTransportRoute(location);
+    }
+} **/
+
+function getTransportRoute(location){
+    console.log(location);
+    let origin = location.lat + ',' + location.lon;
 
     let destination = weatherResponse.city.coord.lat + ',' + weatherResponse.city.coord.lon;
 
