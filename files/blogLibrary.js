@@ -2,24 +2,79 @@
  let blogPost = jsonToBlog(json);
  let date = blogPost.time; **/
 
+let light = false;
 let blogPost;
 
+window.onload = initLibrary();
+
 function initLibrary(){
+        let paraString = window.location.search;
+        let parameter = new URLSearchParams(paraString);
+        if (parameter.get('light')){light = true;}
+        checkCookie();
         getLibrary();
 }
 
-function getLibrary(){
-        let url = 'http://localhost:3456/api/getLibrary'
+function userLogin(){
+        if(light === true){
+                location.href = "login.html?light=true";
+        }
+        else{
+                location.href = "login.html";
+        }
+}
+
+function checkCookie(){
+        let value = '';
+        let cookie = document.cookie.toString();
+        let cookieArray = cookie.split('');
+        for(let i = 0; i < cookie.length; i++){
+                let num = cookieArray[i].charCodeAt(0).toString();
+                value = value + num;
+        }
+        let url = 'http://localhost:3456/api/username/12' //+ value;
         fetch(url, {
-                method: 'GET',
-                contentType: 'application/json'
-        }).then(response => response.json())
-            .then(data => {
-                    console.log(blogPost);
-                    for(let i = 0; i < data.length; i++){
-                            blogPostConstructor(data[i]);
-                    }
-            })
+                methode: 'GET'
+        }).then(function (response){
+                response.text()
+                    .then(function (text){
+                            let name = text;
+                            if(name !== 'NO'){
+                                    document.getElementById('user2').src = 'resources/UserIcon_logged.png';
+                                    let username = document.createElement('p');
+                                    username.setAttribute('id', 'usernameNav');
+                                    username.innerText = name.toUpperCase();
+                                    document.getElementById('userIconContainer').append(username);
+                            }
+                    })})
+}
+
+function getLibrary(){
+        if(light === true){
+                let url = 'http://localhost:3456/api/getLibraryLight'
+                fetch(url, {
+                        method: 'GET',
+                        contentType: 'application/json'
+                }).then(response => response.json())
+                    .then(data => {
+                            for (let i = 0; i < data.length; i++) {
+                                    blogPostConstructor(data[i]);
+                            }
+                    })
+        }
+        else {
+
+                let url = 'http://localhost:3456/api/getLibrary'
+                fetch(url, {
+                        method: 'GET',
+                        contentType: 'application/json'
+                }).then(response => response.json())
+                    .then(data => {
+                            for (let i = 0; i < data.length; i++) {
+                                    blogPostConstructor(data[i]);
+                            }
+                    })
+        }
 }
 
 function blogPostConstructor(blogPost) {
@@ -71,16 +126,18 @@ function blogPostConstructor(blogPost) {
 
         textDiv.innerHTML = blogPost.content;
 
-        //button.addEventListener("click",  collapse(blogPost.title));
+        contentBox.append(userDiv,timeDiv,textDiv);
 
-        let editButton = document.createElement("button");
-        editButton.setAttribute("id", "editButton");
-        let editButtonText = document.createTextNode("Edit Blog");
-        editButton.append(editButtonText);
+        if(document.getElementById('usernameNav')){
+                if(blogPost.user.toUpperCase() === document.getElementById('usernameNav').textContent){
+                        let deleteButton = document.createElement("button");
+                        deleteButton.setAttribute("id", blogPost.time + 'delete');
+                        deleteButton.innerHTML = 'Delete Blog';
+                        deleteButton.setAttribute('onClick', 'deletePost(this.id)');
 
-        //editButton.addEventListener("click", editBlog)
-
-        contentBox.append(userDiv,timeDiv,textDiv, editButton);
+                        contentBox.append(deleteButton);
+                }
+        }
         document.getElementById("headlines").append(button, contentBox);
 }
 
@@ -88,21 +145,39 @@ function setSearchbar (str) {
         return document.getElementById('searchbar').value = str;
 }
 function collapse(id) {
-
-
         let button = document.getElementById(id);
         if(button.value === "YES") {
                 document.getElementById(id + "collapse").style.visibility = "visible";
                 document.getElementById(id + "collapse").style.position = "relative";
+                button.style.backgroundColor = '#ebebeb';
                 button.value = "NO";
 
         }else if (button.value === "NO") {
                 document.getElementById(id + "collapse").style.visibility = "hidden";
                 document.getElementById(id + "collapse").style.position = "absolute";
+                button.style.backgroundColor = 'white';
                 button.value = "YES"
         }
+}
 
+function deletePost(id){
+        let button = document.getElementById(id);
+        button.removeAttribute('onclick');
+        button.setAttribute('onclick', 'deleteForSure(this.id)');
+        button.style.color = 'red';
+        button.style.fontWeight = 'bold';
+}
 
-
-
+function deleteForSure(id){
+        let time = id.slice(0, -6);
+        let url = 'http://localhost:3456/api/deletePost';
+        fetch(url, {
+                method: 'DELETE',
+                body: JSON.stringify({time: time})
+        }).then(function (response){
+                response.text()
+                    .then(function (text){
+                            console.log(text);
+                    })});
+        location.reload();
 }

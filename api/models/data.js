@@ -210,12 +210,52 @@ class Data {
         blogDataArray.push(json);
         blogData = JSON.string(blogDataArray);
         fs.writeFileSync("blogPost.json", blogData);
+
+        let blogDataLight = fs.readFileSync('blogPostLight.json');
+        let blogDataArrayLight = JSON.parse(blogDataLight);
+        blogDataArrayLight.push(json);
+        let index = (blogDataArrayLight.length - 1);
+        blogDataArrayLight[index].
+        blogDataLight = JSON.string(blogDataArrayLight);
+        fs.writeFileSync("blogPostLight.json", blogDataLight);
+
         return "Blog added";
+    }
+
+    deletePost(time){
+        let blogData = fs.readFileSync('blogPost.json');
+        let blogDataArray = JSON.parse(blogData);
+        let temp = [];
+        for(let i = 0; i < blogDataArray.length; i++){
+            if(!blogDataArray[i].time === time){
+                temp.push(blogDataArray[i]);
+            }
+        }
+        blogData = JSON.stringify(temp);
+        fs.writeFileSync("blogPost.json", blogData);
+
+        let blogDataLight = fs.readFileSync('blogPostLight.json');
+        let blogDataArrayLight = JSON.parse(blogDataLight);
+        let tempLight = [];
+        for(let i = 0; i < blogDataArrayLight.length; i++){
+            if(!blogDataArrayLight[i].time === time){
+                tempLight.push(blogDataArrayLight[i]);
+            }
+        }
+        blogDataLight = JSON.stringify(tempLight);
+        fs.writeFileSync("blogPostLight.json", blogDataLight);
+
+        return 'Deleted';
     }
 
     getLibrary(){
         let blogData = fs.readFileSync('blogPost.json');
         return JSON.parse(blogData);
+    }
+
+    getLibraryLight(){
+        let blogDataLight = fs.readFileSync('blogPostLight.json');
+        return JSON.parse(blogDataLight);
     }
 }
 

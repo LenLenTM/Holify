@@ -52,18 +52,26 @@ class RequestController {
         let body;
         req.on('data', function (data){
             body = data;
-        })
-        res.send(model.newPost(post))
+        });
+        res.send(model.newPost(body))
     }
 
-    editPost(){
-    }
-
-    deletePost(){
+    deletePost(req, res){
+        let username = req.params.username;
+        let body;
+        req.on('data', function (data){
+            body = data
+        });
+        console.log(body);
+        res.send(model.deletePost(body));
     }
 
     getLibrary(req, res){
         res.send(model.getLibrary());
+    }
+
+    getLibraryLight(req, res){
+        res.send(model.getLibraryLight());
     }
 
     login(req, res){

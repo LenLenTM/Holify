@@ -12,10 +12,10 @@ routes.get('/getImages/:city', requestController.getImages);
 routes.get('/userLocation', requestController.userLocation);
 routes.get('/getTransportRoute/:origin/:destination', requestController.getTransportRoute);
 
-routes.post('/newPost/ ', requestController.newPost);
-routes.patch('/editPost/ ', requestController.editPost);
-routes.delete('/deletePost/ ', requestController.deletePost);
+routes.post('/newPost', requestController.newPost);
+routes.delete('/deletePost', requestController.deletePost);
 routes.get('/getLibrary', requestController.getLibrary);
+routes.get('/getLibraryLight', requestController.getLibraryLight);
 
 routes.get('/login/:username/:password/:cookie', requestController.login);
 routes.post('/register/:cookie/:email/:username/:password', requestController.register);

@@ -1,211 +1,136 @@
-/* -----------------------------------   Overall   --------------------------------- */
-
 @font-face {
     font-family: 'Avenir';
     src: url('resources/fonts/Avenir.woff') format('woff');
 }
 * {font-family: "Avenir", sans-serif}
 
-body { margin: 0}
-
-/* -----------------------------------   Header   --------------------------------- */
-
-#header {
-    display: flex;
-    width: 100%;
-    height: 110px;
-    background-color: white;
-    font-size: 1.8em;
-    color: grey;
-    text-align: center;
-
-
+body {
+    margin: 0;
+    background-color: #9ae7cd;
 }
 
-/* -----------------------------------   Nav   --------------------------------- */
+nav {
+    position: fixed;
+    width: 100%;
+    height: 90px;
+    background-color: white;
+    font-family: Avenir;
+    font-size: 1.5em;
+    color: grey;
+    z-index: 1;
+}
 
 #navText {
-    align-self: center;
-
-
-}
-#logo {
-    width: 80px;
-    margin-left: 15px;
-    margin-top: 15px;
-}
-#user2 {
-    height: 70px;
     position: absolute;
-    top: 20px;
+    top: 9px;
+    left: 90px;
+}
+
+#logo {
+    width: 70px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+#userIconContainer{
+    position: absolute;
+    top: 12px;
     right: 80px;
+}
+#user {
+    height: 70px;
 }
 #options {
     height: 56px;
     position: absolute;
     right: 10px;
-    top: 25px;
+    top: 18px;
 }
-#username{
-    position: absolute;
-    transform: translate(50%, 0%);
-    top: 6.5%;
-    right: 26.3%;
+#usernameNav{
+    font-family: Avenir;
+    color: grey;
+    position: relative;
+    top: -30px;
+    left: 5%;
     font-size: small;
 }
 
-#image {
-    width: 80px;
-    margin-left: 15px;
-    margin-top: 15px;
+#bar {
+    position: absolute;
+    height: 10px;
+    width: 100%;
+    top: 90px;
+    background-color: #9ae7cd;
+}
 
+/*-----------------------------*/
+
+#searchbarDIV{
+    position: absolute;
+    border-radius: 20px;
+    top: 120px;
+    width: 50%;
+    height: 30px;
+    left: 25%;
 }
-nav{
-    text-align: center;
-    background-color: #9ae7cd;
-}
-.dropbtn {
-    background-color: #9ae7cd;
-    color: white;
-    padding: 1vw;
-    font-size: 1.5vw;
+#searchbar{
+    position: absolute;
+    transform: translate(-50%, 0);
+    top: 0px;
+    left: 50%;
     border: none;
-    cursor: pointer;
-}
-.dropdown {
-    position: relative;
-    display: inline-block;
-    align-items: center;
-    cursor: pointer;
-
-
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: lightgray;}
-
-/* -----------------------------------   Main   --------------------------------- */
-
-/* -----------------------------------   Searchbar   --------------------------------- */
-
-#searchbarDIV {
-    justify-content: center;
+    height: 26px;
+    width: 100%;
+    border-radius: 20px;
     text-align: center;
-    }
-#searchbar {
-    border-radius: 10px;
-    margin-bottom: 5px;
 }
-#searchButton {
-    margin-top: 1vw;
-    background-color: #9ae7cd;
-    color: white;
-    border-style: hidden;
-    font-size: medium;
-    cursor: pointer;
-    border-radius: 10px;
+#headlines{
+    position: absolute;
+    top: 200px;
+    width: 68%;
+    height: 70%;
+    overflow: auto;
+    left: 16%;
+    display: flex;
+    flex-direction: column;
 }
 
-/* -----------------------------------   Blogpost   --------------------------------- */
-button {
+button{
+    border-radius: 25px;
+    border: none;
+    margin-bottom: 20px;
+    height: 50px;
+    font-family: Avenir;
+    background-color: white;
+    color: grey;
 }
-
-#headlines {
-
-}
-#headlines button {
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 15px;
-    font-size: x-large;
-    background: #9ae7cd;
-    max-width: 1000px;
-
-}
-#tags {
-    font-size: initial;
-
-}
-
-.contentBox {
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 15px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
+div[id$='collapse']{
+    background-color: white;
+    margin-bottom: 20px;
+    border-radius: 2%;
     padding: 10px;
-    max-width: 1000px;
-
+    font-family: Avenir;
+    color: grey;
 }
-address {
-    bottom: 0;
-    font-size: 0.75vw;
+button[id$='delete']{
+    background-color: #ebebeb;
+    position: absolute;
+    border-radius: 5px;
+    height: 20px;
+    top: 2%;
+    right: 1%;
 }
 
-/* -----------------------------------   Mobile Version   --------------------------------- */
+/*--------------------------*/
 
-/* -----------------------------------   Main   --------------------------------- */
-
-@media (max-width: 800px) {
-
-    #header {
-        display: flex;
-        justify-content: space-between;
-        text-align: center;
+@media only screen and (min-width: 500px) {
+    #headlines{
+        width: 58%;
+        left: 21%;
     }
-
-    #navText {
-        font-size: 43px;
-        margin-left: -45px;
+    button{
+        height: 50px;
     }
-
-    #logo {
-        height: 80px;
-        width: 80px;
-        align-self: center;
-        margin-left: 1vw;
-
-    }
-
-    #option {
-        align-self: center;
-        height: 18vw;
-        width: 18vw;
-        margin-right: 1vw;
-    }
-
-    /* -----------------------------------   Nav   --------------------------------- */
-
-
-    .dropbtn {
-        background-color: #9ae7cd;
-        color: white;
-        padding: 1vw;
-        font-size: 5vw;
-        border: none;
-        cursor: pointer;
-    }
-
-    /* -----------------------------------   Main   --------------------------------- */
-
-
-
-    #headlines button {
-       width: 100%;
-    }
-
-    #title {
-    }
-
-    /* -----------------------------------   Address   --------------------------------- */
-
-    address {
-        bottom: 0;
-        font-size: 2vw;
+    #searchbar{
+        width: 50%;
     }
 }
