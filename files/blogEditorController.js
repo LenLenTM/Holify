@@ -64,30 +64,39 @@ function checkCookie(){
 
 function collectData() {
 
-    return new Blog(
+    let blog = new Blog(
         document.getElementById('title').value,
-        tinyMCE.activeEditor.getContent(),
+        document.getElementById('blogContent').value,
         document.getElementById('usernameNav').textContent
     );
+    let blogJson = blogToJSON(blog);
+    saveJSON(blogJson);
 }
 
 function blogToJSON(string) {
     let json = JSON.stringify(string)
-    console.log(json);
     return json;
 
 
 }
 
-function saveJSON (JSON) {
-    fetch('http://localhost:3456/api/newPost', {
+async function saveJSON (blogEntry) {
+    console.log(blogEntry);
+
+    let data = new FormData();
+    data.append('json', blogEntry);
+    let response = fetch('http://localhost:3456/api/newPost', {
         method: 'POST',
-        contentType: 'application/json',
-        body: JSON
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: blogEntry
     }).then(function(res){res.text()
         .then(function (text){
             console.log(text);
         })})
+    let answer = await response;
+    console.log(answer);
 }
 
 function jsonToBlog (json) {

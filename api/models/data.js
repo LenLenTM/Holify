@@ -214,8 +214,6 @@ class Data {
         let blogDataLight = fs.readFileSync('blogPostLight.json');
         let blogDataArrayLight = JSON.parse(blogDataLight);
         blogDataArrayLight.push(json);
-        let index = (blogDataArrayLight.length - 1);
-        blogDataArrayLight[index].
         blogDataLight = JSON.stringify(blogDataArrayLight);
         fs.writeFileSync("blogPostLight.json", blogDataLight);
 
