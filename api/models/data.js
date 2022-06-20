@@ -21,7 +21,10 @@ class Location{
 
 class Data {
 
-    async getCity(name) {
+    //---------------------REST services ---------------------------------- ;
+    //https://api-ninjas.com/api/city ,
+    // needed for searchFiledActivated() in mobileMainController;
+    async getCity(name) {           //async means script is executed as soon as possible (vs. defer), always returns a promise;
         let url = 'https://api.api-ninjas.com/v1/city?name=' + name;
 
          let response = fetch(url, {
@@ -29,9 +32,11 @@ class Data {
              headers: {'X-Api-Key': 'vhYp5iFdT8c9Nfgb4v1T3Q==j68KFgrUWXAfpKyJ'},
              contentType: 'application/json',
          }).then(response => response.json());
-        return await response;
+        return await response; //no return before promise is settled
     }
 
+    //https://api-ninjas.com/api/city ,
+    // needed for getFiveBiggestCities(), clickNearestCities(), mainFetch();
     async getCityByCoords(latMin, lonMin, latMax, lonMax, scope) {
         let url;
         if(scope === 10){
@@ -48,6 +53,7 @@ class Data {
         return await response;
     }
 
+    //https://openweathermap.org , needed multiple times, for weather and city Information;
     async getWeather(city, country){
         let url = 'https://community-open-weather-map.p.rapidapi.com/forecast?q=' + city + '%2C' + country;
 
@@ -63,6 +69,7 @@ class Data {
         return await response;
     }
 
+    //https://restcountries.com , needed in function cityInformation();
     async getCityInformation(country){
         let url = 'https://restcountries.com/v3.1/alpha/' + country;
 
@@ -73,7 +80,7 @@ class Data {
 
         return await response;
     }
-
+    //for getImages() in cityInformationController.js , GOOGLE_IMG_SCRAP is npm module;
     async getImages(city){
 
         const { GOOGLE_IMG_SCRAP , GOOGLE_QUERY } = require('google-img-scrap');
@@ -85,6 +92,7 @@ class Data {
         return test;
     }
 
+    //https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html , for getTransportRoute() in cityInformationController.js;
     async getTransportRoute(origin, destination){
         let url = 'https://transit.router.hereapi.com/v8/routes?apiKey=aS8UvScT_UJ5MMroiqglho8U-dCcC6fNDIqfxvR5nXs&origin=' + origin + '&destination=' + destination;
 
@@ -94,7 +102,8 @@ class Data {
         }).then(response => response.json())
         return await response;
     }
-
+    //https://www.geoapify.com ,
+    // was used for user location at getTransportRoute() in citInformationController but yielded only location of ISP;
     async userLocation(){
         let response = fetch("https://api.geoapify.com/v1/ipinfo?&apiKey=b94f067fb31b473592762ee5c90520e1", {
             method: 'GET',
@@ -102,6 +111,7 @@ class Data {
         return await response;
     }
 
+// ------------------ LogIn and Session Management ------------------------ ;
     checkIfUserExistsByName(username){
         let userData = fs.readFileSync('userDB.json');
         let userDataArray = JSON.parse(userData);

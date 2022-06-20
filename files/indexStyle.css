@@ -1,4 +1,4 @@
-/*@font-face specifies a custom font with which to display text */
+/*@font-face specifies a custom font to display text with */
 @font-face {
     font-family: 'Avenir';
     src: url('resources/fonts/Avenir.woff') format('woff');
@@ -41,7 +41,7 @@ body {
     color: slategrey;
 }
 
-
+/* responsive design for mobile devices */
 @media only screen and (min-width: 500px){
 
     #logo{
@@ -56,6 +56,7 @@ body {
         font-size: 30pt;
         transform: translate(-5%, 40%);
     }
+
     #light{
         position: absolute;
         top: 90%;

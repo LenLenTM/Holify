@@ -145,7 +145,7 @@ function zoomMap(event) {
     appendBackUp();
     removeSearchBar();
 }
-
+//https://api-ninjas.com/api/city , gets city by coordinates;
 function getFiveBiggestCities(){
     let bounds = map.getBounds();
     let southWest = bounds.getSouthWest();
@@ -178,6 +178,7 @@ function getFiveBiggestCities(){
 }
 
 /* Get up to 5 cities where the user clicked */
+//https://api-ninjas.com/api/city , gets city by coordinates;
 function clickNearestCities() {
 
     /* define the square around the click in which to search for cities */
@@ -203,7 +204,7 @@ function clickNearestCities() {
     window.setTimeout(mainFetch, 250);
     /* get the city data */
 }
-
+//https://api-ninjas.com/api/city , gets city by coordinates;
 function mainFetch(){
     let url = 'http://localhost:3456/api/getCity/' + latMin + '/' + latMax + '/' + lonMin + '/' + lonMax + '/1';
 
@@ -357,7 +358,7 @@ function createMarker(responseArray, boolean) {
         if (boolean) {
             let label = {text: responseArray[i].name, fontFamily: 'Avenir', color: 'grey'};
             let marker = new google.maps.Marker({position: position, icon: icon, label: label, map: map});
-            if(lightWeight === true){
+            if(light === true){
                 marker.addListener('click', function (){
                     window.location.href = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country + '&light=true';
                 })
