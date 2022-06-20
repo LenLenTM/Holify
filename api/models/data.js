@@ -221,19 +221,6 @@ class Data {
         blogData = JSON.stringify(blogDataArray);
         fs.writeFileSync("blogPost.json", blogData);
 
-        let content = json.content;
-        let content1 = content.substring(0, content.indexOf('<img'));
-        let content2 = content.substring(content.indexOf('">'), content.indexOf('"'));
-
-        content = content1 + content2;
-        console.log(content);
-
-        let blogDataLight = fs.readFileSync('blogPostLight.json');
-        let blogDataArrayLight = JSON.parse(blogDataLight);
-        blogDataArrayLight.push(json);
-        blogDataLight = JSON.stringify(blogDataArrayLight);
-        fs.writeFileSync("blogPostLight.json", blogDataLight);
-
         return "Blog added";
     }
 
@@ -249,17 +236,6 @@ class Data {
         blogData = JSON.stringify(temp);
         fs.writeFileSync("blogPost.json", blogData);
 
-        let blogDataLight = fs.readFileSync('blogPostLight.json');
-        let blogDataArrayLight = JSON.parse(blogDataLight);
-        let tempLight = [];
-        for(let i = 0; i < blogDataArrayLight.length; i++){
-            if(!(blogDataArrayLight[i].title === title)){
-                tempLight.push(blogDataArrayLight[i]);
-            }
-        }
-        blogDataLight = JSON.stringify(tempLight);
-        fs.writeFileSync("blogPostLight.json", blogDataLight);
-
         return 'Deleted';
     }
 
@@ -268,10 +244,6 @@ class Data {
         return JSON.parse(blogData);
     }
 
-    getLibraryLight(){
-        let blogDataLight = fs.readFileSync('blogPostLight.json');
-        return JSON.parse(blogDataLight);
-    }
 }
 
 module.exports = new Data();
