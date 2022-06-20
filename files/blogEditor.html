@@ -14,62 +14,31 @@
     <a href="index.html">
         <div> <img src="resources/Holify.png" alt="Holify Logo" id="logo"> </div>
     </a>
-    <h1 id="navText">HOLIFY</h1>
-    <a href="login.html">
-        <img src="resources/UserIcon.png" id="user2" alt="user icon">
-    </a>
-    <a href="blogLibrary.html">
-        <img src="resources/Options.png" id="options" alt="options">
-    </a>
-</header>
+    <p id="navText">HOLIFY</p>
+    <div id="userIconContainer">
+        <img src="resources/UserIcon.png" id="user2" alt="login" onclick="userLogin()">
+    </div>
+    <img src="resources/Options.png" id="options" alt="blog" onclick="blogLibrary()">
+</nav>
 
 
 
 <main>
-    <form autocomplete="off">
+    <form autocomplete="off" id="form">
         <script src='resources/tinymce/tinymce.min.js'></script>
 
         <script>tinymce.init({
             selector: "#blogContent"
         });
         </script>
-
-        <label for="title"> What is the title of your adventure? </label>
-        <textarea name="title" id="title" cols="30" rows="2" placeholder= "Write your title"></textarea>
-
-        <label for="blogContent">Tell us your travel experiences!</label><textarea name="blog" id="blogContent" ></textarea>
-
-        <div id = tags>
-        <h2>Tags</h2>
-        <p>Press comma or click the add button to create a tag.</p>
-        <div class="input-container">
-            <label for="input"></label><input type="text" id="input" placeholder="Enter tags . . .">
-            <button id="add-button">Add</button>
-
-        </div>
-        <div class="tag-container" id = "tag-container">
-            <br>
-        </div>
-        </div>
+        <textarea name="title" id="title" cols="30" rows="2" placeholder= "Title for your adventure"></textarea>
+        <textarea name="blog" id="blogContent" ></textarea>
 
         <input type="submit" value="Submit" id="submitButton" onclick="saveJSON(blogToJSON(collectData())); //location.href='blogLibrary.html'">
     </form>
 </main>
 
-<script src="tag.js"></script>
 <script src="blogEditorController.js"></script>
 
-
-
-<address>
-    Written by <a href="mailto:nikolaus.kapfer-rupp@stud.fh-campuswien.ac.at">Nikolaus Kapfer-Rupp</a><br>
-    Visit us at:<br>
-    wwww.holify.com<br>
-    Favoritenstraße 226, 1100 Wien
-    <br>
-    Austria
-</address>
-
 </body>
-
 </html>

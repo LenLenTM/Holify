@@ -9,40 +9,22 @@
     <script src="blogLibrary.js"></script>
 </head>
 
-<body id="body" onload="initLibrary()">
-<header id = header>
+<nav id ="nav">
     <a href="index.html">
         <div> <img src="resources/Holify.png" alt="Holify Logo" id="logo"> </div>
     </a>
-    <h1 id="navText">HOLIFY</h1>
-    <a href="login.html">
-        <img src="resources/UserIcon.png" id="user2" alt="user icon">
-    </a>
-    <a href="blogLibrary.html">
-        <img src="resources/Options.png" id="options" alt="options">
-    </a>
-</header>
-
-<main>
-    <br>
-    <div id="searchbarDIV">
-        <label for=searchbar></label>
-        <input type="text" id=searchbar placeholder="Search..">
-        <button type="button" id = "searchButton" onclick="">Go</button>
+    <p id="navText">HOLIFY</p>
+    <div id="userIconContainer">
+        <img src="resources/UserIcon.png" id="user2" alt="login" onclick="userLogin()">
     </div>
+    <img src="resources/Options.png" id="options" alt="blog" onclick="">
+</nav>
 
-
+<body id="body">
+<main id="main">
     <div id = "headlines">
     </div>
 </main>
-<address>
-    Written by <a href="mailto:nikolaus.kapfer-rupp@stud.fh-campuswien.ac.at">Nikolaus Kapfer-Rupp</a><br>
-    Visit us at:<br>
-    wwww.holify.com<br>
-    Favoritenstraße 226, 1100 Wien
-    <br>
-    Austria
-</address>
 </body>
 
 
