@@ -131,7 +131,7 @@ function blogPostConstructor(blogPost) {
         if(document.getElementById('usernameNav')){
                 if(blogPost.user.toUpperCase() === document.getElementById('usernameNav').textContent){
                         let deleteButton = document.createElement("button");
-                        deleteButton.setAttribute("id", blogPost.time + 'delete');
+                        deleteButton.setAttribute("id", blogPost.title + 'delete');
                         deleteButton.innerHTML = 'Delete Blog';
                         deleteButton.setAttribute('onClick', 'deletePost(this.id)');
 
@@ -169,11 +169,11 @@ function deletePost(id){
 }
 
 function deleteForSure(id){
-        let time = id.slice(0, -6);
-        let url = 'http://localhost:3456/api/deletePost';
+        let title = id.slice(0, -6);
+        let url = 'http://localhost:3456/api/deletePost/' + title;
         fetch(url, {
                 method: 'DELETE',
-                body: JSON.stringify({time: time})
+                contentType: 'application/json',
         }).then(function (response){
                 response.text()
                     .then(function (text){

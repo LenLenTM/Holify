@@ -13,7 +13,7 @@ routes.get('/userLocation', requestController.userLocation);
 routes.get('/getTransportRoute/:origin/:destination', requestController.getTransportRoute);
 
 routes.post('/newPost', requestController.newPost);
-routes.delete('/deletePost', requestController.deletePost);
+routes.delete('/deletePost/:title', requestController.deletePost);
 routes.get('/getLibrary', requestController.getLibrary);
 routes.get('/getLibraryLight', requestController.getLibraryLight);
 
