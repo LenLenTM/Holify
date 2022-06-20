@@ -64,25 +64,7 @@ nav {
 
 /*-----------------------------*/
 
-#searchbarDIV{
-    position: absolute;
-    border-radius: 20px;
-    top: 120px;
-    width: 50%;
-    height: 30px;
-    left: 25%;
-}
-#searchbar{
-    position: absolute;
-    transform: translate(-50%, 0);
-    top: 0px;
-    left: 50%;
-    border: none;
-    height: 26px;
-    width: 100%;
-    border-radius: 20px;
-    text-align: center;
-}
+
 #headlines{
     position: absolute;
     top: 200px;
@@ -121,8 +103,8 @@ button[id$='delete']{
 }
 #openEditor{
     position: absolute;
-    right: 10px;
-    top: 120px;
+    left: 10px;
+    top: 100px;
     height: 30px;
 }
 

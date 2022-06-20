@@ -220,7 +220,7 @@ class Data {
         let blogData = fs.readFileSync('blogPost.json');
         let blogDataArray = JSON.parse(blogData);
         blogDataArray.push(json);
-        blogData = JSON.string(blogDataArray);
+        blogData = JSON.stringify(blogDataArray);
         fs.writeFileSync("blogPost.json", blogData);
 
         let blogDataLight = fs.readFileSync('blogPostLight.json');
@@ -228,7 +228,7 @@ class Data {
         blogDataArrayLight.push(json);
         let index = (blogDataArrayLight.length - 1);
         blogDataArrayLight[index].
-        blogDataLight = JSON.string(blogDataArrayLight);
+        blogDataLight = JSON.stringify(blogDataArrayLight);
         fs.writeFileSync("blogPostLight.json", blogDataLight);
 
         return "Blog added";

@@ -1,212 +1,123 @@
-/* -----------------------------------   Overall   --------------------------------- */
-
 @font-face {
     font-family: 'Avenir';
     src: url('resources/fonts/Avenir.woff') format('woff');
 }
 * {font-family: "Avenir", sans-serif}
 
-body { margin: 0}
-
-/* -----------------------------------   Header   --------------------------------- */
-
-header {
-    display: flex;
-    width: 100%;
-    height: 110px;
-    background-color: white;
-    font-size: 1.8em;
-    color: grey;
-    text-align: center;
+body {
+    margin: 0;
+    background-color: #9ae7cd;
 }
 
-/* -----------------------------------   Nav   --------------------------------- */
+nav {
+    position: fixed;
+    width: 100%;
+    height: 90px;
+    background-color: white;
+    font-family: Avenir;
+    font-size: 1.5em;
+    color: grey;
+    z-index: 1;
+}
 
 #navText {
-    left: 120px;
-    margin-left: 10px;
-    align-self: center;
-    border-radius: 15px ;
-}
-#logo {
-    width: 80px;
-    margin-left: 15px;
-    margin-top: 15px;
-}
-#user2 {
-    height: 70px;
     position: absolute;
-    top: 20px;
+    top: 9px;
+    left: 90px;
+}
+
+#logo {
+    width: 70px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+#userIconContainer{
+    position: absolute;
+    top: 12px;
     right: 80px;
+}
+#user {
+    height: 70px;
 }
 #options {
     height: 56px;
     position: absolute;
     right: 10px;
-    top: 25px;
+    top: 18px;
 }
-#image {
-    width: 80px;
-    margin-left: 15px;
-    margin-top: 15px;
-}
-
-/* -----------------------------------   Main   --------------------------------- */
-
-main {
-    display: grid;
-    justify-content: center;
-    text-align: center;
-    background: #9ae7cd;
-
-}
-
-label {
-    font-size: larger;
+#usernameNav{
+    font-family: Avenir;
     color: grey;
-
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    border-radius: 12px;
-    background: white;
-    margin-bottom: 5px;
-    border: black;
-    border-width: thin;
-    margin-top: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    position: relative;
+    top: -30px;
+    left: 5%;
+    font-size: small;
 }
 
-#title {
-    border-radius: 12px;
-}
-
-form {
-    text-align: center;
-    justify-content: center;
-    width: 100%;
-
-}
-
-
-.tox-statusbar__branding{visibility: hidden}
-
-/* -----------------------------------   Textarea   --------------------------------- */
-
-#title, #user {
-    width: 50vw
-}
-
-/* -----------------------------------   Tags   --------------------------------- */
-
-#tags {
-    background: white;
-    border-radius: 12px;
-}
-.input-container label {
-    height: 0;
+#bar {
     position: absolute;
-    visibility: hidden;
-}
-.tag {
-    color: white;
+    height: 10px;
+    width: 100%;
+    top: 90px;
     background-color: #9ae7cd;
-    border-width: 1px;
-    border-style: groove;
-    border-color: #9ae7cd;
-    border-radius: 12px;
-    margin-right: 1px;
 }
 
-#tag-container {
-    padding-bottom: 5px;
+/*-------------------------------*/
+
+#form{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 90px;
+    width: 100%;
 }
-.remove-tag {
-    color: white;
-    margin-left: 1vw;
-    cursor: pointer;
+#title{
+    margin: 10px;
+    position: relative;
+    alignment: center;
+    width: 50%;
+    height: 30px;
+    left: 22%;
+    resize: none;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 30px;
+}
+.tox{
+    width: 100%;
+}
+#submitButton{
+    position: absolute;
+    width: 50%;
+    border: none;
+    border-radius: 20px;
+    left: 25%;
+    height: 30px;
+    color: grey;
+    background-color: white;
+    top: 105%;
 }
 
-/* -----------------------------------   Buttons   --------------------------------- */
+/*----------------------------------------*/
 
-#submitButton, #add-button {
-    margin-top: 1vw;
-    background-color: #9ae7cd;
-    color: white;
-    border-style: hidden;
-    font-size: medium;
-    cursor: pointer;
-}
-#submitButton {
-    height: 3vw ;
-    width: 10vw;
-}
-address {
-    bottom: 0;
-    font-size: 15px;
-}
-
-/* -----------------------------------   Mobile Version   --------------------------------- */
-
-/* -----------------------------------   Header   --------------------------------- */
-
-@media (max-width: 800px) {
-
-    #header {
-        display: flex;
-        text-align: center;
-        justify-content: space-between;
-
+@media only screen and (min-width: 500px) {
+    #add-button{
+        width: 20%;
+        left: 60%;
+        height: 30px;
+        top: 82%;
     }
-
-    #logo {
-        height: 80px;
-        width: 80px;
-        align-self: center;
-        margin-left: 1vw;
+    #input{
+        width: 30%;
+        left: 25%;
     }
-    #userIcon {
-        height: 20vw;
-        width: 18vw;
-        align-self: center;
-        margin-right: 3vw;
+    #submitButton{
+        width: 30%;
+        left: 35%;
     }
-    #option {
-        align-self: center;
-        height: 18vw;
-        width: 18vw;
-        margin-right: 1vw;
+    #title{
+        width: 36%;
+        left: 32%;
     }
-
-    /* -----------------------------------   Nav   --------------------------------- */
-
-    #navText {
-        font-size: 43px;
-        margin-left: -45px;
-    }
-    /* -----------------------------------   Button   --------------------------------- */
-
-    #title {width: 98%;
-    }
-
-    /* -----------------------------------   Button   --------------------------------- */
-
-    #submitButton {
-        margin-top: 2vw;
-        background-color: #9ae7cd;
-        color: white;
-        height: 10vw;
-        width: 20vw;
-        border-style: hidden;
-        font-size: medium;
-        cursor: pointer;
-    }
-
-    /* -----------------------------------   Address   --------------------------------- */
-
-    address {
-         bottom: 0;
-         font-size: 2vw;
-     }
 }
