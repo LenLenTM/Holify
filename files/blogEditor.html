@@ -10,16 +10,20 @@
 </head>
 
 <body onload="initEditorPage()">
-<nav id ="nav">
+<header id = header>
     <a href="index.html">
         <div> <img src="resources/Holify.png" alt="Holify Logo" id="logo"> </div>
     </a>
-    <p id="navText">HOLIFY</p>
-    <div id="userIconContainer">
-        <img src="resources/UserIcon.png" id="user2" alt="login" onclick="userLogin()">
-    </div>
-    <img src="resources/Options.png" id="options" alt="blog" onclick="">
-</nav>
+    <h1 id="navText">HOLIFY</h1>
+    <a href="login.html">
+        <img src="resources/UserIcon.png" id="user2" alt="user icon">
+    </a>
+    <a href="blogLibrary.html">
+        <img src="resources/Options.png" id="options" alt="options">
+    </a>
+</header>
+
+
 
 <main>
     <form autocomplete="off">
@@ -55,8 +59,6 @@
 
 <script src="tag.js"></script>
 <script src="blogEditorController.js"></script>
-<script src="blogLibrary.js"></script>
-
 
 
 
