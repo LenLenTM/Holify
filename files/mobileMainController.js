@@ -357,7 +357,7 @@ function createMarker(responseArray, boolean) {
         if (boolean) {
             let label = {text: responseArray[i].name, fontFamily: 'Avenir', color: 'grey'};
             let marker = new google.maps.Marker({position: position, icon: icon, label: label, map: map});
-            if(lightWeight === true){
+            if(light === true){
                 marker.addListener('click', function (){
                     window.location.href = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country + '&light=true';
                 })
@@ -455,7 +455,7 @@ function searchFiledActivated(event) {
                     document.getElementById('searchText').value = "";
                 } else {
                     city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
-                    if(lightWeight === true){
+                    if(light === true){
                         window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country + '&light=true';
                     }
                     else {
