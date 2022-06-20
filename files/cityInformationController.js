@@ -414,23 +414,13 @@ function drawTransportRoute(data){
         let p3 = document.createElement('p');
         p3.setAttribute('id', 'departure-time');
         let text1;
-        if(window.innerWidth < 500){                            //responsive design;
-            text1 = stages[i].departure.time.toString().slice(11, 16);
-        }
-        else {
-            text1 = stages[i].departure.time.toString().slice(11, 22)
-        }
+        text1 = stages[i].departure.time.toString().slice(11, 16);
         p3.innerText = text1;
 
         let p4 = document.createElement('p');
         p4.setAttribute('id', 'arrival-time');
         let text2;
-        if(window.innerWidth < 500){
-            text2 = stages[i].arrival.time.toString().slice(11, 16);
-        }
-        else {
-            text2 = stages[i].arrival.time.toString().slice(11, 22);
-        }
+        text2 = stages[i].arrival.time.toString().slice(11, 16);
         p4.innerText = text2;
 
         let divName = document.createElement('div');            //DOM element for station name;

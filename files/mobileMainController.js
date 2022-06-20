@@ -310,11 +310,20 @@ function createPopUp(responseArray) {
             divContainer.push(eval('let' + div + digit + ' = document.createElement(\'div\');'));
         }
         for (let i = 0; i < 5; i++) {
-            let url = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country;
+            let url;
+            if(light === true){
+                url = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country + '&light=true';
+            }
+            else{
+                url = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country;
+            }
             citiesContainer[i] = document.createElement('a');
             citiesContainer[i].setAttribute('href', url);
             divContainer[i] = document.createElement('div');
             divContainer[i].setAttribute('id', 'city' + (i + 1));
+            if(nameArray[i].length > 14){
+                nameArray[i].slice(0, 15);
+            }
             divContainer[i].innerText = nameArray[i].toUpperCase();
             citiesContainer[i].appendChild(divContainer[i]);
             citiesDiv.append(citiesContainer[i]);
@@ -431,6 +440,7 @@ function appendSearchBar() {
 
 function searchFiledActivated(event) {
     let entry = document.getElementById('searchText').value;
+    console.log(entry);
     if (event.keyCode === 13) {
         event.preventDefault();
     }

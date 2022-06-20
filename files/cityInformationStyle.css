@@ -297,10 +297,10 @@ nav {
         justify-content: space-evenly;
         position: absolute;
         top: 25%;
+        width: 100%;
     }
     #icon {
-        width: 12%;
-        padding: 12px;
+        width: 60px;
     }
     .days-box {
         position: absolute;
@@ -389,9 +389,9 @@ nav {
 
     #transIcon {
         position: absolute;
-        width: 14%;
-        top: 0%;
-        left: 0%;
+        width: 70px;
+        top: 8px;
+        left: 15px;
     }
 
     #departure-time {
