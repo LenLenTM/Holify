@@ -104,7 +104,7 @@ function userLogin(){
     }
 }
 function blogLibrary(){
-    if(lightWeight === true){
+    if(light === true){
         location.href = "blogLibrary.html?light=true";
     }
     else{

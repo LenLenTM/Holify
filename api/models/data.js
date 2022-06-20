@@ -212,6 +212,11 @@ class Data {
         fs.writeFileSync("blogPost.json", blogData);
         return "Blog added";
     }
+
+    getLibrary(){
+        let blogData = fs.readFileSync('blogPost.json');
+        return JSON.parse(blogData);
+    }
 }
 
 module.exports = new Data();

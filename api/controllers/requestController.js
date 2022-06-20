@@ -48,7 +48,11 @@ class RequestController {
     }
 
     newPost(req, res){
-        let post = req.body();
+        //let post = req.body();
+        let body;
+        req.on('data', function (data){
+            body = data;
+        })
         res.send(model.newPost(post))
     }
 
@@ -56,6 +60,10 @@ class RequestController {
     }
 
     deletePost(){
+    }
+
+    getLibrary(req, res){
+        res.send(model.getLibrary());
     }
 
     login(req, res){
@@ -139,8 +147,6 @@ class RequestController {
     username(req, res){
         let cookie = req.params.cookie;
         res.send(model.username(cookie));
-
-        let post = req.body();
     }
 
     getUser(req, res){
