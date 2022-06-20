@@ -1,10 +1,10 @@
 /* -----------------------------------   Overall   --------------------------------- */
-
+/*@font-face specifies a custom font to display text with */
 @font-face {
     font-family: 'Avenir';
     src: url('resources/fonts/Avenir.woff') format('woff');
 }
-
+/* * selects all elements */
 * {font-family: "Avenir", sans-serif}
 
 body {
@@ -94,6 +94,7 @@ nav {
     color: grey;
     padding-top: 8px;
 }
+/* selects elements with placeholder text */
 ::placeholder {
     color: lightgray;
 }
@@ -115,6 +116,7 @@ nav {
     width: 50%;
     text-align: center;
 }
+/* hyperlink is created */
 #citiesDiv > a {
     font-family: "Avenir", sans-serif;
     font-weight: bold;
@@ -130,7 +132,7 @@ nav {
 }
 
 /* https://stackoverflow.com/questions/12499886/how-to-hide-or-disable-the-google-logo-footer-copyright-on-google-maps-javascr */
-
+/* selector for ids containing the specified url */
 a[href^="http://maps.google.com/maps"],
 a[href^="https://maps.google.com/maps"],
 a[href^="https://www.google.com/maps"] {

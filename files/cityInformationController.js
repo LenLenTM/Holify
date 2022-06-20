@@ -196,7 +196,8 @@ function displayWeather(){
 }
 
 //---------------------------- Display Images of City -------------------------------------;
-//called in getWeather(), https://openweathermap.org gives useful information aside from weather;
+//called in getWeather(), images from GOOGLE_IMG_SCRAP (getImages function in data.js),
+// https://openweathermap.org gives useful information aside from weather;
 function getImages(){
     if(light === false) {       //images not displayed in light weight version;
         cityImages = [];
