@@ -11,7 +11,7 @@ let latMin;
 let latMax;
 let lonMin;
 let lonMax;
-let lightWeight = false;
+let light = false;
 
 
 /* Cities received from Cities API */
@@ -27,7 +27,7 @@ function City(name, latitude, longitude, country, population) {
 function initMap() {
     let paraString = window.location.search;
     let parameter = new URLSearchParams(paraString);
-    if (parameter.get('lw')){lightWeight = true;}
+    if (parameter.get('light')){light = true;}
 
     map = new google.maps.Map(document.getElementById("worldMap"), {
         zoom: zoom,
@@ -95,15 +95,32 @@ function initMap() {
 }
 window.initMap = initMap;
 
+function userLogin(){
+    if(lightWeight === true){
+        location.href = "login.html?light=true";
+    }
+    else{
+        location.href = "login.html";
+    }
+}
+function blogLibrary(){
+    if(lightWeight === true){
+        location.href = "blogLibrary.html?light=true";
+    }
+    else{
+        location.href = "blogLibrary.html";
+    }
+}
+
 function checkCookie(){
     let value = '';
-    let cookie = 'connect.sid=s%3Av6whpb6LtXy7eHU2VhfEhyi6Pw1uPr_Y.0PIFoQ4on8TlM2pzAaA8gpaloqxSPrTNakZ7j3eI9Rs'; //document.cookie.toString();
+    let cookie = document.cookie.toString();
     let cookieArray = cookie.split('');
     for(let i = 0; i < cookie.length; i++){
         let num = cookieArray[i].charCodeAt(0).toString();
         value = value + num;
     }
-    let url = 'http://localhost:3456/api/username/' + value;
+    let url = 'http://localhost:3456/api/username/12' //+ value;
     fetch(url, {
         methode: 'GET'
     }).then(function (response){
@@ -114,9 +131,9 @@ function checkCookie(){
                 if(name !== 'NO'){
                     document.getElementById('user').src = 'resources/UserIcon_logged.png';
                     let username = document.createElement('p');
-                    username.setAttribute('id', 'username');
+                    username.setAttribute('id', 'usernameNav');
                     username.innerText = name.toUpperCase();
-                    document.getElementById('nav').append(username);
+                    document.getElementById('userIconContainer').append(username);
                 }
             })})
 }
@@ -340,9 +357,16 @@ function createMarker(responseArray, boolean) {
         if (boolean) {
             let label = {text: responseArray[i].name, fontFamily: 'Avenir', color: 'grey'};
             let marker = new google.maps.Marker({position: position, icon: icon, label: label, map: map});
-            marker.addListener('click', function (){
-                window.location.href = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country;
-            })
+            if(lightWeight === true){
+                marker.addListener('click', function (){
+                    window.location.href = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country + '&light=true';
+                })
+            }
+            else{
+                marker.addListener('click', function (){
+                    window.location.href = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country;
+                })
+            }
             markerList.push(marker);
         }
         else {
@@ -407,8 +431,9 @@ function appendSearchBar() {
 
 function searchFiledActivated(event) {
     let entry = document.getElementById('searchText').value;
-    event.preventDefault();
-
+    if (event.keyCode === 13) {
+        event.preventDefault();
+    }
     if (event.keyCode === 13 && entry.length > 3) {
 
         let url = 'http://localhost:3456/api/getCity/' + entry;
@@ -431,7 +456,7 @@ function searchFiledActivated(event) {
                 } else {
                     city = new City(data[0].name, data[0].latitude, data[0].longitude, data[0].country, data[0].population);
                     if(lightWeight === true){
-                        window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country + '&lw=true';
+                        window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country + '&light=true';
                     }
                     else {
                         window.location.href = 'cityInformation.html?city=' + city["name"] + '&country=' + city.country;

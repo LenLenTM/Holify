@@ -11,6 +11,13 @@ class User{
         this.xoj = xoj;
     }
 }
+class Location{
+    constructor(cookie, lat, lon) {
+        this.cookie = cookie;
+        this.lat = lat;
+        this.lon = lon;
+    }
+}
 
 class Data {
 

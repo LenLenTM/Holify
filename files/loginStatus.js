@@ -18,8 +18,8 @@ function removePaneChildren(){
 
 function activateKey(event){
     let key = window.event.keyCode;
-    event.preventDefault();
     if(key === 13){
+        event.preventDefault();
         if(document.getElementById('Login')){
             login();
         }
@@ -57,7 +57,7 @@ function checkCookie(){
                     let username = document.createElement('p');
                     username.setAttribute('id', 'usernameNav');
                     username.innerText = name.toUpperCase();
-                    document.getElementById('nav').append(username);
+                    document.getElementById('userIconContainer').append(username);
                     loginStatus = true;
                 }
                 setUp();
@@ -236,6 +236,10 @@ function register(){
                 else if(text === 'Password too short.'){
                     document.getElementById('passwordInput').value = '';
                     document.getElementById('passwordInput').setAttribute('placeholder', text);
+                }
+                else if(text === 'Username too long.'){
+                    document.getElementById('usernameInput').value = '';
+                    document.getElementById('usernameInput').setAttribute('placeholder', text);
                 }
                     });});
 }
