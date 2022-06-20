@@ -1,8 +1,9 @@
+/*@font-face specifies a custom font with which to display text */
 @font-face {
     font-family: 'Avenir';
     src: url('resources/fonts/Avenir.woff') format('woff');
 }
-
+/* * selects all elements */
 * {font-family: "Avenir", sans-serif}
 
 body {
