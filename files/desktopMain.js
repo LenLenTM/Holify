@@ -27,7 +27,7 @@ function City(name, latitude, longitude, country, population) {
 function initMap() {
     console.log("Test");
     map = new google.maps.Map(document.getElementById("worldMap"), {
-        zoom: 2,
+        zoom: 2.4,
         center: {lat: 0, lng: 10 },
         styles: mapStyle,
         disableDefaultUI: true,
@@ -390,7 +390,7 @@ function appendBackUp() {
     back.style.width = `${(15 * 100 /screen.width)}`
     back.setAttribute('onclick', 'backUp()');
     back.setAttribute('id', 'backUp');
-    document.getElementById('buttons').append(back);
+   // document.getElementById('buttons').append(back);
 }
 
 function removeBackUp() {
@@ -406,7 +406,7 @@ function appendSearchBar() {
     search.setAttribute('placeholder', 'Search for a city ...');
     search.addEventListener("keydown", searchFiledActivated);
     search.style.width = '52%';     /* generate a relative style which works for all mobiles */
-    search.style.top = `${(window.innerHeight - 60)}` + 'px';
+    search.style.top = `${(window.innerHeight + 200)}` + 'px';
     search.style.left = `${(screen.width / 2) - (26 * screen.width / 100)}` + 'px';
     search.style.width = `${(52 * 100 /screen.width)}`
     search.style.resize = 'none';
@@ -490,7 +490,7 @@ function appendTip() {
         }
 
         tip.style.width = '40%'; /* generate a relative style which works for all mobiles */
-        tip.style.top = `${(window.innerHeight - 160)}` + 'px';
+        tip.style.top = `${(window.innerHeight - 600)}` + 'px';
         tip.style.left = `${(screen.width / 2) - (20 * screen.width / 100)}` + 'px';
         tip.style.resize = 'none';
         tip.setAttribute('readonly', '');
