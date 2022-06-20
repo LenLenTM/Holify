@@ -1,10 +1,10 @@
 /* -----------------------------------   Overall   --------------------------------- */
-
+/*@font-face specifies a custom font with which to display text */
 @font-face {
     font-family: 'Avenir';
     src: url('resources/fonts/Avenir.woff') format('woff');
 }
-
+/* * selects all elements */
 * {font-family: "Avenir", sans-serif}
 
 body {
@@ -22,7 +22,7 @@ nav {
     font-family: Avenir;
     font-size: 1.5em;
     color: grey;
-    z-index: 1;
+    z-index: 1; /* z-index specifies stack order of element */
 }
 
 #navText {
@@ -67,7 +67,7 @@ nav {
     background-color: #9ae7cd;
 }
 
-
+/* responsive design */
 @media only screen and (max-width: 499px) {
     /* -----------------------------------   Main   --------------------------------- */
     #progBar {
@@ -150,6 +150,7 @@ nav {
         object-fit: cover;
         padding: 1%;
     }
+    /* used in drawNoImages() in cityInformationController.js */
     #noImage{
         font-family: Avenir;
         font-size: xxx-large;
@@ -185,7 +186,7 @@ nav {
         font-size: small;
         color: grey;
     }
-
+    /* selector for ids containing "stage", needed for drawTransportRoute() in cityInformationController.js  */
     [id^="stage"] {
         position: absolute;
         width: 96%;
@@ -193,43 +194,44 @@ nav {
         height: 8.5%;
         background-color: white;
     }
-
+    /* getTransportRoute() in cityInformationController.js*/
     #origin {
         position: absolute;
         margin-top: 0;
         top: 17%;
         left: 24%
     }
-
+    /* getTransportRoute() in cityInformationController.js*/
     #destination {
         position: absolute;
         margin-top: 0;
         top: 17%;
         left: 62%
     }
-
+    /* icon for means of transportation, drawTransportRoute() in cityInformationController.js */
     #transIcon {
         position: absolute;
         width: 20%;
         top: 0%;
         left: 0%;
     }
-
+    /* drawTransportRoute() in cityInformationController.js */
     #departure-time {
         position: absolute;
         top: 30%;
         left: 24%;
     }
-
+    /* drawTransportRoute() in cityInformationController.js */
     #arrival-time {
         position: absolute;
         top: 30%;
         left: 62%;
     }
 }
-
+/* responsive design, desktop version*/
 @media only screen and (min-width: 500px){
 
+    /* grid layout*/
     #main{
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -244,6 +246,7 @@ nav {
     #weatherInformation {grid-area: c3}
     #transit {grid-area: c4}
 
+    /* removed in leightweight version, drawNoImages*/
     #progBar {
         position: absolute;
         width: 16%;
@@ -354,6 +357,7 @@ nav {
     }
 
     /*-----------------------------*/
+    /* drawTransportRoute(), getTransportRoute() in cityInformationController.js */
 
     #transit {
         font-family: Avenir;
