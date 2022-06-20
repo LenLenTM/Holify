@@ -14,12 +14,16 @@
     <a href="index.html">
         <div> <img src="resources/Holify.png" alt="Holify Logo" id="logo"> </div>
     </a>
-    <p id="navText">HOLIFY</p>
-    <div id="userIconContainer">
-        <img src="resources/UserIcon.png" id="user2" alt="login" onclick="userLogin()">
-    </div>
-    <img src="resources/Options.png" id="options" alt="blog" onclick="">
-</nav>
+    <h1 id="navText">HOLIFY</h1>
+    <a href="login.html">
+        <img src="resources/UserIcon.png" id="user2" alt="user icon">
+    </a>
+    <a href="blogLibrary.html">
+        <img src="resources/Options.png" id="options" alt="options">
+    </a>
+</header>
+
+
 
 <main>
     <form autocomplete="off">
@@ -30,14 +34,12 @@
         });
         </script>
 
-        <label for="user"> Here's space to write your name!</label>
-        <textarea name="user" id="user" cols="30" rows="2" placeholder= "Write your name"></textarea>
-
         <label for="title"> What is the title of your adventure? </label>
         <textarea name="title" id="title" cols="30" rows="2" placeholder= "Write your title"></textarea>
 
         <label for="blogContent">Tell us your travel experiences!</label><textarea name="blog" id="blogContent" ></textarea>
 
+        <div id = tags>
         <h2>Tags</h2>
         <p>Press comma or click the add button to create a tag.</p>
         <div class="input-container">
@@ -48,8 +50,9 @@
         <div class="tag-container" id = "tag-container">
             <br>
         </div>
+        </div>
 
-        <input type="submit" value="Submit" id="submitButton" onclick="saveJSON(blogToJSON(collectData())); location.href='blogLibrary.html'">
+        <input type="submit" value="Submit" id="submitButton" onclick="saveJSON(blogToJSON(collectData())); //location.href='blogLibrary.html'">
     </form>
 </main>
 
