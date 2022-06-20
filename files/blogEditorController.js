@@ -1,5 +1,6 @@
 let tagArray = [];
 
+
 class Blog {
     constructor(title, content, tags, user) {
 
@@ -57,17 +58,26 @@ function collectData() {
 }
 
 function blogToJSON(string) {
-    let test = JSON.stringify(string)
-    console.log(test)
-    return test;
+    let json = JSON.stringify(string)
+    console.log(json);
+    return json;
 
 
 }
 
 function saveJSON (JSON) {
     localStorage.setItem('blogPost', JSON);
+    fetch('http://localhost:3456/api/newPost', {
+        method: 'POST',
+        contentType: 'application/json',
+        body: JSON
+    }).then(function(res){res.text()
+        .then(function (text){
+            console.log(text);
+        })})
 }
 
 function jsonToBlog (json) {
     return JSON.parse(json);
 }
+

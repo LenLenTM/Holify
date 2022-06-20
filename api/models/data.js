@@ -204,6 +204,14 @@ class Data {
         }
         return 'NO';
     }
+    newPost(json) {
+        let blogData = fs.readFileSync('blogPost.json');
+        let blogDataArray = JSON.parse(blogData);
+        blogDataArray.push(json);
+        blogData = JSON.string(blogDataArray);
+        fs.writeFileSync("blogPost.json", blogData);
+        return "Blog added";
+    }
 }
 
 module.exports = new Data();
