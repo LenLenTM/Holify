@@ -10,45 +10,15 @@
 </head>
 
 <body onload="initEditorPage()">
-<header id = header>
+<nav id ="nav">
     <a href="index.html">
         <div> <img src="resources/Holify.png" alt="Holify Logo" id="logo"> </div>
     </a>
-    <h1 id="navText">HOLIFY</h1>
-    <a href="login.html">
-        <img src="resources/UserIcon.png" id="user2" alt="user icon">
-    </a>
-    <a href="blogLibrary.html">
-        <img src="resources/Options.png" id="options" alt="options">
-    </a>
-</header>
-
-
-<nav>
-    <div class="dropdown">
-        <button class="dropbtn" id="africa">Africa</button>
-
+    <p id="navText">HOLIFY</p>
+    <div id="userIconContainer">
+        <img src="resources/UserIcon.png" id="user2" alt="login" onclick="userLogin()">
     </div>
-    <div class="dropdown">
-        <button class="dropbtn" id="asia" >Asia</button>
-
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn" id="europe" >Europe </button>
-
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn" id="oceania" >Oceania</button>
-
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn" id="northamerica" >North America</button>
-
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn" id="southamerica" >South America</button>
-
-    </div>
+    <img src="resources/Options.png" id="options" alt="blog" onclick="">
 </nav>
 
 <main>

@@ -57,13 +57,8 @@ class RequestController {
     }
 
     deletePost(req, res){
-        let username = req.params.username;
-        let body;
-        req.on('data', function (data){
-            body = data
-        });
-        console.log(body);
-        res.send(model.deletePost(body));
+        let title = req.params.title;
+        res.send(model.deletePost(title));
     }
 
     getLibrary(req, res){

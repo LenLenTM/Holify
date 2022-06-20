@@ -6,8 +6,8 @@ function getStart(){
 
 function getStartLightweight(){
     if (window.innerWidth < 800){
-        location.replace("./mobileMain.html?lw=true");
-    } else (location.replace("../desktopMain.html?lw=true"));
+        location.replace("./mobileMain.html?light=true");
+    } else (location.replace("../desktopMain.html?light=true"));
 }
 
 async function testRoutX() {

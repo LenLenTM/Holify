@@ -1,11 +1,24 @@
 let loginStatus = false;
 let pane;
+let light = false;
 
 function initLogin(){
+    let paraString = window.location.search;
+    let parameter = new URLSearchParams(paraString);
+    if (parameter.get('light')){light = true;}
     document.addEventListener('keypress', activateKey)
     pane = document.createElement('div');
     pane.setAttribute('id', 'pane');
     checkCookie();
+}
+
+function openBlog(){
+    if(light === true){
+        location.href = "blogLibrary.html?light=true";
+    }
+    else{
+        location.href = "blogLibrary.html";
+    }
 }
 
 function removePaneChildren(){
