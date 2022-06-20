@@ -1,4 +1,5 @@
 const model = require("../models/data.js");
+const {request} = require("express");
 
 class RequestController {
 
@@ -46,7 +47,9 @@ class RequestController {
         res.send(await model.userLocation());
     }
 
-    newPost(){
+    newPost(req, res){
+        let post = req.body();
+        res.send(model.newPost(post))
     }
 
     editPost(){

@@ -11,13 +11,6 @@ class User{
         this.xoj = xoj;
     }
 }
-class Location{
-    constructor(cookie, lat, lon) {
-        this.cookie = cookie;
-        this.lat = lat;
-        this.lon = lon;
-    }
-}
 
 class Data {
 
@@ -133,23 +126,18 @@ class Data {
         fs.writeFileSync('userDB.json', userData);
     }
 
-    deleteUser(cookie){
+    deleteUser(username, password){
         let userData = fs.readFileSync('userDB.json');
         let userDataArray = JSON.parse(userData);
         let tempArray = [];
-        let deleted = false;
 
         for(let i = 0; i < userDataArray.length; i++){
-            if(userDataArray[i].cookie !== cookie){
+            if(userDataArray[i].username !== username && userDataArray[i].password !== password){
                 tempArray.push(userDataArray[i]);
-            }
-            if(userDataArray[i].cookie === cookie){
-                deleted = true;
             }
         }
         userData = JSON.stringify(tempArray);
         fs.writeFileSync('userDB.json', userData);
-        return deleted;
     }
 
     login(username, password, cookie){
@@ -169,7 +157,7 @@ class Data {
     editUser(cookie, email, username, password){
         let userData = fs.readFileSync('userDB.json');
         let userDataArray = JSON.parse(userData);
-        for(let i = 0; i < userDataArray.length; i++){
+        for(let i = 0; i < userDataArray; i++){
             if(userDataArray[i].cookie === cookie){
                 userDataArray[i].email = email;
                 userDataArray[i].username = username;
@@ -185,12 +173,9 @@ class Data {
     logOut(cookie){
         let userData = fs.readFileSync('userDB.json');
         let userDataArray = JSON.parse(userData);
-        for(let i = 0; i < userDataArray.length; i++){
+        for(let i = 0; i < userDataArray; i++){
             if(userDataArray[i].cookie === cookie){
-                console.log('yes');
                 userDataArray[i].cookie = '';
-                userData = JSON.stringify(userDataArray);
-                fs.writeFileSync('userDB.json', userData);
                 return true;
             }
         }
@@ -200,22 +185,32 @@ class Data {
     username(cookie){
         let userData = fs.readFileSync('userDB.json');
         let userDataArray = JSON.parse(userData);
+
         for(let i = 0; i < userDataArray.length; i++){
-            if(userDataArray[i].cookie === cookie){
+
+            let value = '';
+            let storedCookie = userDataArray[i].cookie.toString();
+
+            let cookieArray = storedCookie.toString().split('');
+
+            for(let i = 0; i < cookieArray.length; i++){
+                let num = cookieArray[i].charCodeAt(0).toString();
+                value = value + num;
+            }
+
+            if(value === cookie){
                 return userDataArray[i].username;
             }
         }
         return 'NO';
     }
-
-    getUser(username){
-        let userData = fs.readFileSync('userDB.json');
-        let userDataArray = JSON.parse(userData);
-        for(let i = 0; i < userDataArray.length; i++){
-            if(userDataArray[i].username.toUpperCase() === username){
-                return userDataArray[i];
-            }
-        }
+    newPost(json) {
+        let blogData = fs.readFileSync('blogPost.json');
+        let blogDataArray = JSON.parse(blogData);
+        blogDataArray.push(json);
+        blogData = JSON.string(blogDataArray);
+        fs.writeFileSync("blogPost.json", blogData);
+        return "Blog added";
     }
 }
 
