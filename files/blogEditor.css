@@ -1,149 +1,126 @@
+/* -----------------------------------   Overall   --------------------------------- */
+
 @font-face {
     font-family: 'Avenir';
     src: url('resources/fonts/Avenir.woff') format('woff');
 }
-
 * {font-family: "Avenir", sans-serif}
 
 body { margin: 0}
 
-#header {
-    position: fixed;
+/* -----------------------------------   Header   --------------------------------- */
+
+header {
+    display: flex;
     width: 100%;
-    height: 100px;
+    height: 110px;
     background-color: white;
-    font-family: Avenir;
-    font-size: 1.0em;
+    font-size: 1.8em;
     color: grey;
+    text-align: center;
 }
+
+/* -----------------------------------   Nav   --------------------------------- */
+
 #navText {
-    position: absolute;
-    top: 25px;
-    left: 90px;
-    margin: 0;
+    left: 120px;
+    margin-left: 10px;
+    align-self: center;
+    border-radius: 15px ;
 }
 #logo {
-    width: 70px;
-    margin-left: 10px;
-    margin-top: 10px;
+    width: 80px;
+    margin-left: 15px;
+    margin-top: 15px;
 }
 #user2 {
     height: 70px;
     position: absolute;
-    top: 12px;
+    top: 20px;
     right: 80px;
 }
 #options {
     height: 56px;
     position: absolute;
     right: 10px;
-    top: 18px;
+    top: 25px;
 }
-#username{
-    position: absolute;
-    transform: translate(50%, 0%);
-    top: 6.5%;
-    right: 26.3%;
-    font-size: small;
-}
-
 #image {
     width: 80px;
     margin-left: 15px;
     margin-top: 15px;
-
-}
-nav{
-    position: absolute;
-    top: 100px;
-    text-align: center;
-    background-color: #9ae7cd;
-}
-.dropbtn {
-    background-color: #9ae7cd;
-    color: white;
-    padding: 1vw;
-    font-size: 1.5vw;
-    border: none;
-    cursor: pointer;
-}
-.dropdown {
-    position: relative;
-    display: inline-block;
-    align-items: center;
-    cursor: pointer;
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: lightgray;
-    min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 100;
-    font-size: 1.5vw;
-}
+/* -----------------------------------   Main   --------------------------------- */
 
-.dropdown-content a {
-
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    z-index: 100;
-
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: lightgray;}
 main {
+    display: grid;
     justify-content: center;
     text-align: center;
+    background: #9ae7cd;
+
 }
 
 label {
-    margin-top: 1vw;
+    font-size: larger;
+    color: grey;
+
     display: flex;
     justify-content: center;
+    width: 100%;
+    border-radius: 12px;
+    background: white;
+    margin-bottom: 5px;
+    border: black;
+    border-width: thin;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-#titleLabel {align-self: center}
+#title {
+    border-radius: 12px;
+}
+
+form {
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+
+.tox-statusbar__branding{visibility: hidden}
+
+/* -----------------------------------   Textarea   --------------------------------- */
 
 #title, #user {
     width: 50vw
 }
-#secondRow {
-    display: flex;
-}
-address {
-    bottom: 0;
-    font-size: 0.75vw;
-}
-#submitButton, #add-button {
-    margin-top: 1vw;
-    background-color: #9ae7cd;
-    color: white;
-    border-style: hidden;
-    font-size: medium;
-    cursor: pointer;
-    }
 
-#submitButton {
-    height: 3vw ;
-    width: 10vw;
-}
+/* -----------------------------------   Tags   --------------------------------- */
 
+#tags {
+    background: white;
+    border-radius: 12px;
+}
+.input-container label {
+    height: 0;
+    position: absolute;
+    visibility: hidden;
+}
 .tag {
     color: white;
     background-color: #9ae7cd;
-    border-width: 0.1vw;
+    border-width: 1px;
     border-style: groove;
     border-color: #9ae7cd;
-    border-radius: 0.5vw;
-    margin-right: 1vw;
+    border-radius: 12px;
+    margin-right: 1px;
+}
+
+#tag-container {
+    padding-bottom: 5px;
 }
 .remove-tag {
     color: white;
@@ -151,27 +128,50 @@ address {
     cursor: pointer;
 }
 
+/* -----------------------------------   Buttons   --------------------------------- */
+
+#submitButton, #add-button {
+    margin-top: 1vw;
+    background-color: #9ae7cd;
+    color: white;
+    border-style: hidden;
+    font-size: medium;
+    cursor: pointer;
+}
+#submitButton {
+    height: 3vw ;
+    width: 10vw;
+}
+address {
+    bottom: 0;
+    font-size: 15px;
+}
+
+/* -----------------------------------   Mobile Version   --------------------------------- */
+
+/* -----------------------------------   Header   --------------------------------- */
+
 @media (max-width: 800px) {
-    #titleBar {
-        flex-direction: column;
-        align-self: center;
-        justify-content: center;
-        text-align: center;
-        align-items: center;
-    }
 
-
-    a {
+    #header {
         display: flex;
+        text-align: center;
         justify-content: space-between;
-        align-items: stretch;
+
     }
 
-    #order2 {
-        flex-grow: 1;
+    #logo {
+        height: 80px;
+        width: 80px;
         align-self: center;
+        margin-left: 1vw;
     }
-
+    #userIcon {
+        height: 20vw;
+        width: 18vw;
+        align-self: center;
+        margin-right: 3vw;
+    }
     #option {
         align-self: center;
         height: 18vw;
@@ -179,39 +179,18 @@ address {
         margin-right: 1vw;
     }
 
-    .dropbtn {
-        background-color: #9ae7cd;
-        color: white;
-        padding: 1vw;
-        font-size: 5vw;
-        border: none;
-        cursor: pointer;
+    /* -----------------------------------   Nav   --------------------------------- */
 
+    #navText {
+        font-size: 43px;
+        margin-left: -45px;
+    }
+    /* -----------------------------------   Button   --------------------------------- */
 
+    #title {width: 98%;
     }
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: lightgray;
-        min-width: 160px;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        font-size: 4vw;
-    }
-
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
-
-
-
-    address {
-        bottom: 0;
-        font-size: 2vw;
-    }
+    /* -----------------------------------   Button   --------------------------------- */
 
     #submitButton {
         margin-top: 2vw;
@@ -224,7 +203,10 @@ address {
         cursor: pointer;
     }
 
+    /* -----------------------------------   Address   --------------------------------- */
 
-
-
+    address {
+         bottom: 0;
+         font-size: 2vw;
+     }
 }
