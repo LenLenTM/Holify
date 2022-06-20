@@ -1,24 +1,34 @@
+/* -----------------------------------   Overall   --------------------------------- */
+
 @font-face {
     font-family: 'Avenir';
     src: url('resources/fonts/Avenir.woff') format('woff');
 }
-* {font-family: "Avenir", sans-serif}
+
+* {font-family: "Avenir", sans-serif;
+    }
 
 body { margin: 0}
 
+/* -----------------------------------   Header   --------------------------------- */
+
 #header {
-    grid-area: n;
+    display: flex;
     width: 100%;
     height: 110px;
     background-color: white;
     font-size: 1.8em;
     color: grey;
+    text-align: center;
+
 
 }
+
+/* -----------------------------------   Nav   --------------------------------- */
+
 #navText {
-    position: absolute;
-    top: -25px;
-    left: 120px;
+    align-self: center;
+
 
 }
 #logo {
@@ -38,13 +48,6 @@ body { margin: 0}
     right: 10px;
     top: 25px;
 }
-#username{
-    position: absolute;
-    transform: translate(50%, 0%);
-    top: 6.5%;
-    right: 26.3%;
-    font-size: small;
-}
 
 #image {
     width: 80px;
@@ -56,30 +59,12 @@ nav{
     text-align: center;
     background-color: #9ae7cd;
 }
-.dropbtn {
-    background-color: #9ae7cd;
-    color: white;
-    padding: 1vw;
-    font-size: 1.5vw;
-    border: none;
-    cursor: pointer;
-}
-.dropdown {
-    position: relative;
-    display: inline-block;
-    align-items: center;
-    cursor: pointer;
 
+/* -----------------------------------   Main   --------------------------------- */
 
-}
+main {background: #9ae7cd;}
 
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: lightgray;}
-
-
+/* -----------------------------------   Searchbar   --------------------------------- */
 
 #searchbarDIV {
     justify-content: center;
@@ -91,22 +76,32 @@ nav{
 }
 #searchButton {
     margin-top: 1vw;
-    background-color: #9ae7cd;
-    color: white;
+    background-color: white;
+    color: black;
     border-style: hidden;
     font-size: medium;
     cursor: pointer;
     border-radius: 10px;
 }
+
+/* -----------------------------------   Blogpost   --------------------------------- */
+button {
+
+}
+
 #headlines {
-    display: grid;
-    margin-right: 10vw;
-    margin-left: 10vw;
+
 }
 #headlines button {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
     border-radius: 15px;
     font-size: x-large;
     background: #9ae7cd;
+    max-width: 1000px;
+    width: 80%;
+
 }
 #tags {
     font-size: initial;
@@ -117,37 +112,36 @@ nav{
     border-style: solid;
     border-width: 1px;
     border-radius: 15px;
-    padding: 10px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1000px;
+    width: 80%;
+    background: white;
+
+
 }
 address {
     bottom: 0;
-    font-size: 0.75vw;
+    font-size: 15px;
+    position: absolute;
 }
 
+/* -----------------------------------   Mobile Version   --------------------------------- */
+
+/* -----------------------------------   Main   --------------------------------- */
 
 @media (max-width: 800px) {
-    #titleBar {
-        flex-direction: column;
-        align-self: center;
-        justify-content: center;
+
+    #header {
+        display: flex;
+        justify-content: space-between;
         text-align: center;
-        align-items: center;
     }
 
-    #title {
-        max-width: 50vw
-    }
-
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch;
-    }
-
-    a {
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch;
+    #navText {
+        font-size: 43px;
+        margin-left: -45px;
     }
 
     #logo {
@@ -158,21 +152,6 @@ address {
 
     }
 
-    #holifyTitle {
-
-        align-self: center;
-        font-size: 8vw;
-        color: grey;
-        margin-left: 1vw;
-    }
-
-    #order2 {
-        flex-grow: 1;
-        align-self: center;
-    }
-
-
-
     #option {
         align-self: center;
         height: 18vw;
@@ -180,14 +159,19 @@ address {
         margin-right: 1vw;
     }
 
-    .dropbtn {
-        background-color: #9ae7cd;
-        color: white;
-        padding: 1vw;
-        font-size: 5vw;
-        border: none;
-        cursor: pointer;
+
+    /* -----------------------------------   Main   --------------------------------- */
+
+
+
+    #headlines button {
+       width: 100%;
     }
+
+    #title {
+    }
+
+    /* -----------------------------------   Address   --------------------------------- */
 
     address {
         bottom: 0;
