@@ -96,7 +96,7 @@ function initMap() {
 window.initMap = initMap;
 
 function userLogin(){
-    if(lightWeight === true){
+    if(light === true){
         location.href = "login.html?light=true";
     }
     else{

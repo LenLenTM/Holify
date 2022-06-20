@@ -81,7 +81,7 @@ function setUp(){
 
                 let inputLogOut = document.createElement('button');
                 inputLogOut.setAttribute('id', 'inputLogOut');
-                inputLogOut.innerHTML = 'LogOut';
+                inputLogOut.innerHTML = 'Logout';
                 inputLogOut.setAttribute('onclick', 'logout()');
                 let inputEdit = document.createElement('button');
                 inputEdit.setAttribute('id', 'inputEdit');
@@ -102,7 +102,7 @@ function setUp(){
     }
 }
 
-function logOut(){
+function logout(){
     let url = 'http://localhost:3456/api/logOut/12' //+ calculateCookieID();
     fetch(url, {
         method: 'PATCH'
