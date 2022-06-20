@@ -63,8 +63,7 @@ function checkCookie(){
 }
 
 function getLibrary(){
-        if(light === true){
-                let url = 'http://localhost:3456/api/getLibraryLight'
+        let url = 'http://localhost:3456/api/getLibrary'
                 fetch(url, {
                         method: 'GET',
                         contentType: 'application/json'
@@ -73,21 +72,7 @@ function getLibrary(){
                             for (let i = 0; i < data.length; i++) {
                                     blogPostConstructor(data[i]);
                             }
-                    })
-        }
-        else {
-
-                let url = 'http://localhost:3456/api/getLibrary'
-                fetch(url, {
-                        method: 'GET',
-                        contentType: 'application/json'
-                }).then(response => response.json())
-                    .then(data => {
-                            for (let i = 0; i < data.length; i++) {
-                                    blogPostConstructor(data[i]);
-                            }
-                    })
-        }
+                    });
 }
 
 function blogPostConstructor(blogPost) {

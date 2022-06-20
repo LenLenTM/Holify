@@ -61,10 +61,6 @@ class RequestController {
         res.send(model.getLibrary());
     }
 
-    getLibraryLight(req, res){
-        res.send(model.getLibraryLight());
-    }
-
     login(req, res){
         let username = req.params.username;
         let password = req.params.password;

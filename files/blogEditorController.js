@@ -67,12 +67,10 @@ function collectData() {
     if(document.getElementById('title').value.length > 0) {
         let blog = new Blog(
             document.getElementById('title').value,
-            //document.getElementById('blogContent').value,
-            tinyMCE.activeEditor.getContent(),
+            document.getElementById('blogContent').value,
+            //tinyMCE.activeEditor.getContent(),
             document.getElementById('usernameNav').textContent
         );
-        console.log(tinyMCE.activeEditor.getContent());
-        console.log(tinyMCE.activeEditor.getContent({format: 'tetx'}));
 
         let blogJson = blogToJSON(blog);
         saveJSON(blogJson);

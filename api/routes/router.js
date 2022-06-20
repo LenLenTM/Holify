@@ -15,7 +15,6 @@ routes.get('/getTransportRoute/:origin/:destination', requestController.getTrans
 routes.post('/newPost', requestController.newPost);
 routes.delete('/deletePost/:title', requestController.deletePost);
 routes.get('/getLibrary', requestController.getLibrary);
-routes.get('/getLibraryLight', requestController.getLibraryLight);
 
 routes.get('/login/:username/:password/:cookie', requestController.login);
 routes.post('/register/:cookie/:email/:username/:password', requestController.register);
