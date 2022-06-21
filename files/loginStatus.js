@@ -326,6 +326,7 @@ function deleteUser(){
     redButton.style.fontWeight = 'bold';
 }
 
+
 function deleteUserForSure(){
     let url = 'http://localhost:3456/api/deleteUser/' + calculateCookieID();
     fetch(url, {
