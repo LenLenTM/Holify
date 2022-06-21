@@ -39,7 +39,7 @@ function checkCookie(){
                 let num = cookieArray[i].charCodeAt(0).toString();
                 value = value + num;
         }
-        let url = 'http://localhost:3456/api/username/12' //+ value;
+        let url = 'http://localhost:3456/api/username/' + value;
         fetch(url, {
                 methode: 'GET'
         }).then(function (response){
@@ -93,11 +93,10 @@ function blogPostConstructor(blogPost) {
         let titleDiv = document.createElement("div");
         titleDiv.setAttribute("id", "test");
 
-        button.append(titleNode);
-
         let timeDiv = document.createElement("div");
         timeDiv.setAttribute("id", "time");
-        let timeNode = document.createTextNode(blogPost.time);
+        let time = blogPost.time.slice(0, -10);
+        let timeNode = document.createTextNode(time);
         timeDiv.append(timeNode);
 
         let userDiv = document.createElement("div");
@@ -105,13 +104,13 @@ function blogPostConstructor(blogPost) {
         let userNode = document.createTextNode(blogPost.user);
         userDiv.append(userNode);
 
-        let tagDiv = document.createElement("div");
+        /**let tagDiv = document.createElement("div");
         tagDiv.setAttribute("id", "tags");
         let tagNode = document.createTextNode(blogPost.tags);
-        tagDiv.append(tagNode);
+        tagDiv.append(tagNode);**/
 
-        contentDiv.append(titleDiv,tagDiv)
-        button.append(contentDiv);
+        //contentDiv.append(titleDiv.tagDiv);
+        //button.append(contentDiv);
 
         let contentBox = document.createElement("div");
         contentBox.setAttribute("class", "contentBox");
@@ -139,9 +138,6 @@ function blogPostConstructor(blogPost) {
         document.getElementById("headlines").append(button, contentBox);
 }
 
-function setSearchbar (str) {
-        return document.getElementById('searchbar').value = str;
-}
 function collapse(id) {
         let button = document.getElementById(id);
         if(button.value === "YES") {
@@ -175,7 +171,6 @@ function deleteForSure(id){
         }).then(function (response){
                 response.text()
                     .then(function (text){
-                            console.log(text);
                     })});
         location.reload();
 }

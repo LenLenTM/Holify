@@ -120,7 +120,7 @@ function checkCookie(){
         let num = cookieArray[i].charCodeAt(0).toString();
         value = value + num;
     }
-    let url = 'http://localhost:3456/api/username/12' //+ value;
+    let url = 'http://localhost:3456/api/username/' + value;
     fetch(url, {
         methode: 'GET'
     }).then(function (response){
@@ -387,8 +387,10 @@ function createMarker(responseArray, boolean) {
 }
 
 function removeMarker(){
-    for (let i = 0; i < 5; i++){
-        markerList[i].setMap(null);
+    if(markerList.length !== 0) {
+        for (let i = 0; i < 5; i++) {
+            markerList[i].setMap(null);
+        }
     }
 }
 
@@ -441,7 +443,6 @@ function appendSearchBar() {
 
 function searchFiledActivated(event) {
     let entry = document.getElementById('searchText').value;
-    console.log(entry);
     if (event.keyCode === 13) {
         event.preventDefault();
     }
