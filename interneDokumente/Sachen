@@ -39,10 +39,10 @@ npm i google-img-scrap
 npm install express-session
 
 ----------REST web services------
-https://developers.google.com/maps - world map
 https://api-ninjas.com/api/city - City API, city information
-https://openweathermap.org - weather information,
-https://restcountries.com - city information
-https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html - transport route
-(https://www.geoapify.com - get user location)
+https://openweathermap.org - Weather API, weather information,
+https://restcountries.com - REST countries API, country information
+https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html - Public Transit Routing API, transport route
+(https://www.geoapify.com - Geoapify Maps API, get user location)
+https://developers.google.com/maps - world map
 
