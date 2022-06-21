@@ -44,7 +44,7 @@ function checkCookie(){
         let num = cookieArray[i].charCodeAt(0).toString();
         value = value + num;
     }
-    let url = 'http://localhost:3456/api/username/12' //+ value;
+    let url = 'http://localhost:3456/api/username/' + value;
     fetch(url, {
         methode: 'GET'
     }).then(function (response){
@@ -65,9 +65,12 @@ function checkCookie(){
 function collectData() {
 
     if(document.getElementById('title').value.length > 0) {
+
+        let textContent =  document.getElementById('blogContent').value.replace(/\n\r?/g, '<br />');
         let blog = new Blog(
             document.getElementById('title').value,
-            document.getElementById('blogContent').value,
+            textContent,
+            //document.getElementById('blogContent').value,
             //tinyMCE.activeEditor.getContent(),
             document.getElementById('usernameNav').textContent
         );
@@ -83,12 +86,9 @@ function collectData() {
 function blogToJSON(string) {
     let json = JSON.stringify(string)
     return json;
-
-
 }
 
 async function saveJSON (blogEntry) {
-    console.log(blogEntry);
 
     let data = new FormData();
     data.append('json', blogEntry);
@@ -100,7 +100,6 @@ async function saveJSON (blogEntry) {
         body: blogEntry
     }).then(function(res){res.text()
         .then(function (text){
-            console.log(text);
             if(light === true){
                 location.href = "blogLibrary.html?light=true";
             }
@@ -109,7 +108,6 @@ async function saveJSON (blogEntry) {
             }
         })})
     let answer = await response;
-    console.log(answer);
 }
 
 function jsonToBlog (json) {

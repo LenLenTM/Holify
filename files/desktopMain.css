@@ -8,18 +8,11 @@
 body {
     margin: 0;
     background-color: #9ae7cd;
-    color: gray;
-    display: grid;
-    grid-template-areas:
-    "n n"
-    "n n"
-    "m m";
 }
 
 /* -----------------------------------   Nav   --------------------------------- */
 
 nav {
-    grid-area: n;
     width: 100%;
     height: 90px;
     background-color: white;
@@ -75,40 +68,15 @@ nav {
 }
 /* -----------------------------------   Main   --------------------------------- */
 main {
-    grid-area: m;
     height: 70%;
     width: 100%;
 }
 #worldMap {
     display: flex;
     width: 100%;
-    height: 1100px;
+    height: 800px;
     overflow: hidden;
     align-self: center;
-}
-
-
-/* -----------------------------------   Footer   --------------------------------- */
-
-footer {
-    grid-area: f;
-    font-size: small;
-    margin: 15px;
-}
-
-/* -----------------------------------   PopUp  --------------------------------- */
-
-
-#tip {
-    position: absolute;
-    text-align: center;
-    font-family: Avenir, sans-serif;
-    color: grey;
-    opacity: 60%;
-    height: 24px;
-    border-radius: 30px;
-    border: none;
-    padding-top: 6px;
 }
 
 ::placeholder {
@@ -116,13 +84,18 @@ footer {
 }
 #backUp {
     position: absolute;
-    width: 15%;
+    top: 100px;
+    left: 10px;
+    width: 70px;
+    opacity: 70%;
 }
-#popup {
-    width: 26%;
+#popup{
     position: absolute;
-    left: 37%;
-    top: 80px;
+    width: 340px;
+    height: 400px;
+    transform: translate(-50%, 0);
+    left: 50%;
+    top: 140px;
     opacity: 70%;
 }
 #citiesDiv{

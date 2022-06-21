@@ -57,20 +57,19 @@ function calculateCookieID(){
 }
 
 function checkCookie(){
-    let url = 'http://localhost:3456/api/username/12' //+ calculateCookieID();
+    let url = 'http://localhost:3456/api/username/' + calculateCookieID();
     fetch(url, {
         methode: 'GET'
     }).then(function (response){
         response.text()
             .then(function (text){
-                let name = text;
-                console.log(name)
-                if(name !== 'NO'){
+                if(text !== 'NO'){
                     document.getElementById('user').src = 'resources/UserIcon_logged.png';
                     let username = document.createElement('p');
                     username.setAttribute('id', 'usernameNav');
                     username.innerText = name.toUpperCase();
                     document.getElementById('userIconContainer').append(username);
+                    console.log('why')
                     loginStatus = true;
                 }
                 setUp();
@@ -116,7 +115,7 @@ function setUp(){
 }
 
 function logout(){
-    let url = 'http://localhost:3456/api/logOut/12' //+ calculateCookieID();
+    let url = 'http://localhost:3456/api/logOut/' + calculateCookieID();
     fetch(url, {
         method: 'PATCH'
     }).then(function (response){
@@ -158,14 +157,12 @@ function login(){
         let username = document.getElementById('usernameInput').value;
         let password = document.getElementById('passwordInput').value;
 
-        let url = 'http://localhost:3456/api/login/' + username + '/' + password + '/12' //+ calculateCookieID();
+        let url = 'http://localhost:3456/api/login/' + username + '/' + password + '/' + calculateCookieID();
         fetch(url, {
             methode: 'GET'
         }).then(function (response) {
             response.text()
                 .then(function (text) {
-                    let answer = text;
-                    console.log(answer);
                     if (text === 'You are logged in now.') {
                         loginStatus = true;
                         removePaneChildren();
@@ -204,9 +201,14 @@ function setupRegister(){
 
     let registerButton = document.createElement('button');
     registerButton.innerHTML = 'Register';
+    registerButton.setAttribute('id', 'Register');
     registerButton.setAttribute('onclick', 'register()');
 
-    pane.append(emailInput, usernameInput, passwordInput, registerButton);
+    let backButton = document.createElement('button');
+    backButton.innerHTML = 'Back';
+    backButton.setAttribute('onclick', 'setUp()')
+
+    pane.append(emailInput, usernameInput, passwordInput, registerButton, backButton);
 }
 
 function register(){
@@ -216,15 +218,13 @@ function register(){
     if(username.length === 0){username = ' ';}
     let password = document.getElementById('passwordInput').value;
     if(password.length === 0){password = ' ';}
-    let url = 'http://localhost:3456/api/register/12/' + email + '/' + username + '/' + password; //calculateCookieID();
+    let url = 'http://localhost:3456/api/register/' + calculateCookieID() + '/' + email + '/' + username + '/' + password;
 
     fetch(url, {
         method: 'POST'
     }).then(function (response){
         response.text()
             .then(function (text){
-                let answer = text;
-                console.log(answer);
                 if(text === 'Registration successfull.'){
                     loginStatus = true;
                     removePaneChildren();
@@ -284,15 +284,13 @@ function editUser(){
     if(username.length === 0){username = ' ';}
     let password = document.getElementById('passwordInput').value;
     if(password.length === 0){password = ' ';}
-    let url = 'http://localhost:3456/api/editUser/12/' + email + '/' + username + '/' + password; //calculateCookieID();
+    let url = 'http://localhost:3456/api/editUser/' + calculateCookieID() + '/' + email + '/' + username + '/' + password;
 
     fetch(url, {
         method: 'PUT'
     }).then(function (response){
         response.text()
             .then(function (text){
-                let answer = text;
-                console.log(answer);
                 if(text === 'Changed data.'){
                     loginStatus = true;
                     removePaneChildren();
@@ -322,7 +320,7 @@ function deleteUser(){
 }
 
 function deleteUserForSure(){
-    let url = 'http://localhost:3456/api/deleteUser/12' //+ calculateCookieID();
+    let url = 'http://localhost:3456/api/deleteUser/' + calculateCookieID();
     fetch(url, {
         method: 'DELETE'
     }).then(function (response){

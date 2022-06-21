@@ -78,13 +78,13 @@ function blogLibrary(){
 //called in initPage(), if user is registered and logged in then their name will be displayed next to user icon;
 function checkCookie(){
     let value = '';
-    let cookie = 'connect.sid=s%3Av6whpb6LtXy7eHU2VhfEhyi6Pw1uPr_Y.0PIFoQ4on8TlM2pzAaA8gpaloqxSPrTNakZ7j3eI9Rs'; //document.cookie.toString();
+    let cookie = document.cookie.toString();
     let cookieArray = cookie.split(''); //generates array from cookie String;
     for(let i = 0; i < cookie.length; i++){
         let num = cookieArray[i].charCodeAt(0).toString(); //value at index to number (UTF-16 code) to String;
         value = value + num;
     }
-    let url = 'http://localhost:3456/api/username/12' //+ value;
+    let url = 'http://localhost:3456/api/username/' + value;
     fetch(url, {
         methode: 'GET'
     }).then(function (response){    //callback function(response) is argument of then() for success of promise;
@@ -296,7 +296,6 @@ function numberWithCommas(x) {
 function getUserLocation(){
     navigator.geolocation.getCurrentPosition(function (position){
         let location = {lat: position.coords.latitude, lon: position.coords.longitude};
-        console.log(location);
         getTransportRoute(location);
     })
 }
@@ -323,7 +322,6 @@ function userLocation(data){
 
 //called in getUserLocation, https://developer.here.com/documentation/public-transit/dev_guide/routing/index.html ;
 function getTransportRoute(location){
-    console.log(location);
     let origin = location.lat + ',' + location.lon;
 
     let destination = weatherResponse.city.coord.lat + ',' + weatherResponse.city.coord.lon;  //lat, lon information from weatherResponse;
@@ -438,8 +436,8 @@ function drawTransportRoute(data){
         divTimes.append(p3, p4);
         div.append(icon, divName, divTimes);
         document.getElementById('transit').append(div);     //transit id defined in cityInformation.html;
-        document.getElementById('progBar').remove();        //progBar is removed for images;
     }
+    document.getElementById('progBar').remove();        //progBar is removed;
 }
 
 //light weight version, called in getTransportRoute(), 'no route found' displayed;
