@@ -186,7 +186,7 @@ nav {
         font-size: small;
         color: grey;
     }
-    /* selector for ids containing "stage", needed for drawTransportRoute() in cityInformationController.js  */
+    /* attribute selector for ids containing the string "stage", needed for drawTransportRoute() in cityInformationController.js  */
     [id^="stage"] {
         position: absolute;
         width: 96%;
@@ -228,7 +228,7 @@ nav {
         left: 62%;
     }
 }
-/* responsive design, desktop version*/
+/* responsive design */
 @media only screen and (min-width: 500px){
 
     /* grid layout*/

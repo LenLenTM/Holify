@@ -1,10 +1,10 @@
-//event handler in html, click on logo - resource replaced using responsive design
+//event handler in html, click on logo - responsive design
 function getStart(){
     if (window.innerWidth < 800){
         location.replace("./mobileMain.html");
     } else (location.replace("../desktopMain.html"));
 }
-//light weight version for desktop and mobile devices, responsive design
+//light weight version for both desktop and mobile devices
 function getStartLightweight(){
     if (window.innerWidth < 800){
         location.replace("./mobileMain.html?light=true");

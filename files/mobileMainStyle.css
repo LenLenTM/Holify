@@ -94,7 +94,7 @@ nav {
     color: grey;
     padding-top: 8px;
 }
-/* selects elements with placeholder text */
+/* pseudo element selector with placeholder text for input field*/
 ::placeholder {
     color: lightgray;
 }
@@ -116,7 +116,7 @@ nav {
     width: 50%;
     text-align: center;
 }
-/* hyperlink is created */
+/* child combinator selector, all links that are direct children of #citiesDiv */
 #citiesDiv > a {
     font-family: "Avenir", sans-serif;
     font-weight: bold;
@@ -132,7 +132,7 @@ nav {
 }
 
 /* https://stackoverflow.com/questions/12499886/how-to-hide-or-disable-the-google-logo-footer-copyright-on-google-maps-javascr */
-/* selector for ids containing the specified url */
+/* attribute selector for links containing the specified string (url) */
 a[href^="http://maps.google.com/maps"],
 a[href^="https://maps.google.com/maps"],
 a[href^="https://www.google.com/maps"] {
