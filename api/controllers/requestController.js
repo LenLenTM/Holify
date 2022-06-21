@@ -75,7 +75,6 @@ class RequestController {
         }
         else {res.status(620).send(`Username doesn't exist.`)}
     }
-
     register(req, res){
         let cookie = req.params.cookie;
         let email = req.params.email;
