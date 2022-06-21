@@ -18,7 +18,7 @@ body {
 }
 
 #font {
-    position: absolute;
+    position: fixed;
     width: 30%;
     left: 36.5%;
     top: 42%;
@@ -27,11 +27,6 @@ body {
     font-size: 30px;
 }
 
-.font {
-    display: flex;
-    text-align: center;
-    width: 100%;
-}
 #light{
     position: absolute;
     top: 1%;
@@ -52,9 +47,11 @@ body {
         transform: translate(-50%, -100%);
     }
     #font{
-        text-align: center;
+        position: fixed;
+        width: 150px;
         font-size: 30pt;
-        transform: translate(-5%, 60%);
+        left: 50.5%;
+        transform: translate(-50%, 60%);
     }
 
     #light{
