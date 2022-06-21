@@ -161,7 +161,6 @@ function deletePost(id){
         button.style.color = 'red';
         button.style.fontWeight = 'bold';
 }
-
 function deleteForSure(id){
         let title = id.slice(0, -6);
         let url = 'http://localhost:3456/api/deletePost/' + title;
