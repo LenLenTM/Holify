@@ -91,7 +91,6 @@ textarea{
     line-height: 40px;
     color: grey;
     resize: none;
-    rows: 1;
 }
 ::placeholder{
     color: lightgray;
