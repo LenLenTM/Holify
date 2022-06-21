@@ -57,6 +57,13 @@ function calculateCookieID(){
 }
 
 function checkCookie(){
+    let value = '';
+    let cookie = document.cookie.toString();
+    let cookieArray = cookie.split('');
+    for(let i = 0; i < cookie.length; i++){
+        let num = cookieArray[i].charCodeAt(0).toString();
+        value = value + num;
+    }
     let url = 'http://localhost:3456/api/username/' + calculateCookieID();
     fetch(url, {
         methode: 'GET'
@@ -67,7 +74,7 @@ function checkCookie(){
                     document.getElementById('user').src = 'resources/UserIcon_logged.png';
                     let username = document.createElement('p');
                     username.setAttribute('id', 'usernameNav');
-                    username.innerText = name.toUpperCase();
+                    username.innerText = text.toUpperCase();
                     document.getElementById('userIconContainer').append(username);
                     console.log('why')
                     loginStatus = true;
