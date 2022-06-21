@@ -58,8 +58,6 @@ function initMap() {
         latitude = event.latLng.lat();
         longitude = event.latLng.lng();
 
-        console.log('L1 ' + latitude + " - " + longitude);
-
         if (interactionMode === 'start') {
             zoomMap(event);
             getFiveBiggestCities();
@@ -77,8 +75,6 @@ function initMap() {
     map.addListener('click', function (event) {
         latitude = event.latLng.lat();
         longitude = event.latLng.lng();
-
-        console.log('L2 ' + latitude + " - " + longitude);
 
         if (interactionMode === 'zoom') {
             clickNearestCities();
@@ -118,7 +114,7 @@ function checkCookie(){
         let num = cookieArray[i].charCodeAt(0).toString();
         value = value + num;
     }
-    let url = 'http://localhost:3456/api/username/12' //+ value;
+    let url = 'http://localhost:3456/api/username/' + value;
     fetch(url, {
         methode: 'GET'
     }).then(function (response){
@@ -135,17 +131,10 @@ function checkCookie(){
                 }
             })})
 }
-function loadFont(){
-    let junction_font = new FontFace('Junction Regular', '../resources/fonts/Avenir.ttc');
-    junction_font.load().then(function(loaded_face) {
-        document.fonts.add(loaded_face);
-        document.body.style.fontFamily = '"Junction Regular", Avenir';
-    }).catch(function(error) {
-    });
-}
+
 function zoomMap(event) {
     map.panTo(event.latLng);
-    map.setZoom(3.5);
+    map.setZoom(5);
     interactionMode = 'zoom';
     appendBackUp();
     removeSearchBar();
@@ -172,13 +161,11 @@ function getFiveBiggestCities(){
         contentType: 'application/json',
     }).then(response => response.json()
         .then(data2 => {
-            console.log('Success(wide): ', data2);
             for (let i = 0; i < data2.length; i++) {
                 responseArray.push(new City(data2[i].name, data2[i].latitude, data2[i].longitude, data2[i].country, data2[i].population));
             }
             responseArray.sort((a, b) => b.population - a.population);
             responseArray = responseArray.slice(0, 5);
-            console.log(responseArray);
             createMarker(responseArray, true);
             document.getElementById('progBar').remove();
         }));
@@ -206,7 +193,6 @@ function clickNearestCities() {
         contentType: 'application/json',
     }).then(response => response.json()
         .then(data2 => {
-            console.log('Success(wide): ', data2);
             for (let i = 0; i < data2.length; i++) {
                 responseArrayBackup.push(new City(data2[i].name, data2[i].latitude, data2[i].longitude, data2[i].country, data2[i].population));
             }
@@ -224,12 +210,8 @@ function mainFetch(){
         contentType: 'application/json',
     }).then(response => response.json()
         .then(data => {
-            console.log('Success(normal): ', data);
             for (let i = 0; i < data.length; i++) {
                 responseArray.push(new City(data[i].name, data[i].latitude, data[i].longitude, data[i].country, data[i].population));
-            }
-            for (let i = 0; i < responseArray.length; i++){
-                console.log(responseArray[i]);
             }
             /* if no cities where found set page back to start */
             if ((responseArray.length === 0) && (responseArrayBackup.length === 0)) {
@@ -337,7 +319,7 @@ function createPopUp(responseArray) {
             citiesContainer[i].appendChild(divContainer[i]);
             citiesDiv.append(citiesContainer[i]);
         }
-        document.getElementById('worldMap').append(divPop);
+        document.getElementById('buttons').append(divPop);
     }
 }
 
@@ -375,6 +357,16 @@ function createMarker(responseArray, boolean) {
         if (boolean) {
             let label = {text: responseArray[i].name, fontFamily: 'Avenir', color: 'grey'};
             let marker = new google.maps.Marker({position: position, icon: icon, label: label, map: map});
+            if(light === true){
+                marker.addListener('click', function (){
+                    window.location.href = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country + '&light=true';
+                })
+            }
+            else{
+                marker.addListener('click', function (){
+                    window.location.href = 'cityInformation.html?city=' + responseArray[i].name + '&country=' + responseArray[i].country;
+                })
+            }
             markerList.push(marker);
         }
         else {
@@ -407,13 +399,9 @@ function backUp(event) {
 function appendBackUp() {
     let back = document.createElement('img');
     back.src = '../resources/backUp.png';
-    back.style.opacity = '70%'; /* generate a relative style which works for all mobiles */
-    back.style.top = `${(window.innerHeight - 60)}` + 'px';
-    back.style.left = `${(screen.width / 2) - (7.5 * screen.width / 100)}` + 'px';
-    back.style.width = `${(15 * 100 /screen.width)}`
     back.setAttribute('onclick', 'backUp()');
     back.setAttribute('id', 'backUp');
-   // document.getElementById('buttons').append(back);
+    document.getElementById('body').append(back);
 }
 
 function removeBackUp() {
@@ -445,7 +433,6 @@ function searchFiledActivated(event){
 
         let url = 'http://localhost:3456/api/getcity/' + entry;
 
-        console.log(url);
         let city;
         progressBar();
         document.getElementById('progBar').style.top = '70%';
